@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public CustomEvents.Vector3Event on_move_event;
     public CustomEvents.BooleanEvent on_sprint_event;
+    public UnityEvent on_waypoint_event;
     public UnityEvent on_jump_event;
     
     void Update ()
@@ -18,5 +19,10 @@ public class PlayerController : MonoBehaviour
 	    
         if (Input.GetButton("Jump"))
             on_jump_event.Invoke();
+
+	    if (Input.GetButton("Fire1"))
+	    {
+	        on_waypoint_event.Invoke();
+	    }
 	}
 }

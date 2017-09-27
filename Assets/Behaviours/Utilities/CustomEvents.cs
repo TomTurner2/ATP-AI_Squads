@@ -16,4 +16,7 @@ public class CustomEvents : MonoBehaviour
 
     [System.Serializable]
     public class FloatEvent : UnityEvent<float> { }
+
+    [System.Serializable]
+    public class AreaWaypointEvent : UnityEvent<Vector3, float> { }
 }

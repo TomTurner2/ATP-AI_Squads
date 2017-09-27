@@ -11,7 +11,7 @@ public class RayInfo
     public Vector3 offset;
     public Vector3 direction;
     public float distance;
-    public UnityEvent on_ray_hit_event;
+    public CustomEvents.Vector3Event on_ray_hit_event;
 }
 
 public class RayCastArray : MonoBehaviour
@@ -24,9 +24,9 @@ public class RayCastArray : MonoBehaviour
         foreach (RayInfo ray in rays)
         {
             Vector3 start = transform.position + ray.offset;
-
-            if (Physics.Raycast(start, ray.direction, ray.distance, ray.layers_to_check))
-                ray.on_ray_hit_event.Invoke();
+            RaycastHit hit;
+            if (Physics.Raycast(start, ray.direction, out hit, ray.distance, ray.layers_to_check))
+                ray.on_ray_hit_event.Invoke(hit.point);
         }
     }
 

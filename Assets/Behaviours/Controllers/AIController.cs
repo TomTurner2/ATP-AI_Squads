@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AIController : MonoBehaviour
 {
-    public Transform waypoint { get; set; }
+    public Vector3 waypoint { get; set; }
 
     [SerializeField] private Character controlled_character;
     [SerializeField] private NavMeshAgent nav_mesh_agent;
@@ -14,16 +14,14 @@ public class AIController : MonoBehaviour
 
     void Start()
     {
+        waypoint = transform.position;
         controlled_character.sprinting = true;   
     }
 
 
     void Update()
     {
-        if (waypoint == null)
-            return;
-
-        MoveToPosition(waypoint.position);
+        MoveToPosition(waypoint);
     }
 
 
@@ -45,12 +43,6 @@ public class AIController : MonoBehaviour
         }
 
         nav_mesh_agent.speed = controlled_character.walk_speed;
-    }
-
-
-    public GameObject FindClosestEnemy()
-    {
-        return new GameObject();
     }
 
 
