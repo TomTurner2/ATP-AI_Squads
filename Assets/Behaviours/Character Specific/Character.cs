@@ -14,8 +14,7 @@ public class Character : MonoBehaviour
     public float sprint_speed = 10;
     public float crouch_speed = 2;
     public Vector3 jump_force = Vector3.up;
-
-    private float current_speed = 0;
+    public float current_speed = 0;
     
     [Space]
     [Header("References")]

@@ -2312,6 +2312,21 @@ Prefab:
       propertyPath: m_Name
       value: Adam (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114885631607301624, guid: e6a35f8d7379dc342ac05b570033abd3,
+        type: 2}
+      propertyPath: sprint_speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114885631607301624, guid: e6a35f8d7379dc342ac05b570033abd3,
+        type: 2}
+      propertyPath: walk_speed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114885631607301624, guid: e6a35f8d7379dc342ac05b570033abd3,
+        type: 2}
+      propertyPath: crouch_speed
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6a35f8d7379dc342ac05b570033abd3, type: 2}
   m_IsPrefabParent: 0
@@ -3028,6 +3043,21 @@ Prefab:
       propertyPath: m_Name
       value: Eve (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114885631607301624, guid: e6a35f8d7379dc342ac05b570033abd3,
+        type: 2}
+      propertyPath: sprint_speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114885631607301624, guid: e6a35f8d7379dc342ac05b570033abd3,
+        type: 2}
+      propertyPath: walk_speed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114885631607301624, guid: e6a35f8d7379dc342ac05b570033abd3,
+        type: 2}
+      propertyPath: crouch_speed
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6a35f8d7379dc342ac05b570033abd3, type: 2}
   m_IsPrefabParent: 0
@@ -3447,6 +3477,21 @@ Prefab:
     - target: {fileID: 1881467939022218, guid: e6a35f8d7379dc342ac05b570033abd3, type: 2}
       propertyPath: m_Name
       value: Adam
+      objectReference: {fileID: 0}
+    - target: {fileID: 114885631607301624, guid: e6a35f8d7379dc342ac05b570033abd3,
+        type: 2}
+      propertyPath: sprint_speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114885631607301624, guid: e6a35f8d7379dc342ac05b570033abd3,
+        type: 2}
+      propertyPath: walk_speed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114885631607301624, guid: e6a35f8d7379dc342ac05b570033abd3,
+        type: 2}
+      propertyPath: crouch_speed
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6a35f8d7379dc342ac05b570033abd3, type: 2}

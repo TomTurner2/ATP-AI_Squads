@@ -66,7 +66,7 @@ public class MouseLookDirect : MonoBehaviour
         if (pitch_target == null)
             return;
 
-        float pitch_change = Input.GetAxisRaw("Vertical") * speed * Time.deltaTime;//calculate movement
+        float pitch_change = Input.GetAxis("Vertical") * speed * Time.deltaTime;//calculate movement
 
         if (invert_pitch)//handle mouse inversion
         {
