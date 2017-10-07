@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CustomEvents : MonoBehaviour
+public class CustomEvents
 {
     [System.Serializable]
     public class Vector3Event : UnityEvent<Vector3> { }

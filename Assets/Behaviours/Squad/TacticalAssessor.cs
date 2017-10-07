@@ -49,9 +49,8 @@ public class TacticalAssessor : MonoBehaviour
         }
 
         weighted_positions.OrderByDescending(p => p.weight);
-        //weighted_positions.Reverse();
 
-        List<Vector3> positions = new List<Vector3>(weighted_positions.Select(p => p.position)); ;
+        List<Vector3> positions = new List<Vector3>(weighted_positions.Select(p => p.position));
         return positions;
     }
 

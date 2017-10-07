@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0dcf35c8d604dd24c9209afa517f789a
-timeCreated: 1507382845
+guid: d42fac8c872452548ad4ff856f1ec1e5
+timeCreated: 1507390122
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
@@ -10,59 +10,10 @@ SubstanceImporter:
     prototypeName: MASTER_MATERIAL
     shaderName: 
     shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
+    shaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
     renderQueue: -1
     lightmapFlags: 4
     inputs:
-    - name: Stone_1_Height_Erosion_1
-      value:
-        scalar[0]: 0.064
-        scalar[1]: 0
-        scalar[2]: 0
-        scalar[3]: 0
-        texture: {instanceID: 0}
-    - name: Stone_3_Albedo_Hue
-      value:
-        scalar[0]: 0.479
-        scalar[1]: 0
-        scalar[2]: 0
-        scalar[3]: 0
-        texture: {instanceID: 0}
-    - name: Stone_4_Height_Holes_Opacity
-      value:
-        scalar[0]: 0.309
-        scalar[1]: 0
-        scalar[2]: 0
-        scalar[3]: 0
-        texture: {instanceID: 0}
-    - name: Stone_4_Height_Edge_Damage
-      value:
-        scalar[0]: 0.38
-        scalar[1]: 0
-        scalar[2]: 0
-        scalar[3]: 0
-        texture: {instanceID: 0}
-    - name: Stone_4_Roughness_BG_Color
-      value:
-        scalar[0]: 0.66
-        scalar[1]: 0
-        scalar[2]: 0
-        scalar[3]: 0
-        texture: {instanceID: 0}
-    - name: Stone_1_Roughness_BG_color
-      value:
-        scalar[0]: 1.41
-        scalar[1]: 0
-        scalar[2]: 0
-        scalar[3]: 0
-        texture: {instanceID: 0}
-    - name: Metal_1_Albedo_Green_Irisation_Distance
-      value:
-        scalar[0]: 33.2
-        scalar[1]: 0
-        scalar[2]: 0
-        scalar[3]: 0
-        texture: {instanceID: 0}
     - name: $outputsize
       value:
         scalar[0]: 8
@@ -72,7 +23,7 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: $randomseed
       value:
-        scalar[0]: 5705
+        scalar[0]: 0
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -92,6 +43,13 @@ SubstanceImporter:
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: Metal_1_Albedo_Red_Irisations_Distance
+      value:
+        scalar[0]: 31
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Metal_1_Albedo_Green_Irisation_Distance
       value:
         scalar[0]: 31
         scalar[1]: 0
@@ -399,6 +357,13 @@ SubstanceImporter:
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
+    - name: Stone_1_Height_Erosion_1
+      value:
+        scalar[0]: 0.05
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
     - name: Stone_1_Height_Erosion_2
       value:
         scalar[0]: 0.25
@@ -510,6 +475,13 @@ SubstanceImporter:
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 4
+        texture: {instanceID: 0}
+    - name: Stone_1_Roughness_BG_color
+      value:
+        scalar[0]: 0.654902
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
         texture: {instanceID: 0}
     - name: Stone_1_Albedo_Hue
       value:
@@ -770,6 +742,13 @@ SubstanceImporter:
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
+    - name: Stone_3_Albedo_Hue
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
     - name: Stone_3_Albedo_Saturation
       value:
         scalar[0]: 0.5
@@ -847,6 +826,27 @@ SubstanceImporter:
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
+    - name: Stone_4_Height_Holes_Opacity
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Stone_4_Height_Edge_Damage
+      value:
+        scalar[0]: 0.1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Stone_4_Roughness_BG_Color
+      value:
+        scalar[0]: 0.576471
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
     - name: Stone_4_Albedo_Hue
       value:
         scalar[0]: 0.5
@@ -870,8 +870,8 @@ SubstanceImporter:
         texture: {instanceID: 0}
     materialInformation:
       serializedVersion: 5
-      offset: {x: 0, y: 0}
-      scale: {x: 25, y: 1}
+      offset: {x: 0, y: 0.01}
+      scale: {x: 5.14, y: 2.95}
       generateMipmaps: 1
       generateAllOutputs: 0
       animationUpdateRate: 42
@@ -880,8 +880,8 @@ SubstanceImporter:
       texEnvs:
       - _BumpMap:
           texture: {instanceID: 0}
-          scale: {x: 25, y: 1}
-          offset: {x: 0, y: 0}
+          scale: {x: 5.11, y: 2.95}
+          offset: {x: 0, y: 0.01}
       - _DetailAlbedoMap:
           texture: {instanceID: 0}
           scale: {x: 1, y: 1}
@@ -896,24 +896,24 @@ SubstanceImporter:
           offset: {x: 0, y: 0}
       - _EmissionMap:
           texture: {instanceID: 0}
-          scale: {x: 25, y: 1}
-          offset: {x: 0, y: 0}
+          scale: {x: 5.14, y: 2.95}
+          offset: {x: 0, y: 0.01}
       - _MainTex:
           texture: {instanceID: 0}
-          scale: {x: 25, y: 1}
-          offset: {x: 0, y: 0}
+          scale: {x: 5.14, y: 2.95}
+          offset: {x: 0, y: 0.01}
       - _MetallicGlossMap:
           texture: {instanceID: 0}
-          scale: {x: 25, y: 1}
-          offset: {x: 0, y: 0}
+          scale: {x: 5.11, y: 2.95}
+          offset: {x: 0, y: 0.01}
       - _OcclusionMap:
           texture: {instanceID: 0}
-          scale: {x: 25, y: 1}
-          offset: {x: 0, y: 0}
+          scale: {x: 5.11, y: 2.95}
+          offset: {x: 0, y: 0.01}
       - _ParallaxMap:
           texture: {instanceID: 0}
-          scale: {x: 25, y: 1}
-          offset: {x: 0, y: 0}
+          scale: {x: 5.11, y: 2.95}
+          offset: {x: 0, y: 0.01}
       floats:
       - _BumpScale: 1
       - _Cutoff: 0.5
@@ -932,7 +932,7 @@ SubstanceImporter:
       - _UVSec: 0
       - _ZWrite: 1
       colors:
-      - _Color: {r: 1, g: 0.9235801, b: 0.7941176, a: 1}
+      - _Color: {r: 1, g: 1, b: 1, a: 1}
       - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     textureParameters:
     - name: MASTER_MATERIAL_basecolor
@@ -987,8 +987,8 @@ SubstanceImporter:
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 
-      textureWidth: 1024
-      textureHeight: 1024
+      textureWidth: 512
+      textureHeight: 512
       textureFormat: 0
       loadingBehavior: 1
   deletedPrototypes: []

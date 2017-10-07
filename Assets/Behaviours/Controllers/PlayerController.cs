@@ -6,23 +6,41 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    public CustomEvents.Vector3Event on_move_event;
-    public CustomEvents.BooleanEvent on_sprint_event;
-    public UnityEvent on_waypoint_event;
-    public UnityEvent on_jump_event;
+    [SerializeField] CustomEvents.Vector3Event on_move_event;
+    [SerializeField] CustomEvents.BooleanEvent on_sprint_event;
+    [SerializeField] CustomEvents.BooleanEvent on_command_event;
+    [SerializeField] UnityEvent on_waypoint_event;
+    [SerializeField] UnityEvent on_jump_event;
     
+
     void Update ()
 	{
-	    Vector3 move_input = new Vector3(Input.GetAxisRaw("Right"), -Input.GetAxisRaw("Forward"));
+	   AxisEvents();
+       ButtonPressEvents();
+       ButtonHeldEvents();  
+	}
+
+
+    private void AxisEvents()
+    {
+        Vector3 move_input = new Vector3(Input.GetAxisRaw("Right"), -Input.GetAxisRaw("Forward"));
         on_move_event.Invoke(move_input.normalized);
+    }
+
+
+    private void ButtonHeldEvents()
+    {
         on_sprint_event.Invoke(Input.GetButton("Sprint"));
-	    
+        on_command_event.Invoke(Input.GetButton("Command"));
+    }
+
+
+    private void ButtonPressEvents()
+    {
         if (Input.GetButton("Jump"))
             on_jump_event.Invoke();
 
-	    if (Input.GetButton("Fire1"))
-	    {
-	        on_waypoint_event.Invoke();
-	    }
-	}
+        if (Input.GetButton("Fire1"))
+            on_waypoint_event.Invoke();
+    }
 }

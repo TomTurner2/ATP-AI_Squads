@@ -11,12 +11,13 @@ public class RayInfo
     public Vector3 offset;
     public Vector3 direction;
     public float distance;
+    public Color debug_color = Color.white;
     public CustomEvents.Vector3Event on_ray_hit_event;
 }
 
 public class RayCastArray : MonoBehaviour
 {
-    [SerializeField] private List<RayInfo> rays = new List<RayInfo>();
+    [SerializeField] List<RayInfo> rays = new List<RayInfo>();
 
 
     void Update ()
@@ -38,7 +39,7 @@ public class RayCastArray : MonoBehaviour
             Vector3 start = transform.position + ray.offset;
             Vector3 end = transform.position + ray.direction.normalized * ray.distance;
 
-            Gizmos.color = Color.blue;
+            Gizmos.color = ray.debug_color;
             Gizmos.DrawSphere(start, 0.05f);
             Gizmos.DrawLine(start, end);
             Gizmos.DrawSphere(end, 0.05f);

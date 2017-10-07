@@ -4,25 +4,60 @@ using UnityEngine;
 
 public class SquadCommander : MonoBehaviour
 {
-    [SerializeField] private Squad owned_squad;
-    [SerializeField] private float pointer_length = 100;
-    [SerializeField] private float pointer_radius = 5.0f;
-    [SerializeField] private CustomEvents.AreaWaypointEvent waypoint_set;
+    [SerializeField] Squad owned_squad;
+    [SerializeField] float pointer_length = 100;
+    [SerializeField] float pointer_radius = 5.0f;
+    [SerializeField] Transform indicator;
+    [SerializeField] ProjectorScaler projector_scaler;
+    [SerializeField] CustomEvents.AreaWaypointEvent waypoint_set;
+
+    private Vector3 hit_location = Vector3.zero;
+
+    public bool issuing_command { get; set; }
+
 
     void Start()
     {
-        //waypoint_set = new CustomEvents.AreaWaypointEvent();
+        indicator.gameObject.SetActive(false);
+    }
+
+
+    void LateUpdate()
+    {
+        if (!issuing_command)
+        {
+            indicator.gameObject.SetActive(false);
+            return;
+        }
+
+        UpdateHitLocation();
+        UpdateIndicator();
+    }
+
+
+    private void UpdateIndicator()
+    {
+        indicator.gameObject.SetActive(true);
+        indicator.position = hit_location;
+        projector_scaler.SetOrthographicSize(pointer_radius);
+    }
+
+
+    private void UpdateHitLocation()
+    {
+        var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height) * 0.5f);//cast from middle of screen
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit, pointer_length);
+        hit_location = hit.point;//store hit location
     }
 
 
     public void SetWaypoint()
     {
-        var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height ) * 0.5f);
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit, pointer_length);
-        
-        waypoint_set.Invoke(hit.point, pointer_radius);
-        Debug.Log("invoked");
+        if (!issuing_command)
+            return;
+    
+        waypoint_set.Invoke(hit_location, pointer_radius);
     }
 
 
@@ -41,5 +76,14 @@ public class SquadCommander : MonoBehaviour
     public void ToggleCover()
     {
         
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        
+        Gizmos.DrawLine(transform.position, transform.forward * pointer_length);
+        UnityEditor.Handles.DrawWireDisc(transform.forward * pointer_length, Vector3.up, pointer_radius);
     }
 }
