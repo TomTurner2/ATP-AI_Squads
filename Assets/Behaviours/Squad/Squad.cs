@@ -10,26 +10,25 @@ public class Squad : MonoBehaviour
 
     public void SetSquadAreaWaypoint(Vector3 _waypoint_pos, float _radius)
     {
-        Debug.Log("waypoint set");
-
-
         List<Vector3> way_points = TacticalAssessor.FindOptimalCoverInArea(_waypoint_pos, _radius);
-
-        if (way_points == null)
-            return;
-
-        
-        for (int i = 0; i < squad_members.Count; ++i)
-        {
-            if (i < way_points.Count)
-            {
-                squad_members[i].waypoint = way_points[i];
-            }
-        }
+        DistributeWaypointsToSquad(way_points);  
     }
 
-    void DistributeWaypointsToSquad()
+    void DistributeWaypointsToSquad(List<Vector3> _way_points)
     {
-        
+        if (_way_points == null)
+            return;
+
+        for (int i = 0; i < squad_members.Count; ++i)
+        {
+            if (i < _way_points.Count)
+            {
+                squad_members[i].waypoint = _way_points[i];
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 }

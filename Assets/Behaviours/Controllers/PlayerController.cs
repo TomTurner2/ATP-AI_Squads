@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private void ButtonPressEvents()
     {
-        if (Input.GetButton("Jump"))
+        if (Input.GetButtonDown("Jump"))
             on_jump_event.Invoke();
 
         if (Input.GetButton("Fire1"))

@@ -26,7 +26,7 @@ public class RayCastArray : MonoBehaviour
         {
             Vector3 start = transform.position + ray.offset;
             RaycastHit hit;
-            if (Physics.Raycast(start, ray.direction, out hit, ray.distance, ray.layers_to_check))
+            if (Physics.Raycast(start, ray.direction + ray.offset, out hit, ray.distance, ray.layers_to_check))
                 ray.on_ray_hit_event.Invoke(hit.point);
         }
     }
@@ -37,7 +37,7 @@ public class RayCastArray : MonoBehaviour
         foreach (RayInfo ray in rays)
         {
             Vector3 start = transform.position + ray.offset;
-            Vector3 end = transform.position + ray.direction.normalized * ray.distance;
+            Vector3 end = start + ray.direction.normalized * ray.distance ;
 
             Gizmos.color = ray.debug_color;
             Gizmos.DrawSphere(start, 0.05f);

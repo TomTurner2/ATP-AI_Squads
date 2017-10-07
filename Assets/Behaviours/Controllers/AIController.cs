@@ -7,15 +7,14 @@ using UnityEngine.AI;
 public class AIController : MonoBehaviour
 {
     public Vector3 waypoint { get; set; }
+    public NavMeshAgent nav_mesh_agent;
 
-    [SerializeField] private Character controlled_character;
-    [SerializeField] private NavMeshAgent nav_mesh_agent;
-    
+    [SerializeField] Character controlled_character;
+ 
 
     void Start()
     {
-        waypoint = transform.position;
-        controlled_character.sprinting = true;   
+        waypoint = transform.position; 
     }
 
 
@@ -32,23 +31,24 @@ public class AIController : MonoBehaviour
 
         if (controlled_character.crouching)
         {
-            nav_mesh_agent.speed = controlled_character.crouch_speed;
+            nav_mesh_agent.speed = controlled_character.crouch_speed;//use crouch speed
             return;
         }
 
         if (controlled_character.sprinting)
         {
-            nav_mesh_agent.speed = controlled_character.sprint_speed;
+            nav_mesh_agent.speed = controlled_character.sprint_speed;//use sprint speed
             return;
         }
 
-        nav_mesh_agent.speed = controlled_character.walk_speed;
+        nav_mesh_agent.speed = controlled_character.walk_speed;//default to walk speed
     }
 
 
     public bool MoveToPosition(Vector3 _position)
     {
         DetermineSpeed();
+        //controlled_character.current_speed = nav_mesh_agent.velocity.z;
         return nav_mesh_agent.SetDestination(_position);
     }
     
