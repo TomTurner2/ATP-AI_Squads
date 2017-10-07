@@ -43,8 +43,8 @@ public class AutoCrouch : MonoBehaviour
         if (BitmaskHelper.IsSet<Directions>(detections, Directions.DOWN))
             crouch = true;
 
-        if (BitmaskHelper.IsSet<Directions>(detections, Directions.UP))
-            crouch = false;
+        //if (BitmaskHelper.IsSet<Directions>(detections, Directions.UP))
+        //    crouch = false;
 
         on_crouch_event.Invoke(crouch);
     }

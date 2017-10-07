@@ -2546,8 +2546,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb11f511a23b90b45ae47e6148361612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlled_character: {fileID: 114885631607301624}
   nav_mesh_agent: {fileID: 195547738747522154}
+  controlled_character: {fileID: 114885631607301624}
 --- !u!114 &114338820775739836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2634,9 +2634,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walk_speed: 0.5
   sprint_speed: 1
-  crouch_speed: 0.3
+  crouch_speed: 0.4
   jump_force: {x: 0, y: 1, z: 0}
-  current_speed: 0
+  current_move_speed: 0
   character_mover: {fileID: 114890260693009724}
   character_jump: {fileID: 0}
 --- !u!114 &114890260693009724
@@ -2666,7 +2666,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: f2f40ce6bd8bd5c4997a59e35445e52f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -2837,7 +2837,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1881467939022218}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
