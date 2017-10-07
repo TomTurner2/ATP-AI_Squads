@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class CoverDetectionTest : MonoBehaviour
@@ -10,7 +11,6 @@ public class CoverDetectionTest : MonoBehaviour
     public float update_delay = 2;
     private List<Vector3> nearest_cover = new List<Vector3>();
     private float t = 0;
-
 
 
     void Start()
