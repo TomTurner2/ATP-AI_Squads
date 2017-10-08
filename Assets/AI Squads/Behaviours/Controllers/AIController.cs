@@ -50,7 +50,6 @@ public class AIController : MonoBehaviour
     public bool MoveToPosition(Vector3 _position)
     {
         DetermineSpeed();
-        //controlled_character.current_speed = nav_mesh_agent.velocity.z;
         return nav_mesh_agent.SetDestination(_position);
     }
 

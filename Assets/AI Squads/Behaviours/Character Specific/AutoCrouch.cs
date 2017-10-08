@@ -74,7 +74,7 @@ public class AutoCrouch : MonoBehaviour
 
     private bool CheckDetection(BitVector32 _detected, Directions _direction_up, Directions _direction_down)
     {
-        return _detected[(int) _direction_up] == false && _detected[(int) _direction_down];//if not top detection but bottom detection
+        return !_detected[(int) _direction_up] && _detected[(int) _direction_down];//if not top detection but bottom detection
     }
 
 }

@@ -1,61 +1,67 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.PostProcessing;
+using Random = UnityEngine.Random;
 
 public class TacticalAssessor : MonoBehaviour
 {
+    [SerializeField] List<WeightModule> weight_modules = new List<WeightModule>();
+    [SerializeField] bool debug = false;
+    [SerializeField] List<WeightedPoint> debug_last_sample = new List<WeightedPoint>();
+
     private const int POSITION_START_WEIGHT = 100;
-    private const int FLANKED_PENALTY = 1000;
-    private const int DISTANCE_FROM_WAYPOINT_PENALTY = 5;
-    private const float HEIGHT_OFFSET = 0.1f;
 
-    public bool debug = false;
-    private static Vector3 debug_line_start = Vector3.zero;
-    private static Vector3 debug_line_end = Vector3.zero;
-    private static List<WeightedPoint> debug_last_sample;
-
-
-    struct WeightedPoint
+    [System.Serializable]
+    public struct WeightedPoint
     {
-        public Vector3 position { get; set; }
-        public Vector3 original_position { get; set; }
-        public int weight { get; set; }
+        public Vector3 position;
+        public Vector3 original_position;
+        public int weight;
     }
 
 
-    public static List<Vector3> FindOptimalCoverInArea(Vector3 _position, float _radius, int _sample_count = 30, int _minimum_score = 0, int _area_mask = NavMesh.AllAreas)
+    public List<Vector3> FindOptimalCoverInArea(Vector3 _position, float _radius, int _sample_count = 30,
+        int _minimum_score = 0, int _area_mask = NavMesh.AllAreas)
     {
-        List<WeightedPoint> weighted_positions = SampleDistributedPointInRadius(_position, _radius, _area_mask);//select random points on nav
+        List<WeightedPoint> weighted_positions = SampleDistributedPointInRadius(_position,
+            _radius, _area_mask);//select random points on nav
 
         if (weighted_positions.Count <= 0)//if none sampled leave
             return new List<Vector3>();
 
-        for (int i = 0; i < weighted_positions.Count; ++i)
+        FindCoverLocations(ref weighted_positions, _position, _radius, _sample_count, _minimum_score, _area_mask);//find cover
+        weighted_positions.OrderByDescending(p => p.weight);
+        List<Vector3> positions = new List<Vector3>(weighted_positions.Select(p => p.position));
+
+        return positions;
+    }
+
+
+    private void FindCoverLocations(ref List<WeightedPoint> _weighted_positions, Vector3 _position, float _radius,
+        int _sample_count = 30, int _minimum_score = 0, int _area_mask = NavMesh.AllAreas)
+    {
+        for (int i = 0; i < _weighted_positions.Count; ++i)
         {
-            WeightedPoint point = weighted_positions[i];
+            WeightedPoint point = _weighted_positions[i];
             NavMeshHit hit;
 
             if (!NavMesh.FindClosestEdge(point.position, out hit, _area_mask))//get closest edge on nav mesh
                 continue;
 
             point.position = hit.position;//set it as position
-            
-            weighted_positions[i] = point;
+
+            _weighted_positions[i] = point;
             point.weight = DetermineWeight(point, _position, _radius);//calculate weighting
         }
-
-        weighted_positions.OrderByDescending(p => p.weight);
-
-        List<Vector3> positions = new List<Vector3>(weighted_positions.Select(p => p.position));
-        return positions;
     }
 
 
-    private static List<WeightedPoint> SamplePointInRadius(Vector3 _position, float _radius, int _sample_count = 30, int _area_mask = NavMesh.AllAreas)
+    private List<WeightedPoint> SamplePointInRadius(Vector3 _position, float _radius, int _sample_count = 30, int _area_mask = NavMesh.AllAreas)
     {
         List<WeightedPoint> positions = new List<WeightedPoint>();
 
@@ -81,14 +87,14 @@ public class TacticalAssessor : MonoBehaviour
     }
 
 
-    private static List<WeightedPoint> SampleDistributedPointInRadius(Vector3 _position, float _radius, int _area_mask = NavMesh.AllAreas)
+    private List<WeightedPoint> SampleDistributedPointInRadius(Vector3 _position, float _radius, int _area_mask = NavMesh.AllAreas)
     {
         List<WeightedPoint> positions = new List<WeightedPoint>();
 
         int point_count = 1;
         int point_increase = 2;
         
-        float radius_spacing = 0.4f;
+        float radius_spacing = 0.5f;
 
         for (float r = 0; r < _radius; r += radius_spacing)
         {
@@ -122,65 +128,19 @@ public class TacticalAssessor : MonoBehaviour
     }
 
 
-    private static int DetermineWeight(WeightedPoint _point, Vector3 _position, float _radius)
+    private int DetermineWeight(WeightedPoint _point, Vector3 _position, float _radius)
     {
         int weight =  _point.weight;
-        
-        if (VisibleToEnemy(_point.position))
-            weight -= FLANKED_PENALTY;
 
-        //factor in distance from commanded position
-        if (Vector3.Distance(_position, _point.position) > _radius)
-            weight -= DISTANCE_FROM_WAYPOINT_PENALTY;
-
-        return  weight;
-    }
-
-
-    private static bool VisibleToEnemy(Vector3 _position)
-    {
-        GameObject closest_enemy = FindClosestEnemy(_position);
-       
-        if (closest_enemy == null)
-            return false;
-
-        float enemy_height = 2;
-        CapsuleCollider enemy_capsule_collider = closest_enemy.GetComponentInChildren<CapsuleCollider>();
-
-        if (enemy_capsule_collider != null)
-            enemy_height = enemy_capsule_collider.height;
-
-        Vector3 ray_origin = new Vector3(closest_enemy.transform.position.x,
-            closest_enemy.transform.position.y + enemy_height, closest_enemy.transform.position.z);
-
-        Vector3 target = new Vector3(_position.x, _position.y + HEIGHT_OFFSET, _position.z);//offset target from ground
-        Vector3 direction = target - ray_origin;
-        float dist = Vector2.Distance(ray_origin, target);
-
-        debug_line_start = ray_origin;
-        debug_line_end = target;
-
-        return Physics.Raycast(ray_origin, direction, dist/*, 1 << LayerMask.NameToLayer("Enemy")*/);//if we hit something return false
-    }
-
-
-    public static GameObject FindClosestEnemy(Vector3 _position)
-    {
-        GameObject closest_enemy = null;
-        List<GameObject> enemies = GameManager.scene_refs.enemy_manager.enemies;
-        float closest_distance = float.PositiveInfinity;
-
-        foreach (var enemy in enemies)
+        foreach (WeightModule module in weight_modules)
         {
-            float dist = (enemy.transform.position -_position).sqrMagnitude;
-            if (dist >= closest_distance)
+            if (module == null)
                 continue;
 
-            closest_distance = dist;
-            closest_enemy = enemy;
+            weight += module.AssessWeight(_point, _radius);
         }
 
-        return closest_enemy;
+        return  weight;
     }
 
 
@@ -188,10 +148,6 @@ public class TacticalAssessor : MonoBehaviour
     {
         if (!debug)
             return;
-
-        Gizmos.color = Color.red;
-        
-        Gizmos.DrawLine(debug_line_start, debug_line_end);
 
         Gizmos.color = Color.white;
 
@@ -202,7 +158,6 @@ public class TacticalAssessor : MonoBehaviour
         {
             Gizmos.DrawSphere(point.original_position, 0.05f);
         }
-        
     }
 
 }
