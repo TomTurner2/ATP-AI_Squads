@@ -13,21 +13,46 @@ public class RayInfo
     public float distance;
     public Color debug_color = Color.white;
     public CustomEvents.Vector3Event on_ray_hit_event;
+    public UnityEvent on_ray_miss_event;
 }
 
 public class RayCastArray : MonoBehaviour
 {
+    [SerializeField] private float update_delay = 0;
     [SerializeField] List<RayInfo> rays = new List<RayInfo>();
+
+    private CountdownTimer timer = new CountdownTimer();
+
+
+    void Start()
+    {
+        timer.InitCountDownTimer(update_delay);
+    }
 
 
     void Update ()
+    {
+        timer.timer_duration = update_delay;//in case updated
+
+        if (!timer.UpdateTimer())//only execute after timed delay
+            return;
+
+        FireRays();
+    }
+
+
+    private void FireRays()
     {
         foreach (RayInfo ray in rays)
         {
             Vector3 start = transform.position + ray.offset;
             RaycastHit hit;
             if (Physics.Raycast(start, ray.direction + ray.offset, out hit, ray.distance, ray.layers_to_check))
+            {
                 ray.on_ray_hit_event.Invoke(hit.point);
+                continue;
+            }
+            ray.on_ray_miss_event.Invoke();
         }
     }
 

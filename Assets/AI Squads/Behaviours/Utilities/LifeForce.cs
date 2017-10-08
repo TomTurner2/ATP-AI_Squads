@@ -28,18 +28,19 @@ public class LifeForce : MonoBehaviour
     }
 
 
-    public void Damage(int _damage)
+    public bool Damage(int _damage)
     {
         current_health -= _damage;//damage health
 
         if (current_health > 0)
         {
             on_damage_event.Invoke(_damage);//trigger damage event if survived
-            return;
+            return false;
         }
 
         current_health = 0;
         on_death_event.Invoke();//trigger death event
+        return true;
     }
 
 

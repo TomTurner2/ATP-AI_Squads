@@ -9,6 +9,7 @@ public class AIController : MonoBehaviour
     public Vector3 waypoint { get; set; }
     public NavMeshAgent nav_mesh_agent;
 
+    [SerializeField] float target_arrival_threshold = 0.5f;
     [SerializeField] Character controlled_character;
  
 
@@ -20,7 +21,8 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
-        MoveToPosition(waypoint);
+        if (Vector3.Distance(transform.position, waypoint) >= 1)
+            MoveToPosition(waypoint);
     }
 
 
@@ -51,5 +53,11 @@ public class AIController : MonoBehaviour
         //controlled_character.current_speed = nav_mesh_agent.velocity.z;
         return nav_mesh_agent.SetDestination(_position);
     }
-    
+
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawSphere(waypoint, .5f);
+    }
+
 }

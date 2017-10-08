@@ -994,7 +994,6 @@ GameObject:
   - component: {fileID: 4347997619949352}
   - component: {fileID: 54457281685629034}
   - component: {fileID: 195547738747522154}
-  - component: {fileID: 208365192105912332}
   - component: {fileID: 114292556911220436}
   - component: {fileID: 114885631607301624}
   - component: {fileID: 114890260693009724}
@@ -2292,7 +2291,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!95 &95502542007984820
 Animator:
   serializedVersion: 3
@@ -2338,10 +2337,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ccf03645d54e5f40960956d507888c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  update_delay: 1
   rays:
   - layers_to_check:
       serializedVersion: 2
-      m_Bits: 4294960127
+      m_Bits: 4294959615
     offset: {x: 0, y: 0.4, z: 0}
     direction: {x: 0, y: 0, z: 1}
     distance: 0.7
@@ -2350,21 +2350,37 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114870506702447590}
-          m_MethodName: DetectionDown
-          m_Mode: 1
+          m_MethodName: SetFlag
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 16
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114870506702447590}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 16
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
   - layers_to_check:
       serializedVersion: 2
-      m_Bits: 4294960127
+      m_Bits: 4294959615
     offset: {x: 0, y: 0.4, z: 0}
     direction: {x: 0, y: 0, z: -1}
     distance: 0.7
@@ -2373,21 +2389,37 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114870506702447590}
-          m_MethodName: DetectionDown
-          m_Mode: 1
+          m_MethodName: SetFlag
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114870506702447590}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
   - layers_to_check:
       serializedVersion: 2
-      m_Bits: 4294960127
+      m_Bits: 4294959615
     offset: {x: 0, y: 0.4, z: 0}
     direction: {x: -1, y: 0, z: 0}
     distance: 0.7
@@ -2396,21 +2428,37 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114870506702447590}
-          m_MethodName: DetectionDown
-          m_Mode: 1
+          m_MethodName: SetFlag
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 64
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114870506702447590}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 64
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
   - layers_to_check:
       serializedVersion: 2
-      m_Bits: 4294960127
+      m_Bits: 4294959615
     offset: {x: 0, y: 0.4, z: 0}
     direction: {x: 1, y: 0, z: 0}
     distance: 0.7
@@ -2419,17 +2467,33 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114870506702447590}
-          m_MethodName: DetectionDown
-          m_Mode: 1
+          m_MethodName: SetFlag
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 128
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114870506702447590}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 128
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
 --- !u!114 &114274800052099366
 MonoBehaviour:
@@ -2442,10 +2506,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ccf03645d54e5f40960956d507888c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  update_delay: 1
   rays:
   - layers_to_check:
       serializedVersion: 2
-      m_Bits: 4294960127
+      m_Bits: 4294959615
     offset: {x: 0, y: 1.5, z: 0}
     direction: {x: 0, y: 0, z: 1}
     distance: 0.7
@@ -2454,21 +2519,37 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114870506702447590}
-          m_MethodName: DetectionDown
-          m_Mode: 1
+          m_MethodName: SetFlag
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114870506702447590}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
   - layers_to_check:
       serializedVersion: 2
-      m_Bits: 4294960127
+      m_Bits: 4294959615
     offset: {x: 0, y: 1.5, z: 0}
     direction: {x: 0, y: 0, z: -1}
     distance: 0.7
@@ -2477,21 +2558,37 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114870506702447590}
-          m_MethodName: DetectionUp
-          m_Mode: 1
+          m_MethodName: SetFlag
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114870506702447590}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
   - layers_to_check:
       serializedVersion: 2
-      m_Bits: 4294960127
+      m_Bits: 4294959615
     offset: {x: 0, y: 1.5, z: 0}
     direction: {x: -1, y: 0, z: 0}
     distance: 0.7
@@ -2500,21 +2597,37 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114870506702447590}
-          m_MethodName: DetectionUp
-          m_Mode: 1
+          m_MethodName: SetFlag
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114870506702447590}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
   - layers_to_check:
       serializedVersion: 2
-      m_Bits: 4294960127
+      m_Bits: 4294959615
     offset: {x: 0, y: 1.5, z: 0}
     direction: {x: 1, y: 0, z: 0}
     distance: 0.7
@@ -2523,17 +2636,33 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114870506702447590}
-          m_MethodName: DetectionUp
-          m_Mode: 1
+          m_MethodName: SetFlag
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 8
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114870506702447590}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 8
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
 --- !u!114 &114292556911220436
 MonoBehaviour:
@@ -2547,6 +2676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nav_mesh_agent: {fileID: 195547738747522154}
+  target_arrival_threshold: 1
   controlled_character: {fileID: 114885631607301624}
 --- !u!114 &114338820775739836
 MonoBehaviour:
@@ -2632,9 +2762,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29ccb02bb579ab44ae44ab2685faab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walk_speed: 0.5
-  sprint_speed: 1
-  crouch_speed: 0.4
+  walk_speed: 3
+  sprint_speed: 4
+  crouch_speed: 2
   jump_force: {x: 0, y: 1, z: 0}
   current_move_speed: 0
   character_mover: {fileID: 114890260693009724}
@@ -2837,12 +2967,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 1881467939022218}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.4
+  m_Radius: 0.38
   m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2850,18 +2980,3 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!208 &208365192105912332
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1881467939022218}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.42, z: 0}
-  m_TimeToStationary: 0.5
