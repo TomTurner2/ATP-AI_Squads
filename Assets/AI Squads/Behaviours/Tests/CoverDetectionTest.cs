@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CoverDetectionTest : MonoBehaviour
 {
+    public WMEnemyLineOfSight test_line_of_site;
     public float radius = 5.0f;
     public float cover_radius =.5f;
     public int sample_count = 200;
@@ -42,6 +43,9 @@ public class CoverDetectionTest : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+
+        Gizmos.DrawLine(test_line_of_site.debug_start, test_line_of_site.debug_end);
+
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(transform.position, 0.5f);
         Gizmos.DrawWireSphere(transform.position, radius);

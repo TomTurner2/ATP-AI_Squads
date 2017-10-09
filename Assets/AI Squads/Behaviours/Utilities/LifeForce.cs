@@ -7,8 +7,9 @@ using UnityEngine.Events;
 public class LifeForce : MonoBehaviour
 {
     [SerializeField] private int max_health = 100;
+    [SerializeField] private ParticleSystem hit_effect;
     [SerializeField] private UnityEvent on_death_event;
-    [SerializeField] private CustomEvents.IntEvent on_damage_event;
+    [SerializeField] private CustomEvents.DamageEvent on_damage_event;
 
     private int current_health = 100;
 
@@ -24,17 +25,24 @@ public class LifeForce : MonoBehaviour
             on_death_event = new UnityEvent();//create event
 
         if (on_damage_event == null)
-            on_damage_event = new CustomEvents.IntEvent();
+            on_damage_event = new CustomEvents.DamageEvent();
     }
 
 
-    public bool Damage(int _damage)
+    public bool Damage(int _damage, RaycastHit _hit)
     {
         current_health -= _damage;//damage health
 
+        if (hit_effect != null)
+        {
+            hit_effect.transform.position = _hit.point;
+            hit_effect.transform.up = _hit.normal;
+            hit_effect.Emit(30);
+        }
+
         if (current_health > 0)
         {
-            on_damage_event.Invoke(_damage);//trigger damage event if survived
+            on_damage_event.Invoke(_damage, _hit);//trigger damage event if survived
             return false;
         }
 

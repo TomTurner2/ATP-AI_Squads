@@ -11,4 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5063bea6aee614aa4a9b0b19fc76e0, type: 3}
   m_Name: Default Enemy Line Of Site
   m_EditorClassIdentifier: 
-  weight_penalty: -500
+  weight_penalty: -2000
+  height_offset: 0
+  enemy_max_check_distance: 1000
+  debug_start: {x: 2.619, y: 2.581, z: 3.854}
+  debug_end: {x: 8.511443, y: 0.08082175, z: 3.2230577}

@@ -21,6 +21,8 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
+        nav_mesh_agent.isStopped = controlled_character.dead;
+
         if (Vector3.Distance(transform.position, waypoint) >= 1)
             MoveToPosition(waypoint);
     }

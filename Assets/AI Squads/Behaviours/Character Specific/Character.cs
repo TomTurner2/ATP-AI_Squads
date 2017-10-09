@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(MoveRigidbody))]
 public class Character : MonoBehaviour
 {
+    [HideInInspector] public bool dead { get; set; }
     [HideInInspector] public Vector3 move_dir { get; set; }
     [HideInInspector] public bool sprinting { get; set; }
     [HideInInspector] public bool crouching { get; set; }
@@ -27,6 +28,7 @@ public class Character : MonoBehaviour
 
     void Start ()
     {
+        dead = false;
         current_move_speed = walk_speed;
         move_dir = Vector3.zero;
         sprinting = false;
@@ -101,7 +103,7 @@ public class Character : MonoBehaviour
 
     public void KillCharacter()
     {
-        Destroy(gameObject);
+        dead = true;
     }
 
 }

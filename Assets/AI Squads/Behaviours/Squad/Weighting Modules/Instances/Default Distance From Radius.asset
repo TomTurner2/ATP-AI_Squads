@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d8cae099931114d860af4463f53ae7, type: 3}
   m_Name: Default Distance From Radius
   m_EditorClassIdentifier: 
-  weight_penalty: -50
+  weight_penalty: 0

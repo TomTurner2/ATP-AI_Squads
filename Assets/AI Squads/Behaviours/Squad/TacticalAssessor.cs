@@ -68,7 +68,7 @@ public class TacticalAssessor : MonoBehaviour
         List<WeightedPoint> positions = new List<WeightedPoint>();
 
         int point_count = 1;
-        int point_increase = 2;
+        int point_increase = 4;
         
         float radius_spacing = 0.5f;
 
@@ -82,7 +82,7 @@ public class TacticalAssessor : MonoBehaviour
 
                 NavMeshHit hit;
 
-                if (!NavMesh.SamplePosition(new Vector3(x, _position.y, z) + _position, out hit, 2f, _area_mask))//if hit nav mesh
+                if (!NavMesh.SamplePosition(new Vector3(x, _position.y, z) + _position, out hit, 100f, _area_mask))//if hit nav mesh
                     continue;
 
                 WeightedPoint point = new WeightedPoint//create struct

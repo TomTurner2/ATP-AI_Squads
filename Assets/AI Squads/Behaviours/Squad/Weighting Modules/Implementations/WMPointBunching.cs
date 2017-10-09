@@ -7,7 +7,6 @@ using UnityEngine;
 public class WMPointBunching : WeightModule
 {
     [SerializeField] float cover_spacing = 0.3f;
-    [SerializeField] uint check_stride = 1;
 
     public override int AssessWeight(TacticalAssessor.WeightedPoint _point, float _area_radius,
         ref List<TacticalAssessor.WeightedPoint> _weighted_positions)
@@ -20,7 +19,7 @@ public class WMPointBunching : WeightModule
         TacticalAssessor.WeightedPoint _point)
     {
         int point_index = _weighted_positions.IndexOf(_point);
-        point_index += (int)check_stride;
+        ++point_index;
 
         for (int i = point_index; i < _weighted_positions.Count; ++i)
         { 

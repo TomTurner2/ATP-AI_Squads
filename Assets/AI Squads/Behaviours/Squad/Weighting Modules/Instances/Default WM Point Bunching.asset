@@ -13,4 +13,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight_penalty: -1000
   cover_spacing: 1
-  check_stride: 1

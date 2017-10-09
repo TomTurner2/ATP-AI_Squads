@@ -13,6 +13,7 @@ public class CharacterAnimation : MonoBehaviour
         if (character_controller == null || character_animator == null)
             return;
 
+        character_animator.SetBool("dead", character_controller.dead);
         character_animator.SetFloat("speed", character_controller.current_speed);
         character_animator.SetBool("crouching", character_controller.crouching);
     }

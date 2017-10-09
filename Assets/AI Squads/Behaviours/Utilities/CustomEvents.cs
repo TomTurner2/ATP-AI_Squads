@@ -15,6 +15,9 @@ public class CustomEvents
     public class IntEvent : UnityEvent<int> { }
 
     [System.Serializable]
+    public class DamageEvent : UnityEvent<int, RaycastHit> { }
+
+    [System.Serializable]
     public class FloatEvent : UnityEvent<float> { }
 
     [System.Serializable]
