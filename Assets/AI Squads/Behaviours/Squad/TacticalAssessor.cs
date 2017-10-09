@@ -25,7 +25,7 @@ public class TacticalAssessor : MonoBehaviour
     }
 
 
-    public List<Vector3> FindOptimalCoverInArea(Vector3 _position, float _radius, float _cover_spacing = 0.3f, int _sample_count = 30,
+    public List<Vector3> FindOptimalCoverInArea(Vector3 _position, float _radius, int _sample_count = 30,
         int _minimum_score = 0, int _area_mask = NavMesh.AllAreas)
     {
         List<WeightedPoint> weighted_positions = SampleDistributedPointInRadius(_position,
@@ -34,15 +34,18 @@ public class TacticalAssessor : MonoBehaviour
         if (weighted_positions.Count <= 0)//if none sampled leave
             return new List<Vector3>();
 
-        FindCoverLocations(ref weighted_positions, _position, _radius, _cover_spacing, _sample_count, _minimum_score, _area_mask);//find cover
+        FindCoverLocations(ref weighted_positions, _position, _radius,
+            _sample_count, _minimum_score, _area_mask);//find cover
+
         weighted_positions = new List<WeightedPoint>(weighted_positions.OrderByDescending(p => p.weight));
         List<Vector3> positions = new List<Vector3>(weighted_positions.Select(p => p.position));
         debug_last_sample = weighted_positions;
+
         return positions;
     }
 
 
-    private void FindCoverLocations(ref List<WeightedPoint> _weighted_positions, Vector3 _position, float _radius, float _cover_spacing = 0.3f,
+    private void FindCoverLocations(ref List<WeightedPoint> _weighted_positions, Vector3 _position, float _radius,
         int _sample_count = 30, int _minimum_score = 0, int _area_mask = NavMesh.AllAreas)
     {
         for (int i = 0; i < _weighted_positions.Count; ++i)
@@ -54,37 +57,8 @@ public class TacticalAssessor : MonoBehaviour
                 continue;
            
             point.position = hit.position;//set it as position
+            point.weight = DetermineWeight(point, _position, _radius, ref _weighted_positions);//calculate weighting
             _weighted_positions[i] = point;    
-        }
-
-        CullBunchedPoints(ref _weighted_positions, _cover_spacing);
-
-        for(int i = 0; i < _weighted_positions.Count; ++i)
-        {
-            WeightedPoint point = _weighted_positions[i];
-            point.weight = DetermineWeight(point, _position, _radius);//calculate weighting
-            _weighted_positions[i] = point;
-        }
-    }
-
-
-    private void CullBunchedPoints(ref List<WeightedPoint> _weighted_positions, float _cover_spacing = 0.3f)
-    {
-        foreach (WeightedPoint point_a in _weighted_positions.ToList())
-        {
-            for (int i = 1; i < _weighted_positions.Count; ++i)
-            { 
-                if (point_a.original_position == _weighted_positions[i].original_position)
-                    continue;
-
-                var dist = (point_a.position - _weighted_positions[i].position).magnitude/*.sqrMagnitude*/;
-                if (dist <= _cover_spacing /** _cover_spacing*/)
-                {
-                    var weighted_position = _weighted_positions[i];
-                    weighted_position.weight -= 1000; /*.Remove(_weighted_positions[i]);*/
-                    _weighted_positions[i] = weighted_position;
-                }
-            }
         }
     }
 
@@ -130,7 +104,8 @@ public class TacticalAssessor : MonoBehaviour
     }
 
 
-    private int DetermineWeight(WeightedPoint _point, Vector3 _position, float _radius)
+    private int DetermineWeight(WeightedPoint _point, Vector3 _position, float _radius,
+        ref List<TacticalAssessor.WeightedPoint> _weighted_positions)
     {
         int weight =  _point.weight;
 
@@ -139,7 +114,7 @@ public class TacticalAssessor : MonoBehaviour
             if (module == null)
                 continue;
 
-            weight += module.AssessWeight(_point, _radius);
+            weight += module.AssessWeight(_point, _radius, ref _weighted_positions);
         }
 
         return  weight;

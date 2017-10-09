@@ -9,7 +9,8 @@ public class WMEnemyLineOfSite : WeightModule
     [SerializeField] float enemy_max_check_distance = 100;
 
 
-    public override int AssessWeight(TacticalAssessor.WeightedPoint _point, float _radius = 0)
+    public override int AssessWeight(TacticalAssessor.WeightedPoint _point, float _area_radius,
+        ref List<TacticalAssessor.WeightedPoint> _weighted_positions)
     {
         return VisibleToEnemy(_point.position) ? weight_penalty : 0;
     }

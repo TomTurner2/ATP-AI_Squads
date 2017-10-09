@@ -17,7 +17,7 @@ public class CoverDetectionTest : MonoBehaviour
     void Start()
     {
         t = update_delay;
-        nearest_cover = GameManager.scene_refs.tactical_assessor.FindOptimalCoverInArea(transform.position, radius, cover_radius, sample_count, 50);
+        nearest_cover = GameManager.scene_refs.tactical_assessor.FindOptimalCoverInArea(transform.position, radius, sample_count, 50);
     }
 
 
@@ -30,7 +30,7 @@ public class CoverDetectionTest : MonoBehaviour
 	        return;
 
 	    t = update_delay;
-	    nearest_cover = GameManager.scene_refs.tactical_assessor.FindOptimalCoverInArea(transform.position, radius, cover_radius, sample_count, 50);
+	    nearest_cover = GameManager.scene_refs.tactical_assessor.FindOptimalCoverInArea(transform.position, radius, sample_count, 50);
 	}
 
 

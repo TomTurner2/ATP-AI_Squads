@@ -10,7 +10,7 @@ public class Squad : MonoBehaviour
 
     public void SetSquadAreaWaypoint(Vector3 _waypoint_pos, float _radius)
     {
-        List<Vector3> way_points = GameManager.scene_refs.tactical_assessor.FindOptimalCoverInArea(_waypoint_pos, _radius, 0.4f);
+        List<Vector3> way_points = GameManager.scene_refs.tactical_assessor.FindOptimalCoverInArea(_waypoint_pos, _radius);
         DistributeWaypointsToSquad(way_points);  
     }
 

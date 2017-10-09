@@ -166,11 +166,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d1e7fae33e9e10499248bd9fe9b186c, type: 2}
   m_IsPrefabParent: 0
---- !u!82 &65288373 stripped
-AudioSource:
-  m_PrefabParentObject: {fileID: 82636968737822646, guid: d664e44dab423c44e9efbfbdc3ae71fe,
-    type: 2}
-  m_PrefabInternal: {fileID: 135071255}
 --- !u!4 &76561892 stripped
 Transform:
   m_PrefabParentObject: {fileID: 461882, guid: 5d1e7fae33e9e10499248bd9fe9b186c, type: 2}
@@ -519,51 +514,12 @@ Prefab:
       propertyPath: projector_scaler
       value: 
       objectReference: {fileID: 1272445289}
-    - target: {fileID: 114243955155184894, guid: d664e44dab423c44e9efbfbdc3ae71fe,
-        type: 2}
-      propertyPath: test
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 82636968737822646, guid: d664e44dab423c44e9efbfbdc3ae71fe,
         type: 2}
-      propertyPath: m_audioClip
+      propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114457678402404950, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+      objectReference: {fileID: 24300002, guid: 4da44496da2c8de49b232d7aa2b2caa0,
         type: 2}
-      propertyPath: audio_source
-      value: 
-      objectReference: {fileID: 65288373}
-    - target: {fileID: 114457678402404950, guid: d664e44dab423c44e9efbfbdc3ae71fe,
-        type: 2}
-      propertyPath: gun_shot_clip
-      value: 
-      objectReference: {fileID: 8300000, guid: ebb8113fe18564a4b830a3aab576f761, type: 3}
-    - target: {fileID: 82636968737822646, guid: d664e44dab423c44e9efbfbdc3ae71fe,
-        type: 2}
-      propertyPath: m_Volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114457678402404950, guid: d664e44dab423c44e9efbfbdc3ae71fe,
-        type: 2}
-      propertyPath: max_pitch
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114591533611366094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
-        type: 2}
-      propertyPath: pitch_clamp.x
-      value: -80
-      objectReference: {fileID: 0}
-    - target: {fileID: 114591533611366094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
-        type: 2}
-      propertyPath: pitch_clamp.y
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
-        type: 2}
-      propertyPath: pointer_radius
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d664e44dab423c44e9efbfbdc3ae71fe, type: 2}
   m_IsPrefabParent: 0
@@ -636,6 +592,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114714501118395278, guid: eefca46e7f8873448a788789937ba669,
+        type: 2}
+      propertyPath: weight_modules.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4855702309685508, guid: eefca46e7f8873448a788789937ba669, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -673,6 +634,12 @@ Prefab:
       propertyPath: enemies.Array.data[0]
       value: 
       objectReference: {fileID: 1449207643}
+    - target: {fileID: 114714501118395278, guid: eefca46e7f8873448a788789937ba669,
+        type: 2}
+      propertyPath: weight_modules.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: b6dcf42bbe641c24c90175e778df175b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eefca46e7f8873448a788789937ba669, type: 2}
   m_IsPrefabParent: 0
@@ -2944,8 +2911,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4416441063893068, guid: 2c247d565bd67074bb9429ebd5a23ace, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 82265491976665420, guid: 2c247d565bd67074bb9429ebd5a23ace,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: baded7cedfeff944f872d983df5a5b3f,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c247d565bd67074bb9429ebd5a23ace, type: 2}
   m_IsPrefabParent: 0
@@ -4175,7 +4148,7 @@ Transform:
   - {fileID: 1572323289}
   - {fileID: 1362837459}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1312642448 stripped
 GameObject:
