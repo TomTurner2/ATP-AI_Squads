@@ -5,14 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Weight Module/WMEnemyLineOfSite")]
 public class WMEnemyLineOfSite : WeightModule
 {
-    private float height_offset = 0.1f;
+    [SerializeField] float height_offset = 0.1f;
+    [SerializeField] float enemy_max_check_distance = 100;
+
 
     public override int AssessWeight(TacticalAssessor.WeightedPoint _point, float _radius = 0)
     {
-        if (VisibleToEnemy(_point.position))
-            return weight_penalty;
-
-        return 0;
+        return VisibleToEnemy(_point.position) ? weight_penalty : 0;
     }
 
 
@@ -49,7 +48,7 @@ public class WMEnemyLineOfSite : WeightModule
         foreach (var enemy in enemies)
         {
             float dist = (enemy.transform.position - _position).sqrMagnitude;
-            if (dist >= closest_distance)
+            if (dist >= closest_distance || dist > enemy_max_check_distance)
                 continue;
 
             closest_distance = dist;

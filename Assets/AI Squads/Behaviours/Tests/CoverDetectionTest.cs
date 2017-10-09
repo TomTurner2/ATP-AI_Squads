@@ -6,6 +6,7 @@ using UnityEngine;
 public class CoverDetectionTest : MonoBehaviour
 {
     public float radius = 5.0f;
+    public float cover_radius =.5f;
     public int sample_count = 200;
     public int best_pick_count = 4;
     public float update_delay = 2;
@@ -16,7 +17,7 @@ public class CoverDetectionTest : MonoBehaviour
     void Start()
     {
         t = update_delay;
-        nearest_cover = GameManager.scene_refs.tactical_assessor.FindOptimalCoverInArea(transform.position, radius, sample_count, 50);
+        nearest_cover = GameManager.scene_refs.tactical_assessor.FindOptimalCoverInArea(transform.position, radius, cover_radius, sample_count, 50);
     }
 
 
@@ -29,7 +30,7 @@ public class CoverDetectionTest : MonoBehaviour
 	        return;
 
 	    t = update_delay;
-	    nearest_cover = GameManager.scene_refs.tactical_assessor.FindOptimalCoverInArea(transform.position, radius, sample_count, 50);
+	    nearest_cover = GameManager.scene_refs.tactical_assessor.FindOptimalCoverInArea(transform.position, radius, cover_radius, sample_count, 50);
 	}
 
 
