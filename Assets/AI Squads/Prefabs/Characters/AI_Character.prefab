@@ -2707,6 +2707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nav_mesh_agent: {fileID: 195547738747522154}
+  ai_state_machine: {fileID: 11400000, guid: 35568f415687f074a8cbc948f9ab8141, type: 2}
   target_arrival_threshold: 0.5
   controlled_character: {fileID: 114885631607301624}
 --- !u!114 &114338820775739836

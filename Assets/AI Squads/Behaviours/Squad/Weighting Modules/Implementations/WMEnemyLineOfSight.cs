@@ -21,7 +21,7 @@ public class WMEnemyLineOfSight : WeightModule
 
     private bool VisibleToEnemy(Vector3 _position)
     {
-        GameObject closest_enemy = FindClosestEnemy(_position);
+        GameObject closest_enemy = GameManager.scene_refs.enemy_manager.FindClosestEnemy(_position, enemy_max_check_distance);
 
         if (closest_enemy == null)
             return false;
@@ -44,26 +44,6 @@ public class WMEnemyLineOfSight : WeightModule
 
         bool result = Physics.Raycast(ray_origin, direction.normalized, dist);
         return result;
-    }
-
-
-    public GameObject FindClosestEnemy(Vector3 _position)
-    {
-        GameObject closest_enemy = null;
-        List<GameObject> enemies = GameManager.scene_refs.enemy_manager.enemies;
-        float closest_distance = float.PositiveInfinity;
-
-        foreach (var enemy in enemies)
-        {
-            float dist = (enemy.transform.position - _position).sqrMagnitude;
-            if (dist >= closest_distance || dist > enemy_max_check_distance)
-                continue;
-
-            closest_distance = dist;
-            closest_enemy = enemy;
-        }
-
-        return closest_enemy;
     }
 
 }

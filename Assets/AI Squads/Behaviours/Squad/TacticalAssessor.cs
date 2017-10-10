@@ -70,7 +70,7 @@ public class TacticalAssessor : MonoBehaviour
         int point_count = 1;
         int point_increase = 4;
         
-        float radius_spacing = 0.5f;
+        float radius_spacing = 0.8f;
 
         for (float r = 0; r < _radius; r += radius_spacing)
         {
