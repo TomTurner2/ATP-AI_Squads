@@ -33,7 +33,7 @@ public class Jumper : MonoBehaviour
         jump_force = _force;
     }
 	
-	// Update is called once per frame
+
 	void FixedUpdate ()
     {
         if (target_rigidbody == null)

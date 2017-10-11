@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CustomEvents.BooleanEvent on_fire_held_event;
     [SerializeField] UnityEvent on_fire_event;  
     [SerializeField] UnityEvent on_jump_event;
+    [SerializeField] UnityEvent on_issue_command_event;
 
 
     void Update ()
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
     private void ButtonHeldEvents()
     {
         on_sprint_event.Invoke(Input.GetButton("Sprint"));
-        on_command_event.Invoke(Input.GetButton("Command"));
+        on_command_event.Invoke(Input.GetButton("IndicateCommand"));
         on_fire_held_event.Invoke(Input.GetButton("Fire1"));
 
     }
@@ -63,5 +64,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
             on_fire_event.Invoke();
+
+        if (Input.GetButton("IssueCommand"))
+            on_issue_command_event.Invoke();
     }
 }

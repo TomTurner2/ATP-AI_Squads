@@ -8,6 +8,8 @@ public class SquadCommander : MonoBehaviour
     [SerializeField] float pointer_length = 100;
     [SerializeField] float pointer_radius = 5.0f;
     [SerializeField] Transform indicator;
+    [SerializeField] AudioSource command_sound_source;
+    [SerializeField] AudioClip command_sound;
     [SerializeField] ProjectorScaler projector_scaler;
     [SerializeField] CustomEvents.AreaWaypointEvent waypoint_set;
 
@@ -53,9 +55,20 @@ public class SquadCommander : MonoBehaviour
     public void SetWaypoint()
     {
         if (!issuing_command)
-            return;
-    
+            return;    
+
         waypoint_set.Invoke(hit_location, pointer_radius);
+
+        if (command_sound_source == null)
+            return;
+
+        if (command_sound_source.isPlaying)
+            return;
+
+        if (command_sound == null)
+            return;
+
+        command_sound_source.PlayOneShot(command_sound);
     }
 
 
