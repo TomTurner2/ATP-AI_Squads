@@ -9,7 +9,7 @@ public class WMPointBunching : WeightModule
     [SerializeField] float cover_spacing = 0.3f;
 
     public override int AssessWeight(TacticalAssessor.WeightedPoint _point, float _area_radius,
-        ref List<TacticalAssessor.WeightedPoint> _weighted_positions)
+        ref List<TacticalAssessor.WeightedPoint> _weighted_positions, Faction _requesters_faction)
     {
         return (CullBunchedPoints(ref _weighted_positions, _point) ? weight_penalty : 0);
     }

@@ -19,7 +19,7 @@ public class RayInfo
 public class RayCastArray : MonoBehaviour
 {
     [SerializeField] private float update_delay = 0;
-    [SerializeField] List<RayInfo> rays = new List<RayInfo>();
+    [SerializeField] List<RayInfo> rays /*= new List<RayInfo>()*/;
 
     private CountdownTimer timer = new CountdownTimer();
 
@@ -34,7 +34,7 @@ public class RayCastArray : MonoBehaviour
     {
         timer.timer_duration = update_delay;//in case updated
 
-        if (!timer.UpdateTimer())//only execute after timed delay
+        if (!timer.UpdateTimer() && timer.timer_duration > 0)//only execute after timed delay
             return;
 
         FireRays();

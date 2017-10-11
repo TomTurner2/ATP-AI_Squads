@@ -27,11 +27,7 @@ public class SquadCommander : MonoBehaviour
         if (!issuing_command)
         {
             indicator.gameObject.SetActive(false);
-            return;
         }
-
-        UpdateHitLocation();
-        UpdateIndicator();
     }
 
 
@@ -43,12 +39,14 @@ public class SquadCommander : MonoBehaviour
     }
 
 
-    private void UpdateHitLocation()
+    public void UpdateHitLocation(Vector3 _current_look)
     {
-        var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height) * 0.5f);//cast from middle of screen
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit, pointer_length);
-        hit_location = hit.point;//store hit location
+        var dist = (transform.position - _current_look).sqrMagnitude;
+        if (dist > pointer_length * pointer_length)
+            return;
+
+        hit_location = _current_look;
+        UpdateIndicator();
     }
 
 

@@ -13,15 +13,19 @@ public class WMEnemyLineOfSight : WeightModule
 
 
     public override int AssessWeight(TacticalAssessor.WeightedPoint _point, float _area_radius,
-        ref List<TacticalAssessor.WeightedPoint> _weighted_positions)
+        ref List<TacticalAssessor.WeightedPoint> _weighted_positions, Faction _requesters_faction)
     {
-        return VisibleToEnemy(_point.position) ? weight_penalty : 0;
+        if (_requesters_faction == null)
+            return 0;
+
+        return VisibleToEnemy(_point.position, _requesters_faction) ? weight_penalty : 0;
     }
 
 
-    private bool VisibleToEnemy(Vector3 _position)
+    private bool VisibleToEnemy(Vector3 _position, Faction _requesters_faction)
     {
-        GameObject closest_enemy = GameManager.scene_refs.enemy_manager.FindClosestEnemy(_position, enemy_max_check_distance);
+        GameObject closest_enemy = GameManager.scene_refs.FactionManager.FindClosestEnemy(_position,
+            _requesters_faction, enemy_max_check_distance);
 
         if (closest_enemy == null)
             return false;

@@ -18,6 +18,12 @@ public class Jumper : MonoBehaviour
     }
 
 
+    public void CanJump(bool _can_jump)
+    {
+        can_jump = _can_jump;
+    }
+
+
     public void Jump(Vector3 _force)
     {
         if (target_rigidbody == null)
@@ -43,6 +49,5 @@ public class Jumper : MonoBehaviour
         }
         
         jumping = false;
-        jump_force = Vector3.zero;
     }
 }

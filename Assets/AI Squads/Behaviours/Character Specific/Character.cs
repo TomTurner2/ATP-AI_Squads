@@ -12,6 +12,8 @@ public class Character : MonoBehaviour
     [HideInInspector] public bool jumping { get; set; }
     [HideInInspector] public float current_speed { get; set; }
 
+    [Header("Character Stats")]
+    public Faction faction;
     public float walk_speed = 5;
     public float sprint_speed = 10;
     public float crouch_speed = 2;
@@ -71,8 +73,8 @@ public class Character : MonoBehaviour
         if (character_jump == null)
             return;
 
-        jumping = true;
         character_jump.Jump(jump_force);
+        jumping = true;
     }
 
 

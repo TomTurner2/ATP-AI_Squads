@@ -1,13 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+
 public class Gun : MonoBehaviour
 {
-    [SerializeField] bool is_player_gun = false;
-    [Header("Stats")]
-    [SerializeField] private int damage = 10;
-    [SerializeField] private float effective_range = 20;
-    [SerializeField] private float accuracy = 0.2f;
+    [SerializeField] private GunStats stats;
 
     [Header("Visuals")]
     [SerializeField] private Animator gun_animator;
@@ -23,35 +20,49 @@ public class Gun : MonoBehaviour
 
     public bool firing_weapon { get; set; }
 
+    private CountdownTimer fire_rate_timer = new CountdownTimer();
 
-    public void Shoot()
+
+    void Start()
+    {
+        if (stats == null)
+            stats = new GunStats();
+
+        fire_rate_timer.InitCountDownTimer(stats.shot_delay, false);//don't auto reset, this is done when a shot is fired
+    }
+
+
+    public bool Shoot()
     {
         if (audio_source == null || gun_shot_clip == null)
-            return;
+            return false;
+
+        if (!fire_rate_timer.CheckFinished())//if gun not ready for next shot: bail
+            return false;
+
+        fire_rate_timer.Reset();//start the fire rate cooldown
 
         audio_source.pitch = Random.Range(min_pitch, max_pitch);
-        audio_source.PlayOneShot(gun_shot_clip);
+        audio_source.PlayOneShot(gun_shot_clip);//play pitch shifted sound
 
         if (muzzle_flash == null)
-            return;
+            return false;
 
         muzzle_flash.Emit(30);
         FireBullet();
+
+        return true;//shoot was successfull
     }
 
 
     void Update()
     {
+        fire_rate_timer.UpdateTimer();
+
         if (gun_animator == null)
             return;
 
         gun_animator.SetBool("firing", firing_weapon);
-    }
-
-
-    void LateUpdate()
-    {
-        Aim();
     }
 
 
@@ -60,46 +71,43 @@ public class Gun : MonoBehaviour
         RaycastHit hit;
 
         GameObject bullet = Instantiate(bullet_prefab);
-        LineRenderer bullet_trail = bullet.GetComponent<LineRenderer>();
+        LineRenderer bullet_trail = bullet.GetComponent<LineRenderer>();//create bullet and get refs
 
-        bullet_trail.SetPosition(0, muzzle_position.position);
-        Vector3 end_point = muzzle_position.position + (transform.forward * effective_range);
-        bullet_trail.SetPosition(1, end_point);
+        bullet_trail.SetPosition(0, muzzle_position.position);//set trail start
+        Vector3 end_point = CalculateTrailEndPoint();
+        bullet_trail.SetPosition(1, end_point);//set end point
 
-        Destroy(bullet, .3f);
+        Destroy(bullet, .3f);//destroy the trail after some time
 
         if (!Physics.Raycast(muzzle_position.position, muzzle_position.forward, out hit,
-            effective_range))
+            stats.effective_range))//shoot ray
             return;
 
-        if (hit.distance < effective_range)
+        if (hit.distance < stats.effective_range)//if in guns range
             end_point = hit.point;
         
-        bullet_trail.SetPosition(1, end_point);
+        bullet_trail.SetPosition(1, end_point);//set trail end point to hit location
 
 
         LifeForce target_life = hit.collider.gameObject.GetComponent<LifeForce>() ??
-                                hit.collider.gameObject.GetComponentInParent<LifeForce>();
+                                hit.collider.gameObject.GetComponentInParent<LifeForce>();//attempt to get life component
 
         if (target_life != null)
-        {
-            target_life.Damage(damage, hit);
-        }
+            target_life.Damage(stats.damage, hit);//if hit something with life, apply damage
 
         //TODO add impact effect
     }
 
 
-    void Aim()
+    private Vector3 CalculateTrailEndPoint()
     {
-        if (!is_player_gun)
-            return;
+        return muzzle_position.position + (transform.forward * stats.effective_range);
+    }
 
-        RaycastHit hit;
-        var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height) * 0.5f);
 
-        if (Physics.Raycast(ray, out hit))
-            muzzle_position.LookAt(hit.point);
+    public void Aim(Vector3 _aim_target)
+    {
+        muzzle_position.LookAt(_aim_target);
     }
 
 }

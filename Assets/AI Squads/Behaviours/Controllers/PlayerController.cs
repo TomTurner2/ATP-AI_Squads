@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] CustomEvents.Vector3Event update_look_target;
     [SerializeField] CustomEvents.Vector3Event on_move_event;
     [SerializeField] CustomEvents.BooleanEvent on_sprint_event;
     [SerializeField] CustomEvents.BooleanEvent on_command_event;
@@ -21,6 +22,21 @@ public class PlayerController : MonoBehaviour
        ButtonPressEvents();
        ButtonHeldEvents();  
 	}
+
+
+    void LateUpdate()
+    {
+    }
+
+
+    private void CheckLookTarget()
+    {
+        RaycastHit hit;
+        var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width, Screen.height) * 0.5f);
+
+        if (Physics.Raycast(ray, out hit))
+            update_look_target.Invoke(hit.point);
+    }
 
 
     private void AxisEvents()

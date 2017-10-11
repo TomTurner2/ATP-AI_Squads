@@ -25,7 +25,7 @@ public class TacticalAssessor : MonoBehaviour
     }
 
 
-    public List<Vector3> FindOptimalCoverInArea(Vector3 _position, float _radius, int _sample_count = 30,
+    public List<Vector3> FindOptimalCoverInArea(Vector3 _position, float _radius, Faction _requesters_faction, int _sample_count = 30,
         int _minimum_score = 0, int _area_mask = NavMesh.AllAreas)
     {
         List<WeightedPoint> weighted_positions = SampleDistributedPointInRadius(_position,
@@ -34,7 +34,7 @@ public class TacticalAssessor : MonoBehaviour
         if (weighted_positions.Count <= 0)//if none sampled leave
             return new List<Vector3>();
 
-        FindCoverLocations(ref weighted_positions, _position, _radius,
+        FindCoverLocations(ref weighted_positions, _position, _radius, _requesters_faction,
             _sample_count, _minimum_score, _area_mask);//find cover
 
         weighted_positions = new List<WeightedPoint>(weighted_positions.OrderByDescending(p => p.weight));
@@ -45,7 +45,7 @@ public class TacticalAssessor : MonoBehaviour
     }
 
 
-    private void FindCoverLocations(ref List<WeightedPoint> _weighted_positions, Vector3 _position, float _radius,
+    private void FindCoverLocations(ref List<WeightedPoint> _weighted_positions, Vector3 _position, float _radius, Faction _requesters_faction,
         int _sample_count = 30, int _minimum_score = 0, int _area_mask = NavMesh.AllAreas)
     {
         for (int i = 0; i < _weighted_positions.Count; ++i)
@@ -57,7 +57,7 @@ public class TacticalAssessor : MonoBehaviour
                 continue;
            
             point.position = hit.position;//set it as position
-            point.weight = DetermineWeight(point, _position, _radius, ref _weighted_positions);//calculate weighting
+            point.weight = DetermineWeight(point, _position, _radius, _requesters_faction, ref _weighted_positions);//calculate weighting
             _weighted_positions[i] = point;    
         }
     }
@@ -104,7 +104,7 @@ public class TacticalAssessor : MonoBehaviour
     }
 
 
-    private int DetermineWeight(WeightedPoint _point, Vector3 _position, float _radius,
+    private int DetermineWeight(WeightedPoint _point, Vector3 _position, float _radius, Faction _requesters_faction,
         ref List<TacticalAssessor.WeightedPoint> _weighted_positions)
     {
         int weight =  _point.weight;
@@ -114,7 +114,7 @@ public class TacticalAssessor : MonoBehaviour
             if (module == null)
                 continue;
 
-            weight += module.AssessWeight(_point, _radius, ref _weighted_positions);
+            weight += module.AssessWeight(_point, _radius, ref _weighted_positions, _requesters_faction);
         }
 
         return  weight;

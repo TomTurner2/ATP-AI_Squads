@@ -1,30 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AIStateSystem;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class AIController : MonoBehaviour
 {
-    public Vector3 waypoint { get; set; }
-    public GameObject closest_enemy = null;
     public NavMeshAgent nav_mesh_agent;
     public AIStateSystem.StateMachine ai_state_machine;
     public Character controlled_character;
-
-    public float target_arrival_threshold = 0.5f;
-    public float burst_fire_cooldown = 2f;
-    public bool is_shooting = false;
-    public int max_shot_count = 5;
-
-    [HideInInspector] public CountdownTimer burst_fire_cooldown_timer = new CountdownTimer();
-    [HideInInspector] public int shot_count = 0;
+    public AIStateSystem.Knowledge knowledge;
+    public Gun weapon;
 
 
     void Start()
     {
-        waypoint = transform.position;
-        burst_fire_cooldown_timer.InitCountDownTimer(burst_fire_cooldown, false);
+        knowledge = knowledge != null ? Instantiate(knowledge) : new Knowledge();
+
+        knowledge.waypoint = transform.position;
+        knowledge.burst_fire_cooldown_timer.InitCountDownTimer(knowledge.burst_fire_cooldown, false);
 
         if (ai_state_machine == null)
             return;
