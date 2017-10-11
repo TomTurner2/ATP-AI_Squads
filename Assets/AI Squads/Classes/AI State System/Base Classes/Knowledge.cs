@@ -22,6 +22,6 @@ namespace AIStateSystem
         [HideInInspector] public bool is_shooting = false;
         [HideInInspector] public Vector3 waypoint { get; set; }
         [HideInInspector] public CountdownTimer burst_fire_cooldown_timer = new CountdownTimer();
-        [HideInInspector] public GameObject closest_enemy = null;
+        [HideInInspector] public Character closest_enemy = null;
     }
 }

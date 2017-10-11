@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 616b17b46f48c624fb0a3240e0e5c8de, type: 3}
-  m_Name: AK47
+  m_Name: Enemy Nerf Gun
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 3
   effective_range: 20
   accuracy: 0.2
   shot_delay: 0.1

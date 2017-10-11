@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Name: Squad Member Knowledge
   m_EditorClassIdentifier: 
   target_arrival_tolerance: 0.5
-  burst_fire_cooldown: 2
+  burst_fire_cooldown: 5
   max_shot_count: 5
-  enemy_detect_radius: 100
+  enemy_detect_radius: 10
   shot_count: 0
   weapons_free: 1
   stick_to_cover: 1

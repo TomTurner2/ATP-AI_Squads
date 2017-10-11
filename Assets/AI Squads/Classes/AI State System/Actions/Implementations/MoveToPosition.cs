@@ -16,10 +16,8 @@ namespace AIStateSystem
             if (controller == null)
                 return;
 
-            if (controller.knowledge.is_shooting)
-                return;
-
             controller.nav_mesh_agent.isStopped = false;
+
 
             if (controller.controlled_character.dead)
             {

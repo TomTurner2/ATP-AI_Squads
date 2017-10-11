@@ -24,7 +24,7 @@ public class WMEnemyLineOfSight : WeightModule
 
     private bool VisibleToEnemy(Vector3 _position, Faction _requesters_faction)
     {
-        GameObject closest_enemy = GameManager.scene_refs.FactionManager.FindClosestEnemy(_position,
+        Character closest_enemy = GameManager.scene_refs.FactionManager.FindClosestEnemy(_position,
             _requesters_faction, enemy_max_check_distance);
 
         if (closest_enemy == null)

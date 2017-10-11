@@ -5,7 +5,6 @@ using UnityEngine.PostProcessing;
 
 public class DamageFlash : MonoBehaviour
 {
-    public bool test = false;
     public float flash_speed = 1;
     public float flash_ammount = 0.22f;
     [SerializeField] PostProcessingProfile camera_effects;
@@ -14,7 +13,7 @@ public class DamageFlash : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	    if (!test || camera_effects == null)
+	    if (camera_effects == null)
 	        return;
 
 	    var vinette_settings = camera_effects.vignette.settings;

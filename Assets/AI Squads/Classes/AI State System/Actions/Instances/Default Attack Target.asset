@@ -8,10 +8,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 616b17b46f48c624fb0a3240e0e5c8de, type: 3}
-  m_Name: AK47
+  m_Script: {fileID: 11500000, guid: 4d9e622aadf269344bb38aae2d099f56, type: 3}
+  m_Name: Default Attack Target
   m_EditorClassIdentifier: 
-  damage: 15
-  effective_range: 20
-  accuracy: 0.2
-  shot_delay: 0.1

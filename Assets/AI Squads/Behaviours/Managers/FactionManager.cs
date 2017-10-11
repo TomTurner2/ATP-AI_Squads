@@ -5,11 +5,17 @@ using UnityEngine;
 
 public class FactionManager : MonoBehaviour
 {
-    public List<Character> characters = new List<Character>();
+    private List<Character> characters = new List<Character>();
 
-    public GameObject FindClosestEnemy(Vector3 _position, Faction _requesters_faction, float _enemy_max_check_distance = Mathf.Infinity)
+
+    void Start()
     {
-        GameObject closest_enemy = null;
+        characters = GameObject.FindObjectsOfType<Character>().ToList();
+    }
+
+    public Character FindClosestEnemy(Vector3 _position, Faction _requesters_faction, float _enemy_max_check_distance = Mathf.Infinity)
+    {
+        Character closest_enemy = null;
         float closest_distance = float.PositiveInfinity;
 
         foreach (var character in characters)
@@ -17,15 +23,18 @@ public class FactionManager : MonoBehaviour
             if (character.faction == null)
                 continue;
 
+            if (character.dead)
+                continue;
+
             if (!CheckFactionRelation(_requesters_faction, character.faction))
                 continue;
 
             float dist = (character.transform.position - _position).sqrMagnitude;
-            if (dist >= closest_distance || dist > _enemy_max_check_distance)
+            if (dist >= closest_distance || dist > _enemy_max_check_distance * _enemy_max_check_distance)
                 continue;
 
             closest_distance = dist;
-            closest_enemy = character.gameObject;
+            closest_enemy = character;
         }
 
         return closest_enemy;

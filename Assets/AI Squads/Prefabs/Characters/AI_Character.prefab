@@ -2864,7 +2864,7 @@ MonoBehaviour:
   ai_state_machine: {fileID: 11400000, guid: 35568f415687f074a8cbc948f9ab8141, type: 2}
   controlled_character: {fileID: 114885631607301624}
   knowledge: {fileID: 11400000, guid: b06745faadf0b2b4190ab271759ac9d3, type: 2}
-  weapon: {fileID: 0}
+  weapon: {fileID: 114721008397685130}
 --- !u!114 &114338820775739836
 MonoBehaviour:
   m_ObjectHideFlags: 1
