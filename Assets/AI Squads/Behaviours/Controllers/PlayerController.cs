@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     void LateUpdate()
     {
+        CheckLookTarget();
     }
 
 
