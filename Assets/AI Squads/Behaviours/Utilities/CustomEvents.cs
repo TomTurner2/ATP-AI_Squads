@@ -22,4 +22,7 @@ public class CustomEvents
 
     [System.Serializable]
     public class AreaWaypointEvent : UnityEvent<Vector3, float> { }
+
+    [System.Serializable]
+    public class SpriteSwapEvent : UnityEvent<Sprite> { }
 }

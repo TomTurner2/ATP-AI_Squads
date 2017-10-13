@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
     [Header("References")]
     [SerializeField] MoveRigidbody character_mover;
     [SerializeField] Jumper character_jump;
+    public Collider character_collider;
 
     private Vector3 previous_position;
 
@@ -43,6 +44,9 @@ public class Character : MonoBehaviour
     {
         if (character_mover == null)
             character_mover = GetComponent<MoveRigidbody>();//in case not manually assigned
+
+        if (character_collider == null)
+            character_collider = GetComponentInChildren<Collider>();
     }
 
 

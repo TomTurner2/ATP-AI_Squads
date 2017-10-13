@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace AIStateSystem
 {
-    public abstract class Decision : ScriptableObject
+    public abstract class Condition : ScriptableObject
     {
-        public abstract bool Decide(MonoBehaviour _knowledge);
+        public abstract bool Check(MonoBehaviour _controller);
     }
 }

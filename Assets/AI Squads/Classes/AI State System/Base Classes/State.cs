@@ -24,7 +24,8 @@ namespace AIStateSystem
         {
             foreach (Action action in actions)
             {
-                action.Execute(_knowledge);
+                if (action.CanExecute(_knowledge))
+                    action.Execute(_knowledge);
             }
         }
 
@@ -33,7 +34,7 @@ namespace AIStateSystem
         {
             foreach (Transition transition in transitions)
             {
-                bool decision = transition.decision.Decide(_knowledge);
+                bool decision = transition.condition.Check(_knowledge);
 
                 if (!decision)
                     continue;

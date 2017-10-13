@@ -19,6 +19,7 @@ public class AIController : MonoBehaviour
         knowledge = knowledge != null ? Instantiate(knowledge) : new Knowledge();
 
         knowledge.waypoint = transform.position;
+        knowledge.best_cover = transform.position;
         knowledge.burst_fire_cooldown_timer.InitCountDownTimer(knowledge.burst_fire_cooldown, false);
 
         if (ai_state_machine == null)

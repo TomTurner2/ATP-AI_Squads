@@ -65,42 +65,30 @@ public class TacticalAssessor : MonoBehaviour
 
     private List<WeightedPoint> SampleDistributedPointInRadius(Vector3 _position, float _radius, int _area_mask = NavMesh.AllAreas)
     {
-        List<WeightedPoint> positions = new List<WeightedPoint>();
+        List<Vector3> positions = new List<Vector3>();
+        List<WeightedPoint> weight_positions = new List<WeightedPoint>();
 
-        int point_count = 1;
-        int point_increase = 4;
-        
-        float radius_spacing = 0.8f;
+        positions = CustomMath.DistributedPointsInRadius(_position, _radius);
 
-        for (float r = 0; r < _radius; r += radius_spacing)
+        NavMeshHit hit;
+
+        foreach (Vector3 position in positions)
         {
-            for (int i = 0; i < point_count; i++)
+            if (!NavMesh.SamplePosition(position + _position, out hit, 100f, _area_mask))//if hit nav mesh
+                continue;
+
+            WeightedPoint point = new WeightedPoint//create struct
             {
-                float theta = (2 * Mathf.PI / point_count * i);
-                float x = Mathf.Cos(theta) * r;
-                float z = Mathf.Sin(theta) * r;
+                original_position = hit.position,
+                position = hit.position,
+                weight = POSITION_START_WEIGHT
+            };
 
-                NavMeshHit hit;
-
-                if (!NavMesh.SamplePosition(new Vector3(x, _position.y, z) + _position, out hit, 100f, _area_mask))//if hit nav mesh
-                    continue;
-
-                WeightedPoint point = new WeightedPoint//create struct
-                {
-                    original_position = hit.position,
-                    position = hit.position,
-                    weight = POSITION_START_WEIGHT
-                };
-
-                positions.Add(point);//add position to list
-
-            }
-
-            point_count += point_increase;
+            weight_positions.Add(point);//add position to list
         }
 
-        debug_last_sample = positions;
-        return positions;
+        debug_last_sample = weight_positions;
+        return weight_positions;
     }
 
 

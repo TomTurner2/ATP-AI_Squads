@@ -21,6 +21,8 @@ namespace AIStateSystem
         [HideInInspector] public bool stick_to_cover = true;      
         [HideInInspector] public bool is_shooting = false;
         [HideInInspector] public Vector3 waypoint { get; set; }
+        [HideInInspector] public Vector3 best_cover { get; set; }
+        [HideInInspector] public Transform follow_target { get; set; }
         [HideInInspector] public CountdownTimer burst_fire_cooldown_timer = new CountdownTimer();
         [HideInInspector] public Character closest_enemy = null;
     }

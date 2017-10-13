@@ -4,6 +4,13 @@ using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
+public struct KeyEvent
+{
+    public KeyCode key;
+    public UnityEvent on_press_event;
+}
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] UnityEvent on_fire_event;  
     [SerializeField] UnityEvent on_jump_event;
     [SerializeField] UnityEvent on_issue_command_event;
+    [SerializeField] List<KeyEvent> key_events = new List<KeyEvent>();
 
 
     void Update ()
@@ -67,5 +75,12 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButton("IssueCommand"))
             on_issue_command_event.Invoke();
+
+
+        foreach (KeyEvent key in key_events)
+        {
+            if (Input.GetKeyUp(key.key))
+                key.on_press_event.Invoke();
+        }
     }
 }

@@ -11,13 +11,12 @@ namespace AIStateSystem
     {
         public override void Execute(MonoBehaviour _controller)
         {
-            AIController controller = (AIController) _controller;
+            AIController controller =  _controller as AIController;
 
             if (controller == null)
                 return;
 
             controller.nav_mesh_agent.isStopped = false;
-
 
             if (controller.controlled_character.dead)
             {

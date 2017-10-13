@@ -981,12 +981,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owned_squad: {fileID: 114917495972876160}
+  formations: []
   pointer_length: 20
   pointer_radius: 4
   indicator: {fileID: 0}
+  projector_scaler: {fileID: 0}
   command_sound_source: {fileID: 82807871604187628}
   command_sound: {fileID: 8300000, guid: 8e1ec3dc0df77a447baa9a48f438489a, type: 3}
-  projector_scaler: {fileID: 0}
   waypoint_set:
     m_PersistentCalls:
       m_Calls:
@@ -1028,7 +1029,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
@@ -1118,7 +1119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8446c76ff1cc12247bfc361775595d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: efe218b65ed56bb48894b76175085746, type: 2}
+  stats: {fileID: 11400000, guid: 11ddb8bda1d8ebc458c047ef56983dc4, type: 2}
   gun_animator: {fileID: 95830995799983008}
   muzzle_flash: {fileID: 198751756224543674}
   muzzle_position: {fileID: 4112613593633804}
@@ -1147,6 +1148,7 @@ MonoBehaviour:
   current_move_speed: 0
   character_mover: {fileID: 114228172450208546}
   character_jump: {fileID: 114820762929073670}
+  character_collider: {fileID: 0}
 --- !u!124 &124180246252815080
 Behaviour:
   m_ObjectHideFlags: 1

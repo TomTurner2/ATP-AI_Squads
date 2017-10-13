@@ -1518,7 +1518,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1881467939022218}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 6.919999, y: 0, z: 14.57}
+  m_LocalPosition: {x: 6.919999, y: 0, z: 24.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4106296950969406}
@@ -2910,7 +2910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce6d55ce2085a447bf31e88a28764b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_health: 100
+  max_health: 500
   hit_effect: {fileID: 198994822276075516}
   on_death_event:
     m_PersistentCalls:
@@ -2990,6 +2990,7 @@ MonoBehaviour:
   current_move_speed: 0
   character_mover: {fileID: 114890260693009724}
   character_jump: {fileID: 0}
+  collider: {fileID: 136060205996809062}
 --- !u!114 &114890260693009724
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -17,7 +17,6 @@ namespace AIStateSystem
             if (states == null)
                 Destroy(this);
 
-
             active_states.Add(states.First());
         }
 

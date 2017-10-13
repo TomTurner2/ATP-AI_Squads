@@ -44,9 +44,6 @@ public class CoverDetectionTest : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-
-        Gizmos.DrawLine(test_line_of_site.debug_start, test_line_of_site.debug_end);
-
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(transform.position, 0.5f);
         Gizmos.DrawWireSphere(transform.position, radius);

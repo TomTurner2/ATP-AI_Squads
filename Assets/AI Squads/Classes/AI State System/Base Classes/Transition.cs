@@ -17,7 +17,7 @@ namespace AIStateSystem
     public class Transition
     {
         public TransitionType transition_type;
-        public Decision decision;
+        public Condition condition;
         public State triggered_state;
     }
 }

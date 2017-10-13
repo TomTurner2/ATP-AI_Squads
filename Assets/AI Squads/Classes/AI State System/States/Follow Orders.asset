@@ -9,9 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfb66e18f1f1f0844a7a3baa4029a31e, type: 3}
-  m_Name: Moving To Waypoint
+  m_Name: Follow Orders
   m_EditorClassIdentifier: 
   actions:
+  - {fileID: 11400000, guid: 54c1a99a74f921c4c8588f18ac7ea887, type: 2}
+  - {fileID: 11400000, guid: 36acc6b1f2c72c24eb4900605a1e382a, type: 2}
   - {fileID: 11400000, guid: 0ae4cb8c90c9d0b4c9341a60e50a44c3, type: 2}
   - {fileID: 11400000, guid: 844273382f489504d87b4f90531bb499, type: 2}
   transitions: []

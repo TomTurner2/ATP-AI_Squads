@@ -10,7 +10,7 @@ namespace AIStateSystem
     {
         public override void Execute(MonoBehaviour _controller)
         {
-            AIController controller = (AIController)_controller;
+            AIController controller = _controller as AIController;
 
             if (controller == null)
                 return;
@@ -21,9 +21,8 @@ namespace AIStateSystem
                 return;
             }
 
-            if (controller.knowledge.closest_enemy == null || controller.knowledge.closest_enemy.dead)
-                controller.knowledge.closest_enemy = GameManager.scene_refs.FactionManager.FindClosestEnemy(controller.transform.position,
-                    controller.controlled_character.faction, controller.knowledge.enemy_detect_radius);
+            controller.knowledge.closest_enemy = GameManager.scene_refs.FactionManager.FindClosestEnemy(controller.transform.position,
+                controller.controlled_character.faction, controller.knowledge.enemy_detect_radius);
 
             if (controller.knowledge.closest_enemy == null || controller.knowledge.closest_enemy.dead)
                 return;
@@ -31,10 +30,32 @@ namespace AIStateSystem
             if (controller.weapon == null)
                 return;
 
-            //TODO find optimal engagement position and set waypoint?
-            //TODO check line of sight on target
+            if (!LineOfSightCheck.CheckLineOfSight(controller.transform.position + new Vector3(0, 1, 0),
+                controller.knowledge.closest_enemy.transform.position, GetLineOfSightIgnoreColliders(ref controller)))
+            {
+                //TODO override auto crouch
+                //TODO find optimal engagement position and set waypoint
+                return;
+            }
 
             FireWeapon(ref controller);
+        }
+
+
+        private List<Collider> GetLineOfSightIgnoreColliders(ref AIController _controller)
+        {
+            List<Collider> ignore = new List<Collider>();
+
+            Collider character_collider = _controller.controlled_character.character_collider;
+            if (character_collider != null)
+                ignore.Add(character_collider);
+
+
+            Collider enemy_collider = _controller.knowledge.closest_enemy.character_collider;
+            if (enemy_collider != null)
+                ignore.Add(enemy_collider);
+
+            return ignore;
         }
 
 
@@ -58,11 +79,11 @@ namespace AIStateSystem
 
             ++_controller.knowledge.shot_count;
 
-            if (_controller.knowledge.shot_count >= _controller.knowledge.max_shot_count)
-            {
-                _controller.knowledge.shot_count = 0;
-                _controller.knowledge.burst_fire_cooldown_timer.Reset();
-            }
+            if (_controller.knowledge.shot_count < _controller.knowledge.max_shot_count)
+                return;
+
+            _controller.knowledge.shot_count = 0;
+            _controller.knowledge.burst_fire_cooldown_timer.Reset();
         }
     }
 }

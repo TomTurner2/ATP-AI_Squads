@@ -301,6 +301,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1227472259614820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4705779032505878}
+  - component: {fileID: 114577268984251818}
+  - component: {fileID: 114268900020633038}
+  - component: {fileID: 114018233501981410}
+  m_Layer: 12
+  m_Name: auto crouch (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1263975147709512
 GameObject:
   m_ObjectHideFlags: 1
@@ -1975,6 +1993,19 @@ Transform:
   m_Father: {fileID: 4322280328126406}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4705779032505878
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227472259614820}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.000000014901161}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4882972424975864}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4712832981696742
 Transform:
   m_ObjectHideFlags: 1
@@ -2224,17 +2255,18 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472480873025210}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 11.99, y: 0, z: 6.34}
+  m_LocalRotation: {x: -0, y: -0.0000029653306, z: -0, w: -1}
+  m_LocalPosition: {x: 3.73, y: 0, z: -8.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4439851287436998}
   - {fileID: 4791064615288754}
   - {fileID: 4845868560779466}
   - {fileID: 4864968822553900}
+  - {fileID: 4705779032505878}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -360, z: 0}
 --- !u!4 &4889206817653162
 Transform:
   m_ObjectHideFlags: 1
@@ -2511,6 +2543,175 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114018233501981410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227472259614820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccf03645d54e5f40960956d507888c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  update_delay: 2
+  rays:
+  - layers_to_check:
+      serializedVersion: 2
+      m_Bits: 4294960127
+    offset: {x: 0, y: 1.5, z: 0}
+    direction: {x: 0, y: 0, z: 1}
+    distance: 1
+    debug_color: {r: 1, g: 0, b: 0, a: 1}
+    on_ray_hit_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: SetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - layers_to_check:
+      serializedVersion: 2
+      m_Bits: 4294960127
+    offset: {x: 0, y: 1.5, z: 0}
+    direction: {x: 0, y: 0, z: -1}
+    distance: 1
+    debug_color: {r: 0.034482475, g: 0, b: 1, a: 1}
+    on_ray_hit_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: SetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - layers_to_check:
+      serializedVersion: 2
+      m_Bits: 4294960127
+    offset: {x: 0, y: 1.5, z: 0}
+    direction: {x: -1, y: 0, z: 0}
+    distance: 1
+    debug_color: {r: 1, g: 0.9724138, b: 0, a: 1}
+    on_ray_hit_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: SetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - layers_to_check:
+      serializedVersion: 2
+      m_Bits: 4294960127
+    offset: {x: 0, y: 1.5, z: 0}
+    direction: {x: 1, y: 0, z: 0}
+    distance: 1
+    debug_color: {r: 0, g: 1, b: 0.006896496, a: 1}
+    on_ray_hit_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: SetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 8
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 8
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!114 &114059667277123722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2530,6 +2731,7 @@ MonoBehaviour:
   current_move_speed: 0
   character_mover: {fileID: 114701064258674506}
   character_jump: {fileID: 0}
+  character_collider: {fileID: 136163453216604472}
 --- !u!114 &114207550263870336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2557,6 +2759,175 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: CustomEvents+BooleanEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114268900020633038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227472259614820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccf03645d54e5f40960956d507888c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  update_delay: 2
+  rays:
+  - layers_to_check:
+      serializedVersion: 2
+      m_Bits: 4294960127
+    offset: {x: 0, y: 0.4, z: 0}
+    direction: {x: 0, y: 0, z: 1}
+    distance: 1
+    debug_color: {r: 1, g: 0, b: 0, a: 1}
+    on_ray_hit_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: SetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 16
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 16
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - layers_to_check:
+      serializedVersion: 2
+      m_Bits: 4294960127
+    offset: {x: 0, y: 0.4, z: 0}
+    direction: {x: 0, y: 0, z: -1}
+    distance: 1
+    debug_color: {r: 0.034482475, g: 0, b: 1, a: 1}
+    on_ray_hit_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: SetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - layers_to_check:
+      serializedVersion: 2
+      m_Bits: 4294960127
+    offset: {x: 0, y: 0.4, z: 0}
+    direction: {x: -1, y: 0, z: 0}
+    distance: 1
+    debug_color: {r: 1, g: 0.9724138, b: 0, a: 1}
+    on_ray_hit_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: SetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 64
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 64
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - layers_to_check:
+      serializedVersion: 2
+      m_Bits: 4294960127
+    offset: {x: 0, y: 0.4, z: 0}
+    direction: {x: 1, y: 0, z: 0}
+    distance: 1
+    debug_color: {r: 0, g: 1, b: 0.006896496, a: 1}
+    on_ray_hit_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: SetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 128
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: CustomEvents+Vector3Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    on_ray_miss_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114577268984251818}
+          m_MethodName: UnSetFlag
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 128
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!114 &114308368485014668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2821,6 +3192,33 @@ MonoBehaviour:
   controlled_character: {fileID: 114059667277123722}
   knowledge: {fileID: 11400000, guid: b06745faadf0b2b4190ab271759ac9d3, type: 2}
   weapon: {fileID: 114365552189458652}
+--- !u!114 &114577268984251818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227472259614820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2060d4fede88b74fa8138d9d90179d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  on_crouch_event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114059667277123722}
+        m_MethodName: set_crouching
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: CustomEvents+BooleanEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114701064258674506
 MonoBehaviour:
   m_ObjectHideFlags: 1
