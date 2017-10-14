@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace AIStateSystem
 {
+    [Serializable]
     public abstract class Action : ScriptableObject
     {
         [SerializeField] List<Condition> conditional_requirements = new List<Condition>();

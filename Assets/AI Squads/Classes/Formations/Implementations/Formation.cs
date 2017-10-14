@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public abstract class Formation : ScriptableObject
 {
@@ -17,16 +17,15 @@ public abstract class Formation : ScriptableObject
             _waypoints.Last().name = "Squad Waypoint";
             _waypoints.Last().transform.position = position;
         }
-
-        SetFormationLead(ref _waypoints, _waypoints[0]);
     }
 
     protected void SetFormationLead(ref List<Transform> _waypoints, Transform _lead)
     {
+        _waypoints.Swap(0, _waypoints.IndexOf(_lead));//make lead first in list
         foreach (Transform waypoint in _waypoints)
         {
             if (waypoint != _lead)
                 waypoint.parent = _lead;//link points to lead point
-        }
+        }  
     }
 }

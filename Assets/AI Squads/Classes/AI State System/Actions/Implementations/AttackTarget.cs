@@ -21,22 +21,19 @@ namespace AIStateSystem
                 return;
             }
 
-            controller.knowledge.closest_enemy = GameManager.scene_refs.FactionManager.FindClosestEnemy(controller.transform.position,
-                controller.controlled_character.faction, controller.knowledge.enemy_detect_radius);
-
             if (controller.knowledge.closest_enemy == null || controller.knowledge.closest_enemy.dead)
                 return;
 
             if (controller.weapon == null)
                 return;
 
-            if (!LineOfSightCheck.CheckLineOfSight(controller.transform.position + new Vector3(0, 1, 0),
-                controller.knowledge.closest_enemy.transform.position, GetLineOfSightIgnoreColliders(ref controller)))
-            {
-                //TODO override auto crouch
-                //TODO find optimal engagement position and set waypoint
-                return;
-            }
+            //if (!LineOfSightCheck.CheckLineOfSight(controller.transform.position + new Vector3(0, 1, 0),
+            //    controller.knowledge.closest_enemy.transform.position, GetLineOfSightIgnoreColliders(ref controller)))
+            //{
+            //    //TODO override auto crouch
+            //    //TODO find optimal engagement position and set waypoint
+            //    return;
+            //}
 
             FireWeapon(ref controller);
         }

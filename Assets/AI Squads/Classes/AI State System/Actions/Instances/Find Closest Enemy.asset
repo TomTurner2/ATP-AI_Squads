@@ -8,8 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d9e622aadf269344bb38aae2d099f56, type: 3}
-  m_Name: Attack Target
+  m_Script: {fileID: 11500000, guid: 53bd2c032f8732d4e810b793420894fb, type: 3}
+  m_Name: Find Closest Enemy
   m_EditorClassIdentifier: 
-  conditional_requirements:
-  - {fileID: 11400000, guid: fabca693363fbdb418228097bc8f8fb6, type: 2}
+  conditional_requirements: []

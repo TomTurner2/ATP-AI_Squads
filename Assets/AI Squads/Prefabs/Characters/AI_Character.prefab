@@ -2990,7 +2990,7 @@ MonoBehaviour:
   current_move_speed: 0
   character_mover: {fileID: 114890260693009724}
   character_jump: {fileID: 0}
-  collider: {fileID: 136060205996809062}
+  character_collider: {fileID: 0}
 --- !u!114 &114890260693009724
 MonoBehaviour:
   m_ObjectHideFlags: 1

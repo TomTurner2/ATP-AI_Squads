@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
 namespace AIStateSystem
 {
     [CreateAssetMenu(menuName = "AIStateSystem/StateMachine")]

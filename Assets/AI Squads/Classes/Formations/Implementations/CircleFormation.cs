@@ -16,8 +16,10 @@ public class CircleFormation : Formation
 
         float radius = (_member_count + character_radius) * spacing_multiplier;
         List<Transform> waypoints = new List<Transform>();
-
+        
         CreateWaypointObjects(ref waypoints, CustomMath.PointsOnCircumference(Vector3.zero, radius, _member_count));
+        SetFormationLead(ref waypoints, waypoints.Last());
+        
         return waypoints;
     }
 }
