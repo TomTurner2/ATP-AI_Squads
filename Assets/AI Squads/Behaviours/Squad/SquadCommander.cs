@@ -128,6 +128,7 @@ public class SquadCommander : MonoBehaviour
 
     public void ToggleCover()
     {
+        PlayCommandSound();
         if (owned_squad.ToggleStickToCover())
         {
             find_cover_event.Invoke();
@@ -140,7 +141,14 @@ public class SquadCommander : MonoBehaviour
 
     public void ToggleWeaponsFree()
     {
+        PlayCommandSound();
+        if (owned_squad.ToggleWeaponsFreeCover())
+        {
+            weapons_free_event.Invoke();
+            return;
+        }
 
+        hold_fire_event.Invoke();
     }
 
 

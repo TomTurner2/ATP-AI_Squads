@@ -1670,7 +1670,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 7f2243be9d570f2408a6e6831ba50a87, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5938bf2cf78c7154c992756c7b456763, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4833,7 +4833,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
         type: 2}
+      propertyPath: hold_fire_event.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
       propertyPath: find_cover_event.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: weapons_free_event.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114067330931144932, guid: d664e44dab423c44e9efbfbdc3ae71fe,
@@ -5041,6 +5051,68 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 9901a3d13e1cb2646b4f8fc3468b1088,
         type: 2}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: weapons_free_event.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: weapons_free_event.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: hold_fire_event.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: hold_fire_event.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: weapons_free_event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 233947230}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: hold_fire_event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 233947230}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: weapons_free_event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_sprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: weapons_free_event.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Sprite, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: hold_fire_event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_sprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: hold_fire_event.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Sprite, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: weapons_free_event.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 21300000, guid: 5938bf2cf78c7154c992756c7b456763,
+        type: 3}
+    - target: {fileID: 114385964495447094, guid: d664e44dab423c44e9efbfbdc3ae71fe,
+        type: 2}
+      propertyPath: hold_fire_event.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 21300000, guid: 7f2243be9d570f2408a6e6831ba50a87,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d664e44dab423c44e9efbfbdc3ae71fe, type: 2}
   m_IsPrefabParent: 0

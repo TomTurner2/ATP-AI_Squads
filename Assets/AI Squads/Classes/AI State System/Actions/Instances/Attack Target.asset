@@ -13,5 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditional_requirements:
   - {fileID: 11400000, guid: 63933698d831c8b4baab53d511b32dcb, type: 2}
+  - {fileID: 11400000, guid: dc35d6c28a97bce4dab6305709446f99, type: 2}
   - {fileID: 11400000, guid: a91e2d5e475e510479261f3131ca8540, type: 2}
   - {fileID: 11400000, guid: fabca693363fbdb418228097bc8f8fb6, type: 2}
