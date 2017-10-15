@@ -43,7 +43,7 @@ public class Squad : MonoBehaviour
         float dist = move.magnitude;
 
         if (dist >= dist_before_back_to_follow_formation)
-        {           
+        {
             commander_last_position = squad_commander.transform.position;
             return true;
         }
@@ -181,14 +181,18 @@ public class Squad : MonoBehaviour
     {
         ClearFormation();
 
-        if (stick_to_cover)//members will go to their cover points instead
-            return;
+        Vector3 target_pos = _waypoint_pos;
+
+        if (follow_commander)
+        {
+            target_pos = squad_commander.transform.position;
+        }
 
         //if no formation and not going to cover, give them a random poisiton in the area to travel to
         foreach (AIController squad_member in squad_members)
         {
             Vector2 random_in_circle = Random.insideUnitCircle;
-            squad_member.knowledge.waypoint = _waypoint_pos + (new Vector3(random_in_circle.x, 0, random_in_circle.y ) * _radius);
+            squad_member.knowledge.waypoint = target_pos + (new Vector3(random_in_circle.x, 0, random_in_circle.y ) * _radius);
         }
     }
 
@@ -198,12 +202,13 @@ public class Squad : MonoBehaviour
         InitFormation(_formation);
         
         current_follow_targets = _formation.GetFormation(GetTargetRequirement());
-        if (current_follow_targets == null)
-            return;
 
-        if (current_follow_targets.Count <= 0)
+        if (current_follow_targets == null || current_follow_targets.Count <= 0)
+        {
+            HandleNoFormation(last_waypoint, last_radius);
             return;
-       
+        }
+
         SetFormationLeader(current_follow_targets);
         DistributeFollowTargetsToSquad(current_follow_targets);    
     }
@@ -265,8 +270,10 @@ public class Squad : MonoBehaviour
         stick_to_cover = !stick_to_cover;
         squad_members.ForEach(s => s.knowledge.can_take_cover = stick_to_cover);
         SetFormation(current_formation);
+
         if (ai_formation_leader)
             ai_formation_leader.knowledge.waypoint = last_waypoint;
+
         return stick_to_cover;
     }
 

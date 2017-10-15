@@ -10,8 +10,8 @@ public class SquadCommander : MonoBehaviour
     [SerializeField] List<Formation> formations;
 
     [Space][Header("Indicator")]
-    [SerializeField] float pointer_length = 100;
-    [SerializeField] float pointer_radius = 5.0f;
+    public float pointer_length = 100;
+    public float pointer_radius = 5.0f;
     [SerializeField] Transform indicator;
     [SerializeField] ProjectorScaler projector_scaler;
 
