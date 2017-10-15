@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 114385964495447094}
   - component: {fileID: 114243955155184894}
   - component: {fileID: 82807871604187628}
+  - component: {fileID: 208303982218444436}
   m_Layer: 10
   m_Name: Player_Controller
   m_TagString: Player
@@ -937,6 +938,75 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  key_events:
+  - key: 49
+    on_press_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114385964495447094}
+          m_MethodName: ToggleFormation
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - key: 50
+    on_press_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114385964495447094}
+          m_MethodName: ToggleFollowLeader
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - key: 51
+    on_press_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114385964495447094}
+          m_MethodName: ToggleCover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  - key: 52
+    on_press_event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114385964495447094}
+          m_MethodName: ToggleFreeEngage
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!114 &114228172450208546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -981,7 +1051,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owned_squad: {fileID: 114917495972876160}
-  formations: []
+  formations:
+  - {fileID: 11400000, guid: 96cdcbe91989b8a41b0b3b43af765e68, type: 2}
+  - {fileID: 11400000, guid: 1e4e5cd405b3487479200408aa2a5567, type: 2}
+  - {fileID: 11400000, guid: a155b3f0155781d4aadfaf2e78eced9c, type: 2}
+  - {fileID: 11400000, guid: 81b6e0f7f65a07d469d32168f96742df, type: 2}
   pointer_length: 20
   pointer_radius: 4
   indicator: {fileID: 0}
@@ -1004,6 +1078,56 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: CustomEvents+AreaWaypointEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  formation_toggle_event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: set_sprite
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: CustomEvents+SpriteSwapEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  follow_event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: set_sprite
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 21300000, guid: 587e71de95f562a47bff52f92a8937f6,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  un_follow_event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: set_sprite
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 21300000, guid: ba1de14ba06cda0489c25cc67e806065,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114475693461572466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1108,6 +1232,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  follow_commander: 0
 --- !u!114 &114948606205730938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7546,3 +7673,18 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+--- !u!208 &208303982218444436
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1854067424915710}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.71, y: 1, z: 0.71}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.73, z: 0}
+  m_TimeToStationary: 0.5

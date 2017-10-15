@@ -19,9 +19,42 @@ public class Squad : MonoBehaviour
 
     void Start()
     {
-        squad_members.ForEach(s => s.knowledge.stick_to_cover = stick_to_cover);
+        squad_members.ForEach(SetupNewSquadMember);
     }
-    
+
+
+    void SetupNewSquadMember(AIController squad_member)
+    {
+        squad_member.knowledge.stick_to_cover = stick_to_cover;
+        RegisterDeathEvent(squad_member.gameObject);
+    }
+
+
+    void RegisterDeathEvent(GameObject _killable_object)
+    {
+        LifeForce life_force = _killable_object.GetComponent<LifeForce>() ??
+            _killable_object.GetComponentInChildren<LifeForce>();
+
+        if (life_force == null)
+            return;
+
+        life_force.on_death_event.AddListener(OnSquadMemberDeath);
+    }
+
+
+    public void OnSquadMemberDeath(GameObject _death_game_object)
+    {
+        AIController last_formation_leader = ai_formation_leader;
+
+        SetFormation(current_formation);
+
+        //if last leader died the new leader should continue to the waypoint
+        if (_death_game_object == last_formation_leader.gameObject)
+        {
+            ai_formation_leader.knowledge.waypoint = last_formation_leader.knowledge.waypoint;
+        }
+    }
+
 
     public void SetSquadAreaWaypoint(Vector3 _waypoint_pos, float _radius)
     {
@@ -61,6 +94,7 @@ public class Squad : MonoBehaviour
     private void InitFormation(Formation _formation)
     {
         ClearFormation();
+        ResetSquadMemberFollowTargets();
         current_formation = _formation;      
     }
 
@@ -75,12 +109,10 @@ public class Squad : MonoBehaviour
 
     private int GetTargetRequirement()
     {
-        int targets_required = squad_members.Count;
+        int targets_required = GetAliveSquadMemberCount();
 
         if (follow_commander)
-        {
-            targets_required++;
-        }
+            ++targets_required;
 
         return targets_required;
     }
@@ -121,10 +153,16 @@ public class Squad : MonoBehaviour
 
     void DistributeFollowTargetsToSquad(List<Transform> _targets)
     {
-        int count = follow_commander ? 1 : squad_members.FindIndex(s => s.gameObject == current_formation_leader);//if formation leader is not commander make sure that member doesn't follow a target
+        int count = 1;//first position is reserved for formation lead
 
         foreach (AIController squad_member in squad_members)
         {
+            if (squad_member.controlled_character.dead)
+                continue;
+
+            if (squad_member.gameObject == current_formation_leader.gameObject)
+                continue;
+
             if (count > _targets.Count - 1)
                 break;
 
@@ -136,18 +174,47 @@ public class Squad : MonoBehaviour
 
     void SetFormationLeader(List<Transform> _targets)
     {
-        current_formation_leader = squad_members[0].gameObject;//assign formation leader
-        squad_members[0].knowledge.follow_target = null;
-        ai_formation_leader = squad_members.Find(s => s.gameObject == current_formation_leader);
+        ResetSquadMemberFollowTargets();
 
         if (follow_commander)
+        {
             current_formation_leader = squad_commander.gameObject;
+        }
+        else
+        {
+            ai_formation_leader = GetFirstAliveSquadMember();//assign formation leader
+            ai_formation_leader.knowledge.follow_target = null;
+            current_formation_leader = ai_formation_leader.gameObject;//store ai leader
+        }
 
         _targets[0].position = current_formation_leader.transform.position;
-        FollowTransform follow = _targets[0].gameObject.AddComponent<FollowTransform>();
-        follow.follow_target = current_formation_leader.transform;
+        FollowFormationLeader follow = _targets[0].gameObject.AddComponent<FollowFormationLeader>();//make formation lead point follow formation leader
+        follow.InitFollow(current_formation_leader.transform);
     }
 
+
+    AIController GetFirstAliveSquadMember()
+    {
+        if (squad_members.Count <= 0)
+            return null;
+
+        foreach (AIController squad_member in squad_members)
+        {
+            if (squad_member.controlled_character.dead)
+                continue;
+
+            return squad_member;
+        }
+
+        return squad_members[0];
+    }
+
+
+    int GetAliveSquadMemberCount()
+    {
+        return squad_members.Count(s => !s.controlled_character.dead);
+    }
+    
 
     void DistributeWaypointsToSquad(List<Vector3> _waypoints)
     {
@@ -156,14 +223,13 @@ public class Squad : MonoBehaviour
 
         for (int i = 0; i < squad_members.Count; ++i)
         {
-            if (i < _waypoints.Count)
-            {
-                squad_members[i].knowledge.waypoint = _waypoints[i];
-            }
-            else
-            {
+            if (squad_members[i].controlled_character.dead)
+                continue;
+
+            if (i >= _waypoints.Count)
                 return;
-            }
+
+            squad_members[i].knowledge.waypoint = _waypoints[i];
         }
     }
 }

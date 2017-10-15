@@ -8,8 +8,9 @@ public class LifeForce : MonoBehaviour
 {
     [SerializeField] private int max_health = 100;
     [SerializeField] private ParticleSystem hit_effect;
-    [SerializeField] private UnityEvent on_death_event;
-    [SerializeField] private CustomEvents.DamageEvent on_damage_event;
+
+    public CustomEvents.GameObjectEvent on_death_event;
+    public CustomEvents.DamageEvent on_damage_event;
 
     private int current_health = 100;
 
@@ -22,7 +23,7 @@ public class LifeForce : MonoBehaviour
     private void CreateEvents()
     {
         if (on_death_event == null)
-            on_death_event = new UnityEvent();//create event
+            on_death_event = new CustomEvents.GameObjectEvent();//create event
 
         if (on_damage_event == null)
             on_damage_event = new CustomEvents.DamageEvent();
@@ -47,7 +48,7 @@ public class LifeForce : MonoBehaviour
         }
 
         current_health = 0;
-        on_death_event.Invoke();//trigger death event
+        on_death_event.Invoke(gameObject);//trigger death event
         return true;
     }
 

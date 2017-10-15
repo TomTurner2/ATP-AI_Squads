@@ -21,6 +21,9 @@ public class CustomEvents
     public class FloatEvent : UnityEvent<float> { }
 
     [System.Serializable]
+    public class GameObjectEvent : UnityEvent<GameObject> { }
+
+    [System.Serializable]
     public class AreaWaypointEvent : UnityEvent<Vector3, float> { }
 
     [System.Serializable]

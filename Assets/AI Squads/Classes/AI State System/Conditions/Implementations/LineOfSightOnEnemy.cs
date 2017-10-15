@@ -7,6 +7,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIStateSystem/Conditions/LineOfSightOnEnemy")]
 public class LineOfSightOnEnemy : Condition
 {
+    [SerializeField] private float eye_height = 1.5f;
+
+
     public override bool Check(MonoBehaviour _controller)
     {
         AIController controller = _controller as AIController;
@@ -14,8 +17,9 @@ public class LineOfSightOnEnemy : Condition
         if (controller.knowledge.closest_enemy == null)
             return false;
 
-        return LineOfSightCheck.CheckLineOfSight(controller.transform.position + new Vector3(0, 1, 0),
-            controller.knowledge.closest_enemy.transform.position, GetLineOfSightIgnoreColliders(ref controller));
+        return LineOfSightCheck.CheckLineOfSight(controller.transform.position + new Vector3(0, eye_height, 0),
+            controller.knowledge.closest_enemy.transform.position + new Vector3(0, eye_height, 0),
+            GetLineOfSightIgnoreColliders(ref controller));
     }
 
 

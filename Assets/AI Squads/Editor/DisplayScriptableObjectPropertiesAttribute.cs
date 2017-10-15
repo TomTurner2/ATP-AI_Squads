@@ -55,13 +55,10 @@ public class DisplayScriptableObjectPropertiesDrawer : PropertyDrawer
             }
 
             if (show_childen && prop.depth > depth_childen)
-            {
                 continue;
-            }
 
             position.height = position_height;
             EditorGUI.indentLevel = indent + prop.depth;
-
 
             if (EditorGUI.PropertyField(position, prop))
             {
