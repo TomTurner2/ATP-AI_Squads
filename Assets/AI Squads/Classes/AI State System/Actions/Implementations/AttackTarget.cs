@@ -21,19 +21,8 @@ namespace AIStateSystem
                 return;
             }
 
-            if (controller.knowledge.closest_enemy == null || controller.knowledge.closest_enemy.dead)
-                return;
-
-            if (controller.weapon == null)
-                return;
-
-            //if (!LineOfSightCheck.CheckLineOfSight(controller.transform.position + new Vector3(0, 1, 0),
-            //    controller.knowledge.closest_enemy.transform.position, GetLineOfSightIgnoreColliders(ref controller)))
-            //{
-            //    //TODO override auto crouch
-            //    //TODO find optimal engagement position and set waypoint
-            //    return;
-            //}
+            //TODO override auto crouch
+            //TODO find optimal engagement position and set waypoint
 
             FireWeapon(ref controller);
         }

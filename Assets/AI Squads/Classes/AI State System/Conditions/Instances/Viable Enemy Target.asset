@@ -8,8 +8,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05339878f4deec648a99f3c93cfa8fdd, type: 3}
-  m_Name: Aim For Cover
+  m_Script: {fileID: 11500000, guid: 9310c88423c21a74e8762804a9cec629, type: 3}
+  m_Name: Viable Enemy Target
   m_EditorClassIdentifier: 
-  conditional_requirements:
-  - {fileID: 11400000, guid: b65e6cf1deede0d49bf6ad6c8fa2011a, type: 2}

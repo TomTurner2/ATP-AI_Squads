@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
-public abstract class Formation : ScriptableObject
+[CreateAssetMenu(menuName = "Formation/EmptyFormation")]
+public class Formation : ScriptableObject
 {
     public Sprite formation_image;
-    public abstract List<Transform> GetFormation(int _member_count);
+
+
+    public virtual List<Transform> GetFormation(int _member_count)
+    {
+        return null;
+    }
+
 
     protected void CreateWaypointObjects(ref List<Transform> _waypoints, List <Vector3> _positions)
     {
@@ -18,6 +24,7 @@ public abstract class Formation : ScriptableObject
             _waypoints.Last().transform.position = position;
         }
     }
+
 
     protected void SetFormationLead(ref List<Transform> _waypoints, Transform _lead)
     {

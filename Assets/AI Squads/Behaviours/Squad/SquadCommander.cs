@@ -22,8 +22,9 @@ public class SquadCommander : MonoBehaviour
     [Space][Header("Events")]
     [SerializeField] CustomEvents.AreaWaypointEvent waypoint_set;
     [SerializeField] private CustomEvents.SpriteSwapEvent formation_toggle_event;
-    [SerializeField] private UnityEvent follow_event;
-    [SerializeField] private UnityEvent un_follow_event;
+    [SerializeField] private UnityEvent follow_event, un_follow_event;
+    [SerializeField] private UnityEvent find_cover_event, no_cover_event;
+    [SerializeField] private UnityEvent weapons_free_event, hold_fire_event;
 
     private Vector3 hit_location = Vector3.zero;
     private int current_formation_index = 0;
@@ -36,6 +37,7 @@ public class SquadCommander : MonoBehaviour
         indicator.gameObject.SetActive(false);
         //kick start squad
         ToggleFormation();
+        ToggleFollowLeader();
         ToggleFollowLeader();
     }
 
@@ -126,7 +128,19 @@ public class SquadCommander : MonoBehaviour
 
     public void ToggleCover()
     {
-        
+        if (owned_squad.ToggleStickToCover())
+        {
+            find_cover_event.Invoke();
+            return;
+        }
+
+        no_cover_event.Invoke();
+    }
+
+
+    public void ToggleWeaponsFree()
+    {
+
     }
 
 

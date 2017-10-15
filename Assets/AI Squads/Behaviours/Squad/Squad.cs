@@ -1,36 +1,67 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using UnityEngine;
 
 public class Squad : MonoBehaviour
 {
-    [SerializeField] private Faction squad_faction = null;
-    [SerializeField] private SquadCommander squad_commander = null;
-    [SerializeField] private List<AIController> squad_members = new List<AIController>();
+    [SerializeField] Faction squad_faction = null;
+    [SerializeField] SquadCommander squad_commander = null;
+    [SerializeField] List<AIController> squad_members = new List<AIController>();
 
     private List<Transform> current_follow_targets = null;
     private AIController ai_formation_leader = null;
     private GameObject current_formation_leader = null;
     private Formation current_formation = null;
-    public bool follow_commander = false;
     private bool stick_to_cover = false;
+    private bool weapons_free = true;
+    //private bool at_waypoint = false;
+
+    [HideInInspector] public bool follow_commander = false;
 
 
-    void Start()
+    private void Start()
     {
         squad_members.ForEach(SetupNewSquadMember);
     }
 
 
-    void SetupNewSquadMember(AIController squad_member)
+    private void Update()
     {
-        squad_member.knowledge.stick_to_cover = stick_to_cover;
+        HandleFormationBreakForCover();
+    }
+
+
+    private void HandleFormationBreakForCover()
+    {
+        if (!stick_to_cover)
+            return;
+
+        if (ai_formation_leader == null)
+            return;
+
+        if (ai_formation_leader.nav_mesh_agent.remainingDistance <
+            ai_formation_leader.knowledge.target_arrival_tolerance)
+        {
+            squad_members.ForEach(s => s.knowledge.can_take_cover = true);
+        }
+        else
+        {
+            squad_members.ForEach(s => s.knowledge.can_take_cover = false);
+        }
+    }
+
+
+    private void SetupNewSquadMember(AIController squad_member)
+    {
+        squad_member.knowledge.can_take_cover = stick_to_cover;
+        squad_member.knowledge.can_fire = weapons_free;
         RegisterDeathEvent(squad_member.gameObject);
     }
 
 
-    void RegisterDeathEvent(GameObject _killable_object)
+    private void RegisterDeathEvent(GameObject _killable_object)
     {
         LifeForce life_force = _killable_object.GetComponent<LifeForce>() ??
             _killable_object.GetComponentInChildren<LifeForce>();
@@ -58,8 +89,17 @@ public class Squad : MonoBehaviour
 
     public void SetSquadAreaWaypoint(Vector3 _waypoint_pos, float _radius)
     {
+        DistributeCoverToSquad(GameManager.scene_refs.tactical_assessor.
+            FindOptimalCoverInArea(_waypoint_pos, _radius,squad_faction));
+
         if (current_formation != null)
             SetFormation(current_formation);
+
+        if (current_follow_targets == null || current_follow_targets.Count <= 0)
+        {
+            HandleNoFormation(_waypoint_pos, _radius);
+            return;
+        }
 
         if (ai_formation_leader == null)
             return;
@@ -69,9 +109,19 @@ public class Squad : MonoBehaviour
     }
 
 
-    private void SetOwnWaypoints()
+    void HandleNoFormation(Vector3 _waypoint_pos, float _radius)
     {
         ClearFormation();
+
+        if (stick_to_cover)//members will go to their cover points instead
+            return;
+
+        //if no formation and not going to cover, give them a random poisiton in the area to travel to
+        foreach (AIController squad_member in squad_members)
+        {
+            Vector2 random_in_circle = Random.insideUnitCircle;
+            squad_member.knowledge.waypoint = _waypoint_pos + (new Vector3(random_in_circle.x, 0, random_in_circle.y ) * _radius);
+        }
     }
 
 
@@ -137,21 +187,28 @@ public class Squad : MonoBehaviour
     public bool ToggleFollowCommander()
     {
         follow_commander = !follow_commander;
-
         SetFormation(current_formation);
-
         return follow_commander;
     }
 
 
-    public void ToggleStickToCover()
+    public bool ToggleStickToCover()
     {
         stick_to_cover = !stick_to_cover;
-        squad_members.ForEach(s => s.knowledge.stick_to_cover = stick_to_cover);
+        squad_members.ForEach(s => s.knowledge.can_take_cover = stick_to_cover);
+        return stick_to_cover;
     }
 
 
-    void DistributeFollowTargetsToSquad(List<Transform> _targets)
+    public bool ToggleWeaponsFreeCover()
+    {
+        weapons_free = !weapons_free;
+        squad_members.ForEach(s => s.knowledge.can_fire = weapons_free);
+        return weapons_free;
+    }
+
+
+    private void DistributeFollowTargetsToSquad(List<Transform> _targets)
     {
         int count = 1;//first position is reserved for formation lead
 
@@ -172,7 +229,7 @@ public class Squad : MonoBehaviour
     }
 
 
-    void SetFormationLeader(List<Transform> _targets)
+    private void SetFormationLeader(List<Transform> _targets)
     {
         ResetSquadMemberFollowTargets();
 
@@ -193,7 +250,7 @@ public class Squad : MonoBehaviour
     }
 
 
-    AIController GetFirstAliveSquadMember()
+    private AIController GetFirstAliveSquadMember()
     {
         if (squad_members.Count <= 0)
             return null;
@@ -210,13 +267,13 @@ public class Squad : MonoBehaviour
     }
 
 
-    int GetAliveSquadMemberCount()
+    private int GetAliveSquadMemberCount()
     {
         return squad_members.Count(s => !s.controlled_character.dead);
     }
     
 
-    void DistributeWaypointsToSquad(List<Vector3> _waypoints)
+    private void DistributeCoverToSquad(List<Vector3> _waypoints)
     {
         if (_waypoints == null)
             return;
@@ -229,7 +286,8 @@ public class Squad : MonoBehaviour
             if (i >= _waypoints.Count)
                 return;
 
-            squad_members[i].knowledge.waypoint = _waypoints[i];
+            squad_members[i].knowledge.best_cover = _waypoints[i];
         }
     }
+
 }

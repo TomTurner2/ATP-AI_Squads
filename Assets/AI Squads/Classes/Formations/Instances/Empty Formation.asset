@@ -8,8 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05339878f4deec648a99f3c93cfa8fdd, type: 3}
-  m_Name: Aim For Cover
+  m_Script: {fileID: 11500000, guid: e2706547c2280db45b3b2e0436fa39df, type: 3}
+  m_Name: Empty Formation
   m_EditorClassIdentifier: 
-  conditional_requirements:
-  - {fileID: 11400000, guid: b65e6cf1deede0d49bf6ad6c8fa2011a, type: 2}
+  formation_image: {fileID: 21300000, guid: 03aef3296f16dea4ca70a108efebe908, type: 3}

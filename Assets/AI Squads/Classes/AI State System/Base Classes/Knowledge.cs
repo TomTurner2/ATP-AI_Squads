@@ -17,8 +17,8 @@ namespace AIStateSystem
         public float enemy_detect_radius = 100f;
 
         [HideInInspector] public int shot_count = 0;
-        [HideInInspector] public bool weapons_free = true;
-        [HideInInspector] public bool stick_to_cover = true;      
+        [HideInInspector] public bool can_take_cover = true;
+        [HideInInspector] public bool can_fire = true;
         [HideInInspector] public bool is_shooting = false;
         [HideInInspector] public Vector3 waypoint { get; set; }
         [HideInInspector] public Vector3 best_cover { get; set; }

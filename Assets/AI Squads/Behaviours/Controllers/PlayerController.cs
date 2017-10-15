@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CustomEvents.BooleanEvent on_sprint_event;
     [SerializeField] CustomEvents.BooleanEvent on_command_event;
     [SerializeField] CustomEvents.BooleanEvent on_fire_held_event;
-    [SerializeField] UnityEvent on_fire_event;  
     [SerializeField] UnityEvent on_jump_event;
     [SerializeField] UnityEvent on_issue_command_event;
     [SerializeField] List<KeyEvent> key_events = new List<KeyEvent>();
@@ -70,12 +69,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
             on_jump_event.Invoke();
 
-        if (Input.GetButton("Fire1"))
-            on_fire_event.Invoke();
-
         if (Input.GetButton("IssueCommand"))
             on_issue_command_event.Invoke();
-
 
         foreach (KeyEvent key in key_events)
         {

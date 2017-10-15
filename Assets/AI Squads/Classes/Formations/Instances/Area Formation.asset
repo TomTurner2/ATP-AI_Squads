@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6468fda2a6c41164080085dcd4cbef7d, type: 3}
   m_Name: Area Formation
   m_EditorClassIdentifier: 
-  formation_image: {fileID: 21300000, guid: 03aef3296f16dea4ca70a108efebe908, type: 3}
+  formation_image: {fileID: 21300000, guid: 36db07950933bfc4d81870adb3845ef3, type: 3}
   radius: 5
