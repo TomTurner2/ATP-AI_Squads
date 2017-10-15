@@ -16,13 +16,17 @@ public class Squad : MonoBehaviour
     private Formation current_formation = null;
     private bool stick_to_cover = false;
     private bool weapons_free = true;
-    //private bool at_waypoint = false;
+    private Vector3 last_waypoint = Vector3.zero;
+    private float last_radius = 4;
+    private Vector3 commander_last_position;
+    private float dist_before_back_to_follow_formation = 6f;
 
     [HideInInspector] public bool follow_commander = false;
 
 
     private void Start()
     {
+        commander_last_position = squad_commander.transform.position;
         squad_members.ForEach(SetupNewSquadMember);
     }
 
@@ -33,14 +37,42 @@ public class Squad : MonoBehaviour
     }
 
 
+    private bool CheckCommanderHasMoved()
+    {
+        Vector3 move = squad_commander.transform.position - commander_last_position;
+        float dist = move.magnitude;
+
+        if (dist >= dist_before_back_to_follow_formation)
+        {           
+            commander_last_position = squad_commander.transform.position;
+            return true;
+        }
+
+        return false;
+    }
+
+
     private void HandleFormationBreakForCover()
     {
         if (!stick_to_cover)
             return;
 
-        if (ai_formation_leader == null)
-            return;
+        if (follow_commander)
+        {
+            FormationBreakFromFollowingCommander();
+        }
+        else
+        {
+            if (ai_formation_leader == null)
+                return;
 
+            FormationBreakFromWaypoint();
+        }
+    }
+
+
+    private void FormationBreakFromWaypoint()
+    {
         if (ai_formation_leader.nav_mesh_agent.remainingDistance <
             ai_formation_leader.knowledge.target_arrival_tolerance)
         {
@@ -50,6 +82,39 @@ public class Squad : MonoBehaviour
         {
             squad_members.ForEach(s => s.knowledge.can_take_cover = false);
         }
+    }
+
+
+    private void FormationBreakFromFollowingCommander()
+    {
+        AIController squad_member = GetFirstAliveSquadMember();
+
+        if (!CheckCommanderHasMoved())
+        {
+            DistributeCoverToSquad(GameManager.scene_refs.tactical_assessor.
+                FindOptimalCoverInArea(squad_commander.transform.position, last_radius, squad_faction));
+
+            if(SquadMembersAtWaypoint())
+                squad_members.ForEach(s => s.knowledge.can_take_cover = true);
+        }
+        else
+        {          
+            squad_members.ForEach(s => s.knowledge.can_take_cover = false);
+        }
+    }
+
+
+    private bool SquadMembersAtWaypoint()
+    {
+        foreach (AIController squad_member in squad_members)
+        {
+            if (squad_member.controlled_character.dead)
+                continue;
+
+            if (squad_member.nav_mesh_agent.remainingDistance > squad_member.knowledge.target_arrival_tolerance)
+                return false;
+        }
+        return true;
     }
 
 
@@ -89,8 +154,11 @@ public class Squad : MonoBehaviour
 
     public void SetSquadAreaWaypoint(Vector3 _waypoint_pos, float _radius)
     {
+        last_waypoint = _waypoint_pos;
+        last_radius = _radius;
+
         DistributeCoverToSquad(GameManager.scene_refs.tactical_assessor.
-            FindOptimalCoverInArea(_waypoint_pos, _radius,squad_faction));
+            FindOptimalCoverInArea(_waypoint_pos, _radius, squad_faction));
 
         if (current_formation != null)
             SetFormation(current_formation);
@@ -196,6 +264,9 @@ public class Squad : MonoBehaviour
     {
         stick_to_cover = !stick_to_cover;
         squad_members.ForEach(s => s.knowledge.can_take_cover = stick_to_cover);
+        SetFormation(current_formation);
+        if (ai_formation_leader)
+            ai_formation_leader.knowledge.waypoint = last_waypoint;
         return stick_to_cover;
     }
 
