@@ -9,6 +9,8 @@
 		_Metallic("Metallic", 2D) = "white" {}
 		_MetallicMult("Metallic Mult", Range(0,1)) = 0
 		_OccludedColor("Occluded Color", Color) = (1,1,1,1)
+		_RimColor("Rim Color", Color) = (1,1,1,1)
+		_RimWidth("Rim Width", Range(0,1)) = 0
 	}
 
 	SubShader
@@ -25,18 +27,41 @@
 			#pragma fragmentoption ARB_precision_hint_fastest
 
 			half4 _OccludedColor;
+			half4 _RimColor;
+			half _RimWidth;
 
-
-			float4 vert(float4 pos : POSITION) : SV_POSITION
+			struct VertOutput
 			{
-				float4 view_pos = UnityObjectToClipPos(pos);//get clipping
-				return view_pos;
+				float4 pos : POSITION;
+				half4 colour : COLOR;
+			};
+
+			struct Vert
+			{
+                float4 pos : POSITION;
+                float3 normal : NORMAL;
+                float2 texcoord : TEXCOORD0;
+            };
+
+
+			VertOutput vert(Vert v)
+			{
+				VertOutput o;
+				o.pos = UnityObjectToClipPos(v.pos);//get clipping
+				
+				float3 viewDir = normalize(v.pos);
+                float dot_product = 1 - dot(v.normal, viewDir);
+                o.colour = _OccludedColor + smoothstep(1 - _RimWidth, 1.0, dot_product);           
+                o.colour *= _RimColor;
+
+				return o;
 			}
 
 
-			half4 frag(float4 pos : SV_POSITION) : COLOR
-			{
-				return _OccludedColor;
+			half4 frag(VertOutput o) : COLOR
+			{	
+				half4 c = o.colour;
+				return c;
 			}
 
 			ENDCG

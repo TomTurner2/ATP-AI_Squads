@@ -35,8 +35,9 @@ public class SquadCommander : MonoBehaviour
     void Start()
     {
         indicator.gameObject.SetActive(false);
-        //kick start squad
+        //kick start formation
         owned_squad.SetFormation(formations[current_formation_index]);
+        formation_toggle_event.Invoke(formations[current_formation_index].formation_image);
         ToggleFollowLeader();
     }
 
