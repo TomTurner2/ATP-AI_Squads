@@ -2333,7 +2333,7 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: e7befdcb97e688d4b9bc5413c882432c, type: 2}
+  - {fileID: 2100000, guid: d6f425f52ee6c674791ce394f9c35be4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2365,7 +2365,7 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: e7befdcb97e688d4b9bc5413c882432c, type: 2}
+  - {fileID: 2100000, guid: d6f425f52ee6c674791ce394f9c35be4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2937,7 +2937,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: CustomEvents+GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   on_damage_event:
     m_PersistentCalls:
@@ -3035,7 +3035,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 831d76a602d2955438468823e09a1762, type: 2}
+  - {fileID: 2100000, guid: 44c7f874c51dbcf4d945c7dd13d815cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3085,7 +3085,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 831d76a602d2955438468823e09a1762, type: 2}
+  - {fileID: 2100000, guid: 44c7f874c51dbcf4d945c7dd13d815cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
