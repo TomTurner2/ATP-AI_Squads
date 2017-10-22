@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AerialController : MonoBehaviour
 {
@@ -18,7 +19,17 @@ public class AerialController : MonoBehaviour
 
 	void Update ()
 	{
-	    on_command_event.Invoke(true);
+	    if (EventSystem.current.IsPointerOverGameObject())
+	    {
+	        on_command_event.Invoke(false);
+            Cursor.visible = true;
+        }
+	    else
+	    {
+	        on_command_event.Invoke(true);
+	        Cursor.visible = false;
+        }
+	    
         ProcessKeyInputs();
 	}
 

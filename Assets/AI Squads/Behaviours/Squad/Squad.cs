@@ -146,6 +146,10 @@ public class Squad : MonoBehaviour
         SetFormation(current_formation);
 
         //if last leader died the new leader should continue to the waypoint
+
+        if (last_formation_leader == null)
+            return;
+
         if (_death_game_object == last_formation_leader.gameObject)
         {
             ai_formation_leader.knowledge.waypoint = last_formation_leader.knowledge.waypoint;
