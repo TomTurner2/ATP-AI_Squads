@@ -6,11 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIStateSystem/Conditions/AtWaypoint")]
 public class AtWaypoint : Condition
 {
-    public override bool Check(MonoBehaviour _controller)
+    public override bool Check(Knowledge _controller)
     {
-        AIController controller = _controller as AIController;
-
-        return (Vector3.Distance(controller.transform.position, controller.knowledge.waypoint) <=
-                controller.knowledge.target_arrival_tolerance);
+        return (Vector3.Distance(_controller.ai_controller.transform.position, _controller.waypoint) <=
+                _controller.target_arrival_tolerance);
     }
 }

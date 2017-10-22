@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3950c2b9c2b6a40a7bf6a56d35cfe8, type: 3}
+  m_Name: Enemy Knowledge
+  m_EditorClassIdentifier: 
+  target_arrival_tolerance: 0.5
+  burst_fire_cooldown: 2
+  max_shot_count: 5
+  enemy_detect_radius: 10
+  shot_count: 0
+  can_take_cover: 1
+  can_fire: 1
+  is_shooting: 0
+  closest_enemy: {fileID: 0}
+  ai_controller: {fileID: 0}

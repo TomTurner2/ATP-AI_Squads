@@ -27,8 +27,9 @@ public class Squad : MonoBehaviour
     private void Start()
     {
         commander_last_position = squad_commander.transform.position;
-        last_waypoint = commander_last_position;
+        last_waypoint = squad_members.First().transform.position;
         squad_members.ForEach(SetupNewSquadMember);
+        SetSquadAreaWaypoint(last_waypoint, 4);
     }
 
 

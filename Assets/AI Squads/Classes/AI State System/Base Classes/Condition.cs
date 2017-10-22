@@ -8,6 +8,6 @@ namespace AIStateSystem
     [Serializable]
     public abstract class Condition : ScriptableObject
     {
-        public abstract bool Check(MonoBehaviour _controller);
+        public abstract bool Check(Knowledge _controller);
     }
 }

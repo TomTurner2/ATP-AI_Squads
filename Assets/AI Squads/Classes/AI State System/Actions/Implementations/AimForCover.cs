@@ -6,9 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIStateSystem/Actions/AimForCover")]
 public class AimForCover : Action
 {
-    public override void Execute(MonoBehaviour _controller)
+    public override void Execute(Knowledge _controller)
     {
-        AIController controller = _controller as AIController;
-        controller.knowledge.waypoint = controller.knowledge.best_cover;
+        _controller.waypoint = _controller.best_cover;
     }
 }

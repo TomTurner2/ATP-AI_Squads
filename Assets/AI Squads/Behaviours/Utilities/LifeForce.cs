@@ -32,6 +32,9 @@ public class LifeForce : MonoBehaviour
 
     public bool Damage(int _damage, RaycastHit _hit)
     {
+        if (current_health <= 0)
+            return false;
+
         current_health -= _damage;//damage health
 
         if (hit_effect != null)

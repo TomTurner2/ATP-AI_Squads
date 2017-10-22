@@ -8,36 +8,34 @@ namespace AIStateSystem
     [CreateAssetMenu(menuName = "AIStateSystem/Actions/AttackTarget")]
     public class AttackTarget : Action
     {
-        public override void Execute(MonoBehaviour _controller)
+        public override void Execute(Knowledge _controller)
         {
-            AIController controller = _controller as AIController;
-
-            if (controller == null)
+            if (_controller == null)
                 return;
 
-            if (controller.controlled_character.dead)
+            if (_controller.ai_controller.controlled_character.dead)
             {
-                controller.knowledge.is_shooting = false;
+                _controller.is_shooting = false;
                 return;
             }
 
             //TODO override auto crouch
             //TODO find optimal engagement position and set waypoint
 
-            FireWeapon(ref controller);
+            FireWeapon(ref _controller);
         }
 
 
-        private List<Collider> GetLineOfSightIgnoreColliders(ref AIController _controller)
+        private List<Collider> GetLineOfSightIgnoreColliders(ref Knowledge _controller)
         {
             List<Collider> ignore = new List<Collider>();
 
-            Collider character_collider = _controller.controlled_character.character_collider;
+            Collider character_collider = _controller.ai_controller.controlled_character.character_collider;
             if (character_collider != null)
                 ignore.Add(character_collider);
 
 
-            Collider enemy_collider = _controller.knowledge.closest_enemy.character_collider;
+            Collider enemy_collider = _controller.closest_enemy.character_collider;
             if (enemy_collider != null)
                 ignore.Add(enemy_collider);
 
@@ -45,31 +43,31 @@ namespace AIStateSystem
         }
 
 
-        private void FireWeapon(ref AIController _controller)
+        private void FireWeapon(ref Knowledge _controller)
         {
-            if (!_controller.knowledge.burst_fire_cooldown_timer.UpdateTimer())
+            if (!_controller.burst_fire_cooldown_timer.UpdateTimer())
             {
-                _controller.knowledge.is_shooting = false;
+                _controller.is_shooting = false;
                 return;
             }
 
-            _controller.knowledge.is_shooting = true;
+            _controller.is_shooting = true;
 
-            Vector3 enemy_pos = _controller.knowledge.closest_enemy.transform.position;
+            Vector3 enemy_pos = _controller.closest_enemy.transform.position;
             Vector3 aim_target = new Vector3(enemy_pos.x, enemy_pos.y + 1f, enemy_pos.z);
-            Vector3 look_target = new Vector3(enemy_pos.x, _controller.transform.position.y, enemy_pos.z);
+            Vector3 look_target = new Vector3(enemy_pos.x, _controller.ai_controller.transform.position.y, enemy_pos.z);
 
-            _controller.transform.LookAt(look_target);
-            _controller.weapon.Aim(aim_target);
-            _controller.weapon.Shoot();
+            _controller.ai_controller.transform.LookAt(look_target);
+            _controller.ai_controller.weapon.Aim(aim_target);
+            _controller.ai_controller.weapon.Shoot();
 
-            ++_controller.knowledge.shot_count;
+            ++_controller.shot_count;
 
-            if (_controller.knowledge.shot_count < _controller.knowledge.max_shot_count)
+            if (_controller.shot_count < _controller.max_shot_count)
                 return;
 
-            _controller.knowledge.shot_count = 0;
-            _controller.knowledge.burst_fire_cooldown_timer.Reset();
+            _controller.shot_count = 0;
+            _controller.burst_fire_cooldown_timer.Reset();
         }
     }
 }

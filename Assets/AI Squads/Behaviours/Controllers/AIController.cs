@@ -21,6 +21,7 @@ public class AIController : MonoBehaviour
         knowledge.waypoint = transform.position;
         knowledge.best_cover = transform.position;
         knowledge.burst_fire_cooldown_timer.InitCountDownTimer(knowledge.burst_fire_cooldown, false);
+        knowledge.ai_controller = this;
 
         if (ai_state_machine == null)
             return;
@@ -33,14 +34,7 @@ public class AIController : MonoBehaviour
     void Update()
     {
         if (ai_state_machine != null)
-            ai_state_machine.UpdateState(this);
-    }
-
-
-    private void OnDestroy()
-    {
-        if (ai_state_machine != null)
-            Destroy(ai_state_machine);
+            ai_state_machine.UpdateState(knowledge);
     }
 
 
@@ -68,7 +62,9 @@ public class AIController : MonoBehaviour
     public void MoveToPosition(Vector3 _position)
     {
         DetermineSpeed();
-        nav_mesh_agent.SetDestination(_position);
+
+        if (nav_mesh_agent.enabled)
+            nav_mesh_agent.SetDestination(_position);
     }
 
 }

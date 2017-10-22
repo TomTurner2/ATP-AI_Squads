@@ -6,13 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIStateSystem/Conditions/HasWeapon")]
 public class HasWeapon : Condition
 {
-    public override bool Check(MonoBehaviour _controller)
+    public override bool Check(Knowledge _controller)
     {
-        AIController controller = _controller as AIController;
-
-        if (controller == null)
+        if (_controller == null)
             return false;
 
-        return controller.weapon != null;//return true if the controller has a weapon
+        return _controller.ai_controller.weapon != null;//return true if the controller has a weapon
     }
 }

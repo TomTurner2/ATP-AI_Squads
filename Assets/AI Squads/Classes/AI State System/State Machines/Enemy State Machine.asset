@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b7e3fa8ae67041499222e603dde3a33, type: 3}
+  m_Name: Enemy State Machine
+  m_EditorClassIdentifier: 
+  states:
+  - {fileID: 11400000, guid: f1af8a1f733808e48a6691ca973c10e2, type: 2}
+  active_states: []

@@ -10,9 +10,9 @@ namespace AIStateSystem
     public abstract class Action : ScriptableObject
     {
         [SerializeField] List<Condition> conditional_requirements = new List<Condition>();
-        public abstract void Execute(MonoBehaviour _controller);
+        public abstract void Execute(Knowledge _controller);
 
-        public bool CanExecute(MonoBehaviour _controller)
+        public bool CanExecute(Knowledge _controller)
         {
             if (conditional_requirements.Count <= 0)
                 return true;

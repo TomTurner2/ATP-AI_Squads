@@ -13,6 +13,7 @@ public class FactionManager : MonoBehaviour
         characters = GameObject.FindObjectsOfType<Character>().ToList();
     }
 
+
     public Character FindClosestEnemy(Vector3 _position, Faction _requesters_faction, float _enemy_max_check_distance = Mathf.Infinity)
     {
         Character closest_enemy = null;
@@ -20,6 +21,9 @@ public class FactionManager : MonoBehaviour
 
         foreach (var character in characters)
         {
+            if (character == null)
+                continue;
+
             if (character.faction == null)
                 continue;
 

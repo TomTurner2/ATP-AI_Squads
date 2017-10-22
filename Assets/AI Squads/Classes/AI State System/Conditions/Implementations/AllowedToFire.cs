@@ -7,13 +7,11 @@ using UnityEngine;
 public class AllowedToFire : Condition
 {
 
-    public override bool Check(MonoBehaviour _controller)
+    public override bool Check(Knowledge _controller)
     {
-        AIController controller = _controller as AIController;
-
-        if (controller == null)
+        if (_controller == null)
             return false;
 
-        return controller.knowledge.can_fire;
+        return _controller.can_fire;
     }
 }

@@ -6,14 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIStateSystem/Actions/FindClosestEnemy")]
 public class FindClosestEnemy : Action
 {
-    public override void Execute(MonoBehaviour _controller)
+    public override void Execute(Knowledge _controller)
     {
-        AIController controller = _controller as AIController;
-
-        if (controller == null)
+        if (_controller == null)
             return;
 
-        controller.knowledge.closest_enemy = GameManager.scene_refs.FactionManager.FindClosestEnemy(controller.transform.position,
-            controller.controlled_character.faction, controller.knowledge.enemy_detect_radius);
+        _controller.closest_enemy = GameManager.scene_refs.FactionManager.FindClosestEnemy(
+            _controller.ai_controller.transform.position,_controller.ai_controller.controlled_character.faction,
+            _controller.enemy_detect_radius);
     }
 }

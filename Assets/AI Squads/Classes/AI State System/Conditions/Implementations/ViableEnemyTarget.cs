@@ -7,14 +7,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIStateSystem/Conditions/ViableEnemyTarget")]
 public class ViableEnemyTarget : Condition
 {
-    public override bool Check(MonoBehaviour _controller)
+    public override bool Check(Knowledge _controller)
     {
-        AIController controller = _controller as AIController;
-
-        if (controller == null)
+        if (_controller == null)
             return false;
 
-        return !(controller.knowledge.closest_enemy == null ||
-            controller.knowledge.closest_enemy.dead);//return false if not a viable target
+        return !(_controller.closest_enemy == null ||
+            _controller.closest_enemy.dead);//return false if not a viable target
     }
 }

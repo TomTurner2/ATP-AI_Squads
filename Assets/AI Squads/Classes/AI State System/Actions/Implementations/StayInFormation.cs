@@ -6,9 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIStateSystem/Actions/StayInFormation")]
 public class StayInFormation : Action
 {
-    public override void Execute(MonoBehaviour _controller)
+    public override void Execute(Knowledge _controller)
     {
-        AIController controller = _controller as AIController;
-        controller.knowledge.waypoint = controller.knowledge.follow_target.position;
+        _controller.waypoint = _controller.follow_target.position;
     }
 }

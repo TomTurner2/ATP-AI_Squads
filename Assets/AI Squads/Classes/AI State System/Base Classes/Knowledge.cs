@@ -25,5 +25,6 @@ namespace AIStateSystem
         [HideInInspector] public Transform follow_target { get; set; }
         [HideInInspector] public CountdownTimer burst_fire_cooldown_timer = new CountdownTimer();
         [HideInInspector] public Character closest_enemy = null;
+        [HideInInspector] public AIController ai_controller = null;
     }
 }

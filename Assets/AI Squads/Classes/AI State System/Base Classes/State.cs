@@ -16,14 +16,14 @@ namespace AIStateSystem
         public List<Transition> transitions = new List<Transition>();
 
 
-        public void UpdateState(StateMachine _state_controller, MonoBehaviour _knowledge)
+        public void UpdateState(StateMachine _state_controller, Knowledge _knowledge)
         {
             ExecuteActions(_knowledge);
             CheckTransitions(_state_controller, _knowledge);
         }
 
 
-        private void ExecuteActions(MonoBehaviour _knowledge)
+        private void ExecuteActions(Knowledge _knowledge)
         {
             foreach (Action action in actions)
             {
@@ -33,7 +33,7 @@ namespace AIStateSystem
         }
 
 
-        private void CheckTransitions(StateMachine _state_controller, MonoBehaviour _knowledge)
+        private void CheckTransitions(StateMachine _state_controller, Knowledge _knowledge)
         {
             foreach (Transition transition in transitions)
             {
