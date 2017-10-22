@@ -8,8 +8,8 @@
 		_Glossiness("Smoothness", Range(0,1)) = 0.5
 		_Metallic("Metallic", 2D) = "white" {}
 		_MetallicMult("Metallic Mult", Range(0,1)) = 0
-		_OccludedColor("Occluded Color", Color) = (1,1,1,1)
-		_RimColor("Rim Color", Color) = (1,1,1,1)
+		_OccludedColor("Occluded Colour", Color) = (1,1,1,1)
+		_RimColor("Rim Colour", Color) = (1,1,1,1)
 		_RimWidth("Rim Width", Range(0,1)) = 0
 	}
 
@@ -19,7 +19,7 @@
 		{
 			Tags{ "Queue" = "Geometry+1" }//offset render Queue
 			ZTest Greater
-			ZWrite Off
+			ZWrite Off//don't write into depth buffer
 
 			CGPROGRAM
 			#pragma vertex vert            
@@ -30,33 +30,29 @@
 			half4 _RimColor;
 			half _RimWidth;
 
+			struct VertInput
+			{
+                float4 pos : POSITION;
+                float3 normal : NORMAL;
+            };
+
 			struct VertOutput
 			{
 				float4 pos : POSITION;
 				half4 colour : COLOR;
-			};
+			};	
 
-			struct Vert
-			{
-                float4 pos : POSITION;
-                float3 normal : NORMAL;
-                float2 texcoord : TEXCOORD0;
-            };
-
-
-			VertOutput vert(Vert v)
+			VertOutput vert(VertInput v)
 			{
 				VertOutput o;
 				o.pos = UnityObjectToClipPos(v.pos);//get clipping
 				
-				float3 viewDir = normalize(v.pos);
-                float dot_product = 1 - dot(v.normal, viewDir);
+                float dot_product = 1 - dot(v.normal, v.pos);
                 o.colour = _OccludedColor + smoothstep(1 - _RimWidth, 1.0, dot_product);           
                 o.colour *= _RimColor;
 
 				return o;
 			}
-
 
 			half4 frag(VertOutput o) : COLOR
 			{	
@@ -90,7 +86,6 @@
 		half _Glossiness;
 		half _MetallicMult;
 		fixed4 _Color;
-
 
 		void surf(Input IN, inout SurfaceOutputStandard o) 
 		{
