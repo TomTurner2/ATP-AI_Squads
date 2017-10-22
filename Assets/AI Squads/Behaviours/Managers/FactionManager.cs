@@ -49,5 +49,11 @@ public class FactionManager : MonoBehaviour
     {
         return _faction_a.rival_factions.Any(rival_faction => rival_faction == _faction_b);
     }
-    
+
+
+    public void RefreshCharacterList()
+    {
+        characters = GameObject.FindObjectsOfType<Character>().ToList();
+        characters.RemoveAll(c => c == null);
+    }
 }
