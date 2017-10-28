@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 
 
-public class AIManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {  
     [SerializeField] float round_end_delay = 2;
     [SerializeField] UnityEvent on_all_dead;

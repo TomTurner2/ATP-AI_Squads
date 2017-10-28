@@ -7,6 +7,7 @@ public struct SceneRefs
     private FactionManager faction_manager_ref;
     private TacticalAssessor tactical_assessor_ref;
     private UIManager ui_manager_ref;
+    private EnemyManager enemy_manager_ref;
 
 
     public FactionManager FactionManager
@@ -41,6 +42,18 @@ public struct SceneRefs
                 ui_manager_ref = GameObject.FindObjectOfType<UIManager>();
 
             return ui_manager_ref;
+        }
+    }
+
+
+    public EnemyManager enemy_manager
+    {
+        get
+        {
+            if (enemy_manager_ref == null)
+                enemy_manager_ref = GameObject.FindObjectOfType<EnemyManager>();
+
+            return enemy_manager_ref;
         }
     }
 }

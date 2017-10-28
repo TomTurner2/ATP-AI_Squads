@@ -18,6 +18,13 @@ public class UIManager : MonoBehaviour
     private List<GameObject> killed_enemies = new List<GameObject>();
 
 
+    void Update()
+    {
+        enemy_count = GameManager.scene_refs.enemy_manager.GetAliveEnemyCount();
+        enemy_counter_text.text = enemy_count.ToString();
+    }
+
+
     public void EnableGameplayUI(bool _enabled)
     {
         gameplay_ui_canvas.SetActive(_enabled);
