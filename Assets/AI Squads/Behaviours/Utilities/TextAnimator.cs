@@ -39,7 +39,6 @@ public class TextAnimator : MonoBehaviour
             return;
         }
 
-
         AnimateText();
     }
 
@@ -62,7 +61,7 @@ public class TextAnimator : MonoBehaviour
 
         if (animated_text.Length > 0)//if theres text to animate
         {
-            animation_timer += Time.deltaTime;
+            animation_timer += Time.unscaledDeltaTime;
 
             if (animation_timer > animation_delay_speed)//after defined delay
             {

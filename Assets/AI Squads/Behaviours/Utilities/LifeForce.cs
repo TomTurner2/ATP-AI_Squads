@@ -14,6 +14,7 @@ public class LifeForce : MonoBehaviour
 
     private int current_health = 100;
 
+
     void Awake()
     {
         CreateEvents();

@@ -16,6 +16,7 @@ public class RayInfo
     public UnityEvent on_ray_miss_event;
 }
 
+
 public class RayCastArray : MonoBehaviour
 {
     [SerializeField] private float update_delay = 0;

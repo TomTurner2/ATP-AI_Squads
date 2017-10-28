@@ -13,6 +13,7 @@ namespace AIStateSystem
 
         [HideInInspector] public List<State> active_states = new List<State>();
 
+
         public void InitStateMachine()
         {
             if (states == null)

@@ -26,7 +26,6 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private UnityEvent on_generation_begin;
 
 
-
     void Start()
     {
         InitLevel();
@@ -37,6 +36,7 @@ public class LevelGenerator : MonoBehaviour
     {
         slide_transform = new GameObject().transform;
         slide_transform.position = Vector3.zero;
+        slide_transform.name = "Level Slider";
         GenerateLevel();
     }
 
@@ -49,7 +49,8 @@ public class LevelGenerator : MonoBehaviour
         Time.timeScale = 0;
         level_generating = true;
 
-        new_level = new GameObject().transform;      
+        new_level = new GameObject().transform;
+        new_level.name = "Generated Level";
         new_level.parent = slide_transform;
         new_level.transform.position = new Vector3(level_size, 0, 0);
 
@@ -59,7 +60,14 @@ public class LevelGenerator : MonoBehaviour
         from_target = slide_transform.position;
         to_target = slide_transform.position + new Vector3(-level_size, 0, 0);
 
-        Vector3 top_left = new Vector3(-(level_size) * 0.25f,0, -(level_size) * 0.25f);
+        CreateMap();
+        on_generation_begin.Invoke();
+    }
+
+
+    private void CreateMap()
+    {
+        Vector3 top_left = new Vector3(-(level_size) * 0.25f, 0, -(level_size) * 0.25f);
         Vector3 top_right = new Vector3(-(level_size) * 0.25f, 0, (level_size) * 0.25f);
         Vector3 bottom_left = new Vector3((level_size) * 0.25f, 0, -(level_size) * 0.25f);
         Vector3 bottom_right = new Vector3((level_size) * 0.25f, 0, (level_size) * 0.25f);
@@ -68,7 +76,6 @@ public class LevelGenerator : MonoBehaviour
         GenerateSegment(top_right_segments, top_right);
         GenerateSegment(bottom_left_segments, bottom_left);
         GenerateSegment(bottom_right_segments, bottom_right);
-        on_generation_begin.Invoke();
     }
 
 
@@ -86,8 +93,8 @@ public class LevelGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
             GenerateLevel();
 
-        if (current_level == null)
-            GenerateLevel();
+        //if (current_level == null)
+        //    GenerateLevel();
 
         if (!level_generating)
             return;
@@ -110,7 +117,9 @@ public class LevelGenerator : MonoBehaviour
         level_generating = false;
 
         if (current_level)
+        {
             Destroy(current_level.gameObject);
+        }
 
         current_level = new_level;
         current_level.parent = slide_transform;

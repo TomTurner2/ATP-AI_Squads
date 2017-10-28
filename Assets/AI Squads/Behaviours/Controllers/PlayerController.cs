@@ -25,13 +25,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] UnityEvent on_jump_event;
     [SerializeField] UnityEvent on_issue_command_event;
     [SerializeField] List<KeyEvent> key_events = new List<KeyEvent>();
+
     private bool first_person = true;
     private float first_person_pointer_length = 0;
+
 
     void Start()
     {
         first_person_pointer_length = current_commander.pointer_length;
     }
+
 
     void Update ()
 	{
@@ -128,7 +131,6 @@ public class PlayerController : MonoBehaviour
         on_sprint_event.Invoke(Input.GetButton("Sprint"));
         on_command_event.Invoke(Input.GetButton("IndicateCommand"));
         on_fire_held_event.Invoke(Input.GetButton("Fire1"));
-
     }
 
 

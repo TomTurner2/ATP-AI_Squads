@@ -8,9 +8,9 @@ using UnityEngine.AI;
 public class AIController : MonoBehaviour
 {
     public NavMeshAgent nav_mesh_agent;
-    public AIStateSystem.StateMachine ai_state_machine;
+    public StateMachine ai_state_machine;
     public Character controlled_character;
-    public AIStateSystem.Knowledge knowledge;
+    public Knowledge knowledge;
     public Gun weapon;
 
 

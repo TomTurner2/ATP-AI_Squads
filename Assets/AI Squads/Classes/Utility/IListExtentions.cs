@@ -20,8 +20,8 @@ public static class IListExtensions
 
     public static void Swap<T>(this IList<T> _list, int _index_a, int _index_b)
     {
-        T tmp = _list[_index_a];
+        T temp = _list[_index_a];
         _list[_index_a] = _list[_index_b];
-        _list[_index_b] = tmp;
+        _list[_index_b] = temp;
     }
 }

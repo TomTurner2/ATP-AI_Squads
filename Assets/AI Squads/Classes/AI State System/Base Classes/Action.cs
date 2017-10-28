@@ -10,7 +10,8 @@ namespace AIStateSystem
     public abstract class Action : ScriptableObject
     {
         [SerializeField] List<Condition> conditional_requirements = new List<Condition>();
-        public abstract void Execute(Knowledge _controller);
+
+        public virtual void Execute(Knowledge _controller){}
 
         public bool CanExecute(Knowledge _controller)
         {

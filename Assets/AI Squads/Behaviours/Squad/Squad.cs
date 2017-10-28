@@ -147,15 +147,13 @@ public class Squad : MonoBehaviour
         AIController last_formation_leader = ai_formation_leader;
 
         SetFormation(current_formation);
-        CheckSquadWipe();
+        Invoke("CheckSquadWipe", 1);//delay check incase whole squad dies at exact same moment
 
         if (last_formation_leader == null)
             return;
 
         if (_death_game_object == last_formation_leader.gameObject)
             ai_formation_leader.knowledge.waypoint = last_formation_leader.knowledge.waypoint;
-
-
     }
 
 

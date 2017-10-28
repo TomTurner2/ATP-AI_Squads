@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class LineOfSightTest : MonoBehaviour
 {
-    Transform target = null;
+    private Transform target = null;
+
     [SerializeField] List<Collider> ignore;
+
 
 	void Start ()
     {
@@ -48,11 +50,7 @@ public class LineOfSightTest : MonoBehaviour
                 Gizmos.color = Color.red;
             }
         }
-
-
-        Gizmos.DrawLine(transform.position, target.position);
-            
+        Gizmos.DrawLine(transform.position, target.position);        
     }
-
 
 }

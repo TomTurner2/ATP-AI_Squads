@@ -8,6 +8,7 @@ public class LineFormation : Formation
     [SerializeField] float spacing_multiplier = 1;
     [SerializeField] float character_radius = 0.5f;
 
+
     public override List<Transform> GetFormation(int _member_count)
     {
         if (_member_count <= 0)

@@ -7,10 +7,10 @@ public class DamageFlash : MonoBehaviour
 {
     public float flash_speed = 1;
     public float flash_ammount = 0.22f;
+
     [SerializeField] PostProcessingProfile camera_effects;
 	
 	
-	// Update is called once per frame
 	void Update ()
 	{
 	    if (camera_effects == null)

@@ -20,7 +20,6 @@ namespace AIStateSystem
             }
 
             //TODO override auto crouch
-            //TODO find optimal engagement position and set waypoint
 
             FireWeapon(ref _controller);
         }

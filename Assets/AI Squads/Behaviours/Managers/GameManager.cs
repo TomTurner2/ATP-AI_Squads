@@ -7,12 +7,13 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;//singleton
 
+    public static int score_per_kill = 50;
     public static SceneRefs scene_refs = new SceneRefs();
 
 
     public void TriggerGameOver()
     {
-        //show game over and score screen
+        //show game over
         scene_refs.ui_manager.EnableGameplayUI(false);
         scene_refs.ui_manager.EnableGameOverUI(true);
     }

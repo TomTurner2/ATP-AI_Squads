@@ -9,9 +9,7 @@ namespace AIStateSystem
 {
     [Serializable][CreateAssetMenu(menuName = "AIStateSystem/State")]
     public class State : ScriptableObject
-    {
-        [Tooltip("If the state will cancel other states or return to previous one")]
-     
+    {     
         public List<Action> actions = new List<Action>();
         public List<Transition> transitions = new List<Transition>();
 

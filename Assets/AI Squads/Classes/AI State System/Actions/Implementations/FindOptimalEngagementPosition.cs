@@ -9,7 +9,6 @@ public class FindOptimalEngagementPosition : Action
 {
     public override void Execute(Knowledge _controller)
     {
-
         if (_controller.ai_controller.controlled_character.dead)
             return;
 

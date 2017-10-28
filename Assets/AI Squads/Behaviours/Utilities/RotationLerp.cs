@@ -33,7 +33,6 @@ public class RotationLerp : MonoBehaviour
             rotating = false;
             return;
         }
-
        
         transform.rotation = Quaternion.Slerp(from_rotation, target_rotation, t);
     }
