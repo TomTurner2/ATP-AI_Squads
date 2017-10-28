@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/AI Squads/Scenes/Main Menu.unity
+    guid: 189f709f1c0b6914b9c710b583b09425
+  - enabled: 1
+    path: Assets/AI Squads/Scenes/Demo.unity
+    guid: e0244dfa046bdd647aba9d42bcc39d34
