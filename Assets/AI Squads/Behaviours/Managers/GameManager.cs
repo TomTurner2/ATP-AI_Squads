@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,16 +13,21 @@ public class GameManager : MonoBehaviour
     public void TriggerGameOver()
     {
         //show game over and score screen
-
+        scene_refs.ui_manager.EnableGameplayUI(false);
+        scene_refs.ui_manager.EnableGameOverUI(true);
     }
 
 
-    public void Retry()
+    public void PlayAgain()
     {
-        //reload level
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 
     void Awake()

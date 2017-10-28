@@ -29,6 +29,12 @@ public class LevelGenerator : MonoBehaviour
 
     void Start()
     {
+        InitLevel();
+    }
+
+
+    void InitLevel()
+    {
         slide_transform = new GameObject().transform;
         slide_transform.position = Vector3.zero;
         GenerateLevel();
@@ -110,5 +116,11 @@ public class LevelGenerator : MonoBehaviour
         current_level.parent = slide_transform;
         new_level = null;
         on_generation_end.Invoke();
+    }
+
+
+    private void OnLevelWasLoaded(int level)
+    {
+        InitLevel();
     }
 }

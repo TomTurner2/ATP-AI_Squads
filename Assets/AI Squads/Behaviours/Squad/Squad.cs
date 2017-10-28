@@ -161,7 +161,7 @@ public class Squad : MonoBehaviour
 
     private void CheckSquadWipe()
     {
-        if (squad_members.Any(s => !s.controlled_character.dead))
+        if (!squad_members.Any(s => !s.controlled_character.dead))
         {
             on_squad_wipe_event.Invoke();//trigger event if no squad members are alive
         }
