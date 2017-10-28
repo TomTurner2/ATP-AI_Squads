@@ -161,6 +161,5 @@ public class SquadCommander : MonoBehaviour
     {
         Gizmos.color = Color.cyan;  
         Gizmos.DrawLine(transform.position, transform.forward * pointer_length);
-        UnityEditor.Handles.DrawWireDisc(transform.forward * pointer_length, Vector3.up, pointer_radius);
     }
 }

@@ -37,6 +37,7 @@ public class Squad : MonoBehaviour
 
     private void Update()
     {
+        CheckSquadWipe();
         HandleFormationBreakForCover();
     }
 

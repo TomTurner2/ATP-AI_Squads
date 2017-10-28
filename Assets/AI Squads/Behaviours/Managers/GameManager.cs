@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        Cursor.visible = true;
         SceneManager.LoadScene(0);
     }
 
