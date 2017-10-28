@@ -11,6 +11,7 @@ public class AIManager : MonoBehaviour
     [SerializeField] float round_end_delay = 2;
     [SerializeField] UnityEvent on_all_dead;
     [SerializeField] CustomEvents.AIControllerEvent on_enemy_added;
+    [SerializeField] CustomEvents.IntEvent on_enemies_refreshed;
     [SerializeField] Faction enemy_faction;
 
     private List<AIController> ai = new List<AIController>();
@@ -25,10 +26,10 @@ public class AIManager : MonoBehaviour
 
     void Update()
     {
-        if (EnemyRemains())
+        if (EnemyRemains())//check if all enemies are dead
             return;
 
-        Invoke("NextLevelDelay", round_end_delay);
+        Invoke("NextLevelDelay", round_end_delay);//next level if no enemies left
         restart = true;
     }
 
@@ -44,7 +45,8 @@ public class AIManager : MonoBehaviour
         ai = FindObjectsOfType<AIController>().ToList();
         ai.RemoveAll(c => c == null);//clean up garbage references
         ai.RemoveAll(c => c.controlled_character.faction != enemy_faction);//remove non enemy controllers
-        ai.ForEach(ai => on_enemy_added.Invoke(ai));//enemy added event for each element
+        ai.ForEach(a => on_enemy_added.Invoke(a));//enemy added event for each element
+        on_enemies_refreshed.Invoke(GetAliveEnemyCount());//broadcast how many alive enemies in level
     }
 
 
@@ -55,9 +57,9 @@ public class AIManager : MonoBehaviour
     }
 
 
-    public int GetEnemyCount()
-    {
-        return ai.Count;
+    public int GetAliveEnemyCount()
+    {     
+        return ai.Count(a => !a.controlled_character.dead);
     }
 
 
@@ -70,7 +72,7 @@ public class AIManager : MonoBehaviour
                 continue;
 
             ai_controller.enabled = _enabled;
-            ai_controller.nav_mesh_agent.enabled = _enabled;
+            ai_controller.nav_mesh_agent.enabled = _enabled;//set ai behaviours on or off
         }
     }
 
@@ -82,7 +84,7 @@ public class AIManager : MonoBehaviour
             if (ai_controller == null)
                 continue;
 
-            if (ai_controller.nav_mesh_agent.enabled)
+            if (ai_controller.nav_mesh_agent.enabled)//update waypoint to local positions
                 ai_controller.nav_mesh_agent.destination = ai_controller.transform.localPosition;
         }
     }
