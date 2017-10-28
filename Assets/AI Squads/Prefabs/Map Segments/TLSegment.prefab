@@ -862,6 +862,7 @@ GameObject:
   - component: {fileID: 33180223144026480}
   - component: {fileID: 23713357183829884}
   - component: {fileID: 208052115579311330}
+  - component: {fileID: 65767580414461850}
   m_Layer: 0
   m_Name: High and low cover
   m_TagString: Untagged
@@ -1175,6 +1176,7 @@ GameObject:
   - component: {fileID: 33703528688457616}
   - component: {fileID: 23523515266285826}
   - component: {fileID: 208631853215255310}
+  - component: {fileID: 65497940344195536}
   m_Layer: 0
   m_Name: double low cover
   m_TagString: Untagged
@@ -1238,6 +1240,7 @@ GameObject:
   - component: {fileID: 33835438728903092}
   - component: {fileID: 23559563502408664}
   - component: {fileID: 208480736074261346}
+  - component: {fileID: 65245943137185660}
   m_Layer: 0
   m_Name: Fortified_Wall_1D (32)
   m_TagString: Untagged
@@ -1286,6 +1289,7 @@ GameObject:
   - component: {fileID: 33468818899309232}
   - component: {fileID: 23759312948490002}
   - component: {fileID: 208192263182859482}
+  - component: {fileID: 65569408484060982}
   m_Layer: 0
   m_Name: Fortified_Wall_1D (14)
   m_TagString: Untagged
@@ -2546,7 +2550,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1053407311194974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.6056824, y: 0, z: -14.080887}
+  m_LocalPosition: {x: 0.099990845, y: 0.00000011920929, z: -5.261444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4497549533625782}
@@ -3199,6 +3203,54 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4493359, y: 2.3063328, z: 2.2046895}
   m_Center: {x: 0.27533513, y: 0.6531664, z: 0.010923327}
+--- !u!65 &65245943137185660
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1802248434063660}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 10.007492, z: 9.000003}
+  m_Center: {x: -0.000002503395, y: 0.47038436, z: 0.000005245209}
+--- !u!65 &65497940344195536
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1749505457324168}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 10.007492, z: 9.000003}
+  m_Center: {x: -0.00000059604656, y: 0.47038436, z: 0.000001072884}
+--- !u!65 &65569408484060982
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864091870196710}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 10.007492, z: 9.000003}
+  m_Center: {x: -0.00000059604656, y: 0.47038436, z: 0.000004291535}
+--- !u!65 &65767580414461850
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1590219794373638}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 10.007492, z: 9.000003}
+  m_Center: {x: -0.00000059604656, y: 0.47038436, z: 0.0000014305118}
 --- !u!82 &82064435265665524
 AudioSource:
   m_ObjectHideFlags: 1

@@ -28,4 +28,7 @@ public class CustomEvents
 
     [System.Serializable]
     public class SpriteSwapEvent : UnityEvent<Sprite> { }
+
+    [System.Serializable]
+    public class AIControllerEvent : UnityEvent<AIController> { }
 }

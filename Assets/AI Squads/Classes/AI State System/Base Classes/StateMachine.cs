@@ -22,7 +22,7 @@ namespace AIStateSystem
         }
 
 
-        public virtual void UpdateState(Knowledge _knowledge)
+        public void UpdateState(Knowledge _knowledge)
         {
             active_states.Last().UpdateState(this, _knowledge);
         }

@@ -5,14 +5,17 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
+
 public class AIManager : MonoBehaviour
-{
+{  
+    [SerializeField] float round_end_delay = 2;
+    [SerializeField] UnityEvent on_all_dead;
+    [SerializeField] CustomEvents.AIControllerEvent on_enemy_added;
+    [SerializeField] Faction enemy_faction;
+
     private List<AIController> ai = new List<AIController>();
-    [SerializeField] private float round_end_delay = 2;
-    [SerializeField] private UnityEvent on_all_dead;
-    [SerializeField] private Faction enemy_faction;
-    private int death_count = 0;
     private bool restart = false;
+
 
     void Start()
     {
@@ -22,7 +25,7 @@ public class AIManager : MonoBehaviour
 
     void Update()
     {
-        if (ai.Any(a => a.controlled_character.dead == false) || ai.Count <= 0 || restart == true)
+        if (EnemyRemains())
             return;
 
         Invoke("NextLevelDelay", round_end_delay);
@@ -30,36 +33,18 @@ public class AIManager : MonoBehaviour
     }
 
 
-    public void RefreshList()
+    bool EnemyRemains()
     {
-        ai = GameObject.FindObjectsOfType<AIController>().ToList();
-
-        ai.RemoveAll(c => c == null);
-        ai.RemoveAll(c => c.controlled_character.faction != enemy_faction);
-        death_count = ai.Count;
-
-        foreach (AIController ai_controller in ai)
-        {
-            LifeForce life_force = ai_controller.GetComponent<LifeForce>() ??
-                                   ai_controller.GetComponentInChildren<LifeForce>();
-
-            if (life_force == null)
-                return;
-
-            life_force.on_death_event.AddListener(OnEnemyDeath);
-        }
+        return (ai.Any(a => !a.controlled_character.dead) || ai.Count <= 0 || restart);
     }
 
 
-    public void OnEnemyDeath(GameObject _victim)
+    public void RefreshList()
     {
-        --death_count;
-
-        if (death_count <= 0)
-        {
-            //Invoke("NextLevelDelay", round_end_delay);
-            death_count = 0;
-        }
+        ai = FindObjectsOfType<AIController>().ToList();
+        ai.RemoveAll(c => c == null);//clean up garbage references
+        ai.RemoveAll(c => c.controlled_character.faction != enemy_faction);//remove non enemy controllers
+        ai.ForEach(ai => on_enemy_added.Invoke(ai));//enemy added event for each element
     }
 
 
@@ -67,6 +52,12 @@ public class AIManager : MonoBehaviour
     {
         on_all_dead.Invoke();
         restart = false;
+    }
+
+
+    public int GetEnemyCount()
+    {
+        return ai.Count;
     }
 
 

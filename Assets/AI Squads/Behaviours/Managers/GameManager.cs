@@ -8,6 +8,22 @@ public class GameManager : MonoBehaviour
 
     public static SceneRefs scene_refs = new SceneRefs();
 
+
+    public void TriggerGameOver()
+    {
+        //show game over and score screen
+
+    }
+
+
+    public void Retry()
+    {
+        //reload level
+
+    }
+
+
+
     void Awake()
     {
         if (instance == null)

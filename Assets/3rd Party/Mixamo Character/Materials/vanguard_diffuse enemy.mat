@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: vanguard_diffuse enemy
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 48c0deff7fa8d134db4d6a96944d22f3, type: 3}
   m_ShaderKeywords: _DETAIL_MULX2 _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -42,8 +42,16 @@ Material:
         m_Texture: {fileID: 2800000, guid: 5f005c3a0aea12b45b0909f02e06f117, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Metallic:
+        m_Texture: {fileID: 2800000, guid: 42f0bf4d8942faa48acf2598fc9e79ce, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 471689bfd81445a47928a673066ef3f4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -63,9 +71,11 @@ Material:
     - _Glossiness: 0.22
     - _GlossyReflections: 1
     - _Metallic: 0.5
+    - _MetallicMult: 0.708
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RimWidth: 0.325
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -74,3 +84,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 0.2794118, b: 0.2794118, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OccludedColor: {r: 1, g: 0.4044118, b: 0.4044118, a: 1}
+    - _RimColor: {r: 1, g: 0.30147058, b: 0.30147058, a: 1}

@@ -37,7 +37,23 @@ GameObject:
   - component: {fileID: 4796704567977602}
   - component: {fileID: 114694079235944716}
   m_Layer: 0
-  m_Name: Enemy Manager
+  m_Name: Faction Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1400136250905952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4076105141376848}
+  - component: {fileID: 114290142474871498}
+  m_Layer: 0
+  m_Name: Level Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +70,23 @@ GameObject:
   - component: {fileID: 114616134768884406}
   - component: {fileID: 114841413091541448}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: Event System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1596188744336542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4009485706986544}
+  - component: {fileID: 114564242765402446}
+  m_Layer: 0
+  m_Name: AI Enemy Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,6 +107,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!4 &4009485706986544
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596188744336542}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4855702309685508}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4051764272361592
 Transform:
   m_ObjectHideFlags: 1
@@ -87,6 +132,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4855702309685508}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4076105141376848
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400136250905952}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4855702309685508}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4597802213553438
 Transform:
@@ -127,9 +185,143 @@ Transform:
   - {fileID: 4796704567977602}
   - {fileID: 4597802213553438}
   - {fileID: 4051764272361592}
+  - {fileID: 4076105141376848}
+  - {fileID: 4009485706986544}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114290142474871498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400136250905952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50af707ca097dc740ab43cf388ad02e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level_size: 60
+  slide_speed: 1
+  top_left_segments:
+  - {fileID: 1053407311194974, guid: fd246e9b202afb34f8fef07d5bd1b9a2, type: 2}
+  - {fileID: 1351413587707692, guid: cd703b391d93d504bb61fdf763bec3a3, type: 2}
+  top_right_segments:
+  - {fileID: 1453486255830886, guid: 149cebd9426f6f44c80b4117362b45e5, type: 2}
+  - {fileID: 1257414298451438, guid: a29ee23cb01a07c419ada8976524d7f0, type: 2}
+  bottom_left_segments:
+  - {fileID: 1053407311194974, guid: fd246e9b202afb34f8fef07d5bd1b9a2, type: 2}
+  - {fileID: 1351413587707692, guid: cd703b391d93d504bb61fdf763bec3a3, type: 2}
+  - {fileID: 1617076536600490, guid: 3d684368ab87a5941b9f0a40c8bb9be6, type: 2}
+  - {fileID: 1942620934407012, guid: c7686fb189cedea438c492e8ee39db7b, type: 2}
+  bottom_right_segments:
+  - {fileID: 1453486255830886, guid: 149cebd9426f6f44c80b4117362b45e5, type: 2}
+  - {fileID: 1930745196453606, guid: af6c1deb6a653434b829c8f7ae12392a, type: 2}
+  on_generation_end:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114564242765402446}
+        m_MethodName: RefreshList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 114564242765402446}
+        m_MethodName: EnableAI
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 114694079235944716}
+        m_MethodName: RefreshCharacterList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 114564242765402446}
+        m_MethodName: UpdateDestinations
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  on_generation_begin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: Rotate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 90
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114564242765402446}
+        m_MethodName: EnableAI
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &114564242765402446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596188744336542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb87cecc044cd8343acf3027acb64892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  round_end_delay: 2
+  on_all_dead:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114290142474871498}
+        m_MethodName: GenerateLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  enemy_faction: {fileID: 11400000, guid: e3b983ccc5dba1d4b88d5209e07308f5, type: 2}
 --- !u!114 &114616134768884406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,8 +347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb696d74673986a4c8b881af4393a143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 0}
 --- !u!114 &114714501118395278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,6 +361,7 @@ MonoBehaviour:
   weight_modules:
   - {fileID: 11400000, guid: 0ce94e40f4fd31444bb17fc5e7dcb7b4, type: 2}
   - {fileID: 11400000, guid: ede46cb871049654a9fe5e00ad367020, type: 2}
+  - {fileID: 11400000, guid: b6dcf42bbe641c24c90175e778df175b, type: 2}
   debug: 1
   debug_last_sample: []
 --- !u!114 &114841413091541448

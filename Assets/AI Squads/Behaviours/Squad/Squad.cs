@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Squad : MonoBehaviour
 {
     [SerializeField] Faction squad_faction = null;
     [SerializeField] SquadCommander squad_commander = null;
     [SerializeField] List<AIController> squad_members = new List<AIController>();
+    [SerializeField] private UnityEvent on_squad_wipe_event;
 
     private List<Transform> current_follow_targets = null;
     private AIController ai_formation_leader = null;
@@ -145,15 +147,23 @@ public class Squad : MonoBehaviour
         AIController last_formation_leader = ai_formation_leader;
 
         SetFormation(current_formation);
-
-        //if last leader died the new leader should continue to the waypoint
+        CheckSquadWipe();
 
         if (last_formation_leader == null)
             return;
 
         if (_death_game_object == last_formation_leader.gameObject)
-        {
             ai_formation_leader.knowledge.waypoint = last_formation_leader.knowledge.waypoint;
+
+
+    }
+
+
+    private void CheckSquadWipe()
+    {
+        if (squad_members.Any(s => !s.controlled_character.dead))
+        {
+            on_squad_wipe_event.Invoke();//trigger event if no squad members are alive
         }
     }
 
@@ -164,12 +174,12 @@ public class Squad : MonoBehaviour
         last_radius = _radius;
 
         DistributeCoverToSquad(GameManager.scene_refs.tactical_assessor.
-            FindOptimalCoverInArea(_waypoint_pos, _radius, squad_faction));
+            FindOptimalCoverInArea(_waypoint_pos, _radius, squad_faction));//find cover at waypoint
 
         if (current_formation != null)
-            SetFormation(current_formation);
+            SetFormation(current_formation);//assign formation
 
-        if (current_follow_targets == null || current_follow_targets.Count <= 0)
+        if (current_follow_targets == null || current_follow_targets.Count <= 0)//if no formation
         {
             HandleNoFormation(_waypoint_pos, _radius);
             return;
@@ -179,7 +189,7 @@ public class Squad : MonoBehaviour
             return;
 
         ai_formation_leader.knowledge.follow_target = null;
-        ai_formation_leader.knowledge.waypoint = _waypoint_pos;
+        ai_formation_leader.knowledge.waypoint = _waypoint_pos;//reset last formation leader
     }
 
 
@@ -190,9 +200,7 @@ public class Squad : MonoBehaviour
         Vector3 target_pos = _waypoint_pos;
 
         if (follow_commander)
-        {
             target_pos = squad_commander.transform.position;
-        }
 
         //if no formation and not going to cover, give them a random poisiton in the area to travel to
         foreach (AIController squad_member in squad_members)
