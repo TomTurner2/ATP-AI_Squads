@@ -11,7 +11,20 @@ public class GameManager : MonoBehaviour
     public static SceneRefs scene_refs = new SceneRefs();
 
 
-    public void TriggerGameOver()
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Cursor.visible = true;
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            TriggerGameOver();
+    }
+
+
+    public static void TriggerGameOver()
     {
         //show game over
         scene_refs.ui_manager.EnableGameplayUI(false);
@@ -19,13 +32,13 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void PlayAgain()
+    public static void PlayAgain()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 
-    public void ReturnToMainMenu()
+    public static void ReturnToMainMenu()
     {
         Cursor.visible = true;
         SceneManager.LoadScene(0);

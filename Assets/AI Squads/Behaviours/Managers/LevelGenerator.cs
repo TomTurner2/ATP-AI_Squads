@@ -90,11 +90,11 @@ public class LevelGenerator : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKey(KeyCode.G))
             GenerateLevel();
 
-        //if (current_level == null)
-        //    GenerateLevel();
+        if (current_level == null)
+            GenerateLevel();
 
         if (!level_generating)
             return;
@@ -118,7 +118,7 @@ public class LevelGenerator : MonoBehaviour
 
         if (current_level)
         {
-            Destroy(current_level.gameObject);
+            DestroyImmediate(current_level.gameObject);
         }
 
         current_level = new_level;
