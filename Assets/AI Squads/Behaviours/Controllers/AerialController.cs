@@ -11,18 +11,18 @@ public class AerialController : MonoBehaviour
     [SerializeField] List<KeyEvent> key_events = new List<KeyEvent>();
 
 
-    void Start()
+    private void Start()
     {
         Cursor.visible = false;
     }
 
 
-	void Update ()
+	private void Update ()
 	{
 	    if (EventSystem.current.IsPointerOverGameObject())
 	    {
-	        on_command_event.Invoke(false);
-            Cursor.visible = true;
+	        on_command_event.Invoke(false);//if over ui element disable command
+            Cursor.visible = true;//enable cursor
         }
 	    else
 	    {
@@ -34,7 +34,7 @@ public class AerialController : MonoBehaviour
 	}
 
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         CheckLookTarget();
     }
@@ -43,14 +43,14 @@ public class AerialController : MonoBehaviour
     private void CheckLookTarget()
     {
         RaycastHit hit;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//ray from mouse position
 
         if (Physics.Raycast(ray, out hit))
             update_look_target.Invoke(hit.point);
     }
 
 
-    void ProcessKeyInputs()
+    private void ProcessKeyInputs()
     {
         foreach (KeyEvent key in key_events)
         {

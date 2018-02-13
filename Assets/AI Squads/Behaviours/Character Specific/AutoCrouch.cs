@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
 
-[FlagsAttribute]
+
+[Flags]
 public enum Directions
 {
     NONE = 0,
@@ -18,9 +19,11 @@ public enum Directions
     RIGHT_DOWN = 128,
 }
 
+
 public class AutoCrouch : MonoBehaviour
 {
     [SerializeField] CustomEvents.BooleanEvent on_crouch_event;
+
     private  BitVector32 detections = new BitVector32(0);
 
 

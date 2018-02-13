@@ -17,7 +17,7 @@ public class DamageFlash : MonoBehaviour
 	        return;
 
 	    var vinette_settings = camera_effects.vignette.settings;
-        vinette_settings.intensity = Mathf.Abs(Mathf.Sin(Time.realtimeSinceStartup) * flash_ammount);
+        vinette_settings.intensity = Mathf.Abs(Mathf.Sin(Time.realtimeSinceStartup) * flash_ammount);//flash vinette using sine
 	    camera_effects.vignette.settings = vinette_settings;
 	}
 
@@ -26,6 +26,6 @@ public class DamageFlash : MonoBehaviour
     {
         var vinette_settings = camera_effects.vignette.settings;
         vinette_settings.intensity = 0;
-        camera_effects.vignette.settings = vinette_settings;
+        camera_effects.vignette.settings = vinette_settings;//post processing is an asset so needs to be reset
     }
 }

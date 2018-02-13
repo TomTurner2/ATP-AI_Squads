@@ -16,13 +16,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] SquadCommander current_commander;
     [SerializeField] Camera first_person_camera;
     [SerializeField] Camera Ortho_camera;
+
     [SerializeField] CustomEvents.Vector3Event update_look_target;
     [SerializeField] CustomEvents.Vector3Event on_move_event;
     [SerializeField] CustomEvents.BooleanEvent on_sprint_event;
     [SerializeField] CustomEvents.BooleanEvent on_command_event;
     [SerializeField] CustomEvents.BooleanEvent on_fire_held_event;
+
     [SerializeField] UnityEvent on_jump_event;
     [SerializeField] UnityEvent on_issue_command_event;
+
     [SerializeField] List<KeyEvent> key_events = new List<KeyEvent>();
 
     private bool first_person = true;

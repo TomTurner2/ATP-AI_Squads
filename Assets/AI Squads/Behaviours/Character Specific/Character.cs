@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(MoveRigidbody))]
 public class Character : MonoBehaviour
 {
@@ -29,18 +30,24 @@ public class Character : MonoBehaviour
     private Vector3 previous_position;
 
 
-    void Start ()
+    private void Start ()
+    {
+        Init();
+        CheckReferences();
+	}
+
+
+    private void Init()
     {
         dead = false;
         current_move_speed = walk_speed;
         move_dir = Vector3.zero;
         sprinting = false;
         jumping = false;
-        CheckReferences();
-	}
+    }
 
 
-    void CheckReferences()
+    private void CheckReferences()
     {
         if (character_mover == null)
             character_mover = GetComponent<MoveRigidbody>();//in case not manually assigned
@@ -50,7 +57,7 @@ public class Character : MonoBehaviour
     }
 
 
-    void CheckSpeed()
+    private void CheckSpeed()
     {
         Vector3 move = transform.position - previous_position;
         float speed = move.magnitude * current_move_speed / Time.deltaTime;
@@ -59,14 +66,14 @@ public class Character : MonoBehaviour
     }
 
 
-    void Update()
+    private void Update()
     {
         CheckSpeed();
         ProcessStance();
     }
 
 
-	void FixedUpdate ()
+	private void FixedUpdate ()
     {
 	   MoveCharacter();
 	}

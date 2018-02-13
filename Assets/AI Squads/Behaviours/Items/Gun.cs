@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private GunStats stats;
+    [SerializeField] GunStats stats;
 
     [Header("Visuals")]
-    [SerializeField] private Animator gun_animator;
-    [SerializeField] private ParticleSystem muzzle_flash;
-    [SerializeField] private Transform muzzle_position;
-    [SerializeField] private GameObject bullet_prefab;
+    [SerializeField] Animator gun_animator;
+    [SerializeField] ParticleSystem muzzle_flash;
+    [SerializeField] Transform muzzle_position;
+    [SerializeField] GameObject bullet_prefab;
 
     [Header("Audio")]
-    [SerializeField] private AudioSource audio_source;
-    [SerializeField] private AudioClip gun_shot_clip;  
-    [SerializeField] private float min_pitch = 1;
-    [SerializeField] private float max_pitch = 2;
+    [SerializeField] AudioSource audio_source;
+    [SerializeField] AudioClip gun_shot_clip;  
+    [SerializeField] float min_pitch = 1;
+    [SerializeField] float max_pitch = 2;
 
     public bool firing_weapon { get; set; }
 
     private CountdownTimer fire_rate_timer = new CountdownTimer();
 
 
-    void Start()
+    private void Start()
     {
         if (stats == null)
             stats = new GunStats();
@@ -37,7 +37,7 @@ public class Gun : MonoBehaviour
         if (audio_source == null || gun_shot_clip == null)
             return false;
 
-        if (!fire_rate_timer.CheckFinished())//if gun not ready for next shot: bail
+        if (!fire_rate_timer.CheckFinished())//if gun not ready for next shot: leave
             return false;
 
         fire_rate_timer.Reset();//start the fire rate cooldown
@@ -55,7 +55,7 @@ public class Gun : MonoBehaviour
     }
 
 
-    void Update()
+    private void Update()
     {
         fire_rate_timer.UpdateTimer();
 
@@ -95,7 +95,6 @@ public class Gun : MonoBehaviour
         if (target_life != null)
             target_life.Damage(stats.damage, hit);//if hit something with life, apply damage
 
-        //TODO add impact effect
     }
 
 
