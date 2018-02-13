@@ -6,12 +6,12 @@ using UnityEngine.Events;
 public class SquadCommander : MonoBehaviour
 {
     [SerializeField] Squad owned_squad;
-
     [SerializeField] List<Formation> formations;
 
     [Space][Header("Indicator")]
     public float pointer_length = 100;
     public float pointer_radius = 5.0f;
+
     [SerializeField] Transform indicator;
     [SerializeField] ProjectorScaler projector_scaler;
 
@@ -60,7 +60,7 @@ public class SquadCommander : MonoBehaviour
 
     public void UpdateHitLocation(Vector3 _current_look)//current look position from external source
     {
-        var dist = (transform.position - _current_look).sqrMagnitude;
+        float dist = (transform.position - _current_look).sqrMagnitude;
         if (dist > pointer_length * pointer_length)//if in range
             return;
 
@@ -88,10 +88,7 @@ public class SquadCommander : MonoBehaviour
 
     private void PlayCommandSound()
     {
-        if (command_sound_source == null)
-            return;
-
-        if (command_sound == null)
+        if (command_sound_source == null || command_sound == null)
             return;
 
         command_sound_source.PlayOneShot(command_sound);//play sound
@@ -148,12 +145,6 @@ public class SquadCommander : MonoBehaviour
         }
 
         hold_fire_event.Invoke();
-    }
-
-
-    public void ToggleFreeEngage()
-    {
-
     }
 
 

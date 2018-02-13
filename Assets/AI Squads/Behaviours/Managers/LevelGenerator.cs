@@ -18,12 +18,15 @@ public class LevelGenerator : MonoBehaviour
     private Transform new_level;
     private bool level_generating = false;
 
-    [SerializeField] private List<GameObject> top_left_segments = new List<GameObject>();
-    [SerializeField] private List<GameObject> top_right_segments = new List<GameObject>();
-    [SerializeField] private List<GameObject> bottom_left_segments = new List<GameObject>();
-    [SerializeField] private List<GameObject> bottom_right_segments = new List<GameObject>();
-    [SerializeField] private UnityEvent on_generation_end;
-    [SerializeField] private UnityEvent on_generation_begin;
+    [Header("Segment Prefabs")]
+    [SerializeField] List<GameObject> top_left_segments = new List<GameObject>();
+    [SerializeField] List<GameObject> top_right_segments = new List<GameObject>();
+    [SerializeField] List<GameObject> bottom_left_segments = new List<GameObject>();
+    [SerializeField] List<GameObject> bottom_right_segments = new List<GameObject>();
+    [Space]
+
+    [SerializeField] UnityEvent on_generation_end;
+    [SerializeField] UnityEvent on_generation_begin;
 
 
     void Start()
@@ -49,7 +52,7 @@ public class LevelGenerator : MonoBehaviour
         Time.timeScale = 0;
         level_generating = true;
 
-        new_level = new GameObject().transform;
+        new_level = new GameObject().transform;//new gameobject is the same as instantiating
         new_level.name = "Generated Level";
         new_level.parent = slide_transform;
         new_level.transform.position = new Vector3(level_size, 0, 0);
@@ -67,7 +70,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void CreateMap()
     {
-        Vector3 top_left = new Vector3(-(level_size) * 0.25f, 0, -(level_size) * 0.25f);
+        Vector3 top_left = new Vector3(-(level_size) * 0.25f, 0, -(level_size) * 0.25f);//corner coordinates
         Vector3 top_right = new Vector3(-(level_size) * 0.25f, 0, (level_size) * 0.25f);
         Vector3 bottom_left = new Vector3((level_size) * 0.25f, 0, -(level_size) * 0.25f);
         Vector3 bottom_right = new Vector3((level_size) * 0.25f, 0, (level_size) * 0.25f);
@@ -81,16 +84,16 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateSegment(List<GameObject> _map_segments, Vector3 _position)
     {
-        _map_segments.Shuffle();
+        _map_segments.Shuffle();//randomise
         var new_segment = Instantiate(_map_segments.First());
         new_segment.transform.position = new_level.position + _position;
         new_segment.transform.parent = new_level;
     }
 
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKey(KeyCode.G))
+        if (Input.GetKey(KeyCode.G))//debug
             GenerateLevel();
 
         if (current_level == null)
@@ -99,10 +102,10 @@ public class LevelGenerator : MonoBehaviour
         if (!level_generating)
             return;
 
-        t += Time.unscaledDeltaTime * slide_speed;
+        t += Time.unscaledDeltaTime * slide_speed;//unscaled so it doesn't pause
         if (t >= 1)
         {
-            EndGeneration();
+            EndGeneration();//end generation when lerp is finished
             return;
         }
 
@@ -118,7 +121,7 @@ public class LevelGenerator : MonoBehaviour
 
         if (current_level)
         {
-            DestroyImmediate(current_level.gameObject);
+            DestroyImmediate(current_level.gameObject);//destroy old level
         }
 
         current_level = new_level;
@@ -128,7 +131,7 @@ public class LevelGenerator : MonoBehaviour
     }
 
 
-    private void OnLevelWasLoaded(int level)
+    private void OnLevelWasLoaded(int _level)
     {
         InitLevel();
     }

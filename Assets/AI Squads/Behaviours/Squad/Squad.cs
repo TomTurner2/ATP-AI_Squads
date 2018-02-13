@@ -10,17 +10,20 @@ public class Squad : MonoBehaviour
     [SerializeField] Faction squad_faction = null;
     [SerializeField] SquadCommander squad_commander = null;
     [SerializeField] List<AIController> squad_members = new List<AIController>();
-    [SerializeField] private UnityEvent on_squad_wipe_event;
+    [SerializeField] UnityEvent on_squad_wipe_event;
 
     private List<Transform> current_follow_targets = null;
     private AIController ai_formation_leader = null;
     private GameObject current_formation_leader = null;
     private Formation current_formation = null;
+
     private bool stick_to_cover = false;
     private bool weapons_free = true;
+
     private Vector3 last_waypoint = Vector3.zero;
-    private float last_radius = 4;
     private Vector3 commander_last_position;
+
+    private float last_radius = 4;
     private float dist_before_back_to_follow_formation = 6f;
 
     [HideInInspector] public bool follow_commander = false;
@@ -78,15 +81,9 @@ public class Squad : MonoBehaviour
 
     private void FormationBreakFromWaypoint()
     {
-        if (ai_formation_leader.nav_mesh_agent.remainingDistance <
-            ai_formation_leader.knowledge.target_arrival_tolerance)
-        {
-            squad_members.ForEach(s => s.knowledge.can_take_cover = true);
-        }
-        else
-        {
-            squad_members.ForEach(s => s.knowledge.can_take_cover = false);
-        }
+        squad_members.ForEach(s => s.knowledge.can_take_cover =
+        (ai_formation_leader.nav_mesh_agent.remainingDistance <
+        ai_formation_leader.knowledge.target_arrival_tolerance));//if at waypoint squad can seek cover
     }
 
 
@@ -94,7 +91,7 @@ public class Squad : MonoBehaviour
     {
         AIController squad_member = GetFirstAliveSquadMember();
 
-        if (!CheckCommanderHasMoved())
+        if (!CheckCommanderHasMoved())//only seek new cover if commander has moved far enough
         {
             DistributeCoverToSquad(GameManager.scene_refs.tactical_assessor.
                 FindOptimalCoverInArea(squad_commander.transform.position, last_radius, squad_faction));
@@ -123,11 +120,11 @@ public class Squad : MonoBehaviour
     }
 
 
-    private void SetupNewSquadMember(AIController squad_member)
+    private void SetupNewSquadMember(AIController _squad_member)
     {
-        squad_member.knowledge.can_take_cover = stick_to_cover;
-        squad_member.knowledge.can_fire = weapons_free;
-        RegisterDeathEvent(squad_member.gameObject);
+        _squad_member.knowledge.can_take_cover = stick_to_cover;
+        _squad_member.knowledge.can_fire = weapons_free;
+        RegisterDeathEvent(_squad_member.gameObject);
     }
 
 

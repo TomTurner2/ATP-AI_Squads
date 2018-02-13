@@ -30,11 +30,13 @@
 			half4 _RimColor;
 			half _RimWidth;
 
+
 			struct VertInput
 			{
                 float4 pos : POSITION;
                 float3 normal : NORMAL;
             };
+
 
 			struct VertOutput
 			{
@@ -42,17 +44,19 @@
 				half4 colour : COLOR;
 			};	
 
+
 			VertOutput vert(VertInput v)
 			{
 				VertOutput o;
 				o.pos = UnityObjectToClipPos(v.pos);//get clipping
 				
-                float dot_product = 1 - dot(v.normal, v.pos);
+                float dot_product = 1 - dot(v.normal, _WorldSpaceLightPos0);//falloff
                 o.colour = _OccludedColor + smoothstep(1 - _RimWidth, 1.0, dot_product);           
                 o.colour *= _RimColor;
 
 				return o;
 			}
+
 
 			half4 frag(VertOutput o) : COLOR
 			{	
@@ -83,9 +87,11 @@
 			float2 uv_MetallicMap;
 		};
 
+
 		half _Glossiness;
 		half _MetallicMult;
 		fixed4 _Color;
+
 
 		void surf(Input IN, inout SurfaceOutputStandard o) 
 		{

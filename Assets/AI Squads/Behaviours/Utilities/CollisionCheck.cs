@@ -42,6 +42,6 @@ public class CollisionCheck : MonoBehaviour
 
     public bool LayerContains(LayerMask _mask, int _layer)
     {
-        return _mask != (_mask | (1 << _layer));
+        return _mask != (_mask | (1 << _layer));//check if layer is in layer mask
     }
 }

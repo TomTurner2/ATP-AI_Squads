@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.PostProcessing;
-using Random = UnityEngine.Random;
+
 
 public class TacticalAssessor : MonoBehaviour
 {
@@ -16,7 +13,7 @@ public class TacticalAssessor : MonoBehaviour
 
     private const int POSITION_START_WEIGHT = 100;
 
-    [System.Serializable]
+    [Serializable]
     public struct WeightedPoint
     {
         public Vector3 position;
@@ -93,7 +90,7 @@ public class TacticalAssessor : MonoBehaviour
 
 
     private int DetermineWeight(WeightedPoint _point, Vector3 _position, float _radius, Faction _requesters_faction,
-        ref List<TacticalAssessor.WeightedPoint> _weighted_positions)
+        ref List<WeightedPoint> _weighted_positions)
     {
         int weight =  _point.weight;
 

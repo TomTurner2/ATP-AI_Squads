@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject gameplay_ui_canvas;
@@ -18,7 +19,7 @@ public class UIManager : MonoBehaviour
     private List<GameObject> killed_enemies = new List<GameObject>();
 
 
-    void Update()
+    private void Update()
     {
         enemy_count = GameManager.scene_refs.enemy_manager.GetAliveEnemyCount();
         enemy_counter_text.text = enemy_count.ToString();
@@ -65,8 +66,8 @@ public class UIManager : MonoBehaviour
         killed_enemies.Add(_enemy);
 
         score += GameManager.score_per_kill;
-        score = Mathf.Clamp(score, 0, 9999);
-        score_text.text = score.ToString("D4");
+        score = Mathf.Clamp(score, 0, 9999);//clamp max score
+        score_text.text = score.ToString("D4");//format score 0000
         final_score_text.text = score.ToString();
      
         enemies_killed_text.text = enemies_killed++.ToString();

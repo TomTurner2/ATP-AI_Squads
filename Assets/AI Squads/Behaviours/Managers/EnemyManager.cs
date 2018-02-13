@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] CustomEvents.IntEvent on_enemies_refreshed;
     [SerializeField] Faction enemy_faction;
 
-    private List<AIController> ai = new List<AIController>();
+    private List<AIController> all_enemy_ai = new List<AIController>();
     private bool restart = false;
 
 
@@ -36,16 +36,15 @@ public class EnemyManager : MonoBehaviour
 
     bool EnemyRemains()
     {
-        return (ai.Any(a => !a.controlled_character.dead) || ai.Count <= 0 || restart);
+        return (all_enemy_ai.Any(enemy => !enemy.controlled_character.dead) || all_enemy_ai.Count <= 0 || restart);
     }
 
 
     public void RefreshList()
     {
-        ai = FindObjectsOfType<AIController>().ToList();
-        ai.RemoveAll(c => c == null);//clean up garbage references
-        ai.RemoveAll(c => c.controlled_character.faction != enemy_faction);//remove non enemy controllers
-        ai.ForEach(a => on_enemy_added.Invoke(a));//enemy added event for each element
+        all_enemy_ai = FindObjectsOfType<AIController>().ToList();
+        all_enemy_ai.RemoveAll(c => c == null || c.controlled_character.faction != enemy_faction);//clean up garbage references and non enemies
+        all_enemy_ai.ForEach(a => on_enemy_added.Invoke(a));//enemy added event for each element
         on_enemies_refreshed.Invoke(GetAliveEnemyCount());//broadcast how many alive enemies in level
     }
 
@@ -59,14 +58,14 @@ public class EnemyManager : MonoBehaviour
 
     public int GetAliveEnemyCount()
     {     
-        return ai.Count(a => !a.controlled_character.dead);
+        return all_enemy_ai.Count(a => !a.controlled_character.dead);
     }
 
 
     public void EnableAI(bool _enabled)
     {
         RefreshList();
-        foreach (AIController ai_controller in ai)
+        foreach (AIController ai_controller in all_enemy_ai)
         {
             if (ai_controller == null)
                 continue;
@@ -79,7 +78,7 @@ public class EnemyManager : MonoBehaviour
 
     public void UpdateDestinations()
     {
-        foreach (AIController ai_controller in ai)
+        foreach (AIController ai_controller in all_enemy_ai)
         {
             if (ai_controller == null)
                 continue;
@@ -88,4 +87,5 @@ public class EnemyManager : MonoBehaviour
                 ai_controller.nav_mesh_agent.destination = ai_controller.transform.localPosition;
         }
     }
+
 }

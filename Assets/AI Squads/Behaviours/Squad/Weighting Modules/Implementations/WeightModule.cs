@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class WeightModule : ScriptableObject
 {
     [SerializeField] protected int weight_penalty = 0;
