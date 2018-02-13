@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     public static void TriggerGameOver()
     {
         //show game over
+        if (scene_refs.ui_manager == null)
+            return;
+
         scene_refs.ui_manager.EnableGameplayUI(false);
         scene_refs.ui_manager.EnableGameOverUI(true);
     }

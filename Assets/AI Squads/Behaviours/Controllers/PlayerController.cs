@@ -13,9 +13,9 @@ public struct KeyEvent
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private SquadCommander current_commander;
-    [SerializeField] private Camera first_person_camera;
-    [SerializeField] private Camera Ortho_camera;
+    [SerializeField] SquadCommander current_commander;
+    [SerializeField] Camera first_person_camera;
+    [SerializeField] Camera Ortho_camera;
     [SerializeField] CustomEvents.Vector3Event update_look_target;
     [SerializeField] CustomEvents.Vector3Event on_move_event;
     [SerializeField] CustomEvents.BooleanEvent on_sprint_event;
