@@ -25,13 +25,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] UnityEvent on_issue_command_event;
 
     [SerializeField] List<KeyEvent> key_events = new List<KeyEvent>();
-    private float first_person_pointer_length = 0;
-
-
-    void Start()
-    {
-        first_person_pointer_length = current_commander.pointer_length;
-    }
 
 
     void Update ()

@@ -89,8 +89,6 @@ public class Squad : MonoBehaviour
 
     private void FormationBreakFromFollowingCommander()
     {
-        AIController squad_member = GetFirstAliveSquadMember();
-
         if (!CheckCommanderHasMoved())//only seek new cover if commander has moved far enough
         {
             DistributeCoverToSquad(GameManager.scene_refs.tactical_assessor.
